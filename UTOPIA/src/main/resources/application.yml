@@ -1,0 +1,143 @@
+#################################################################################
+# 도메인별 세팅
+#################################################################################
+
+mybatis-db:
+  buildingpoint: # MybatisConfig.java 정의된 패키지명
+    admin:
+      jdbcUrl: jdbc:log4jdbc:mysql://db.rflogix.com:3306/geo_test?characterEncoding=UTF-8&serverTimezone=UTC
+      username: root
+      password: rfself99
+    
+  siaa: # MybatisConfig.java 정의된 패키지명
+    admin:
+      jdbcUrl: jdbc:log4jdbc:mysql://db.rflogix.com:3306/siaa?characterEncoding=UTF-8&serverTimezone=UTC
+      username: root
+      password: rfself99
+
+
+
+
+#################################################################################
+# 프로필 그룹 설정
+#################################################################################
+
+spring:
+  profiles:
+    active: local # 그룹 선택
+    group: # 그룹 세팅
+      local: common, local-server
+      dev: common, dev-server
+      prod: common, prod-server
+
+
+
+
+#################################################################################
+# 공통 프로필 (common)
+#################################################################################
+---
+server:
+  port: 80
+  error:
+    path: /custom_error # 필수 설정!! ErrorConfig.java 에서 사용
+  servlet:    session:
+      timeout: 1800 # 필수 설정!! SessionConfig.java 에서 사용 : 초단위이나 최소는 1분이므로 60초 이상
+
+spring:
+  config:
+    activate:
+      on-profile: common # 프로필 설정
+
+  datasource: # DB 관련 설정
+    driverClassName: net.sf.log4jdbc.sql.jdbcapi.DriverSpy # jdbc 로그를 위한 드라이버
+    hikari: # dbcp 상위 버젼
+      maximum-pool-size: 10
+      #connection-test-query: SELECT 1
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+
+  mvc: # JSP 설정
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+
+  devtools: # spring-boot-devtools : jsp파일 서버 재시작 없이 바로 적용하기
+    livereload:
+      enabled: true
+
+logging: # 로그 설정
+  level:
+    root: warn # 기본 레벨
+    config: warn # 환경설정 레벨
+    org:
+      mybatis: error
+    
+  pattern: # 로그 내용 패턴 설정
+    file: "[%d{yyyy-MM-dd HH:mm:ss.SSS}] %p [%c{} %M{}(\\) line:%L{}] : %m%n"
+    console: "[%d{yyyy-MM-dd HH:mm:ss.SSS}] %clr(%p) [%c{} %cyan(%M{}(\\)) line:%L{}] : %m%n"
+    
+  file: # 로그 파일 저장 설정
+    name: logs/logback.log
+    max-history: 30
+    
+  logback: # 일별 로그 파일 분기 설정
+    rollingpolicy:
+      file-name-pattern: logs/logback.%d{yyyy-MM-dd}.%i.log.zip
+      max-history: 30
+
+
+
+
+#################################################################################
+# 로컬(개발자) 프로필 (local-server)
+#################################################################################
+---
+spring:
+  config:
+    activate:
+      on-profile: local-server # 프로필 설정
+
+logging: # 로그 설정
+  level:
+    config: debug # 환경설정 레벨
+    #config.spring: trace 
+    jdbc: # SQL 로그 설정
+      sqltiming: debug
+    buildingpoint: debug # 패키지별 레벨
+    siaa: debug # 패키지별 레벨
+
+
+
+
+#################################################################################
+# 개발 서버 프로필 (dev-server)
+#################################################################################
+---
+spring:
+  config:
+    activate:
+      on-profile: dev-server # 프로필 설정
+      
+logging: # 로그 설정
+  level:
+    root: warn # 기본 레벨
+
+
+
+
+#################################################################################
+# 운영 서버 프로필 (prod-server)
+#################################################################################
+---
+spring:
+  config:
+    activate:
+      on-profile: prod-server # 프로필 설정
+      
+logging: # 로그 설정
+  level:
+    root: error # 기본 레벨

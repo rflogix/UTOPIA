@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="buildingpoint.admin.category.CategoryMapper">
+	
+	<select id="selectCategory" parameterType="HashMap" resultType="CategoryDTO">
+		SELECT *
+		FROM tc_category
+		WHERE 1=1
+			<if test='categoryCD != null and categoryCD != 0'>
+			AND categoryCD = #{categoryCD}
+			</if>
+			<if test='deleteYN != null and deleteYN != 0'>
+			AND deleteYN = #{deleteYN}
+			</if>
+			<if test='categoryLevel != null and categoryLevel != 0'>
+			AND categoryLevel = #{categoryLevel}
+			</if>
+	</select>
+	
+</mapper>
