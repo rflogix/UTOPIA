@@ -168,6 +168,13 @@
 			<scope>provided</scope>
 		</dependency>
 		
+		<!-- file upload -->
+		<dependency>
+			<groupId>servlets.com</groupId>
+			<artifactId>cos</artifactId>
+			<version>05Nov2002</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>

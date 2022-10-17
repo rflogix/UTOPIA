@@ -5,100 +5,108 @@
 	<select id="selectUser" parameterType="HashMap" resultType="UserDTO">
 		SELECT *
 		FROM tb_user
-		WHERE 1=1
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test='userCD != null and userCD != 0'>
+			AND userCD = #{userCD}
+			</if>
+			
 			<if test='userID != null and userID != ""'>
-			AND UserID = #{userID}
+			AND userID = #{userID}
 			</if>
+			<if test='userID_like != null and userID_like != ""'>
+			AND userID LIKE CONCAT('%', #{userID_like}, '%')
+			</if>
+			
+			<if test='userNM != null and userNM != ""'>
+			AND userNM = #{userNM}
+			</if>
+			<if test='userNM_like != null and userNM_like != ""'>
+			AND userNM LIKE CONCAT('%', #{userNM_like} ,'%')
+			</if>
+			
+			<if test='cellPhoneNO != null and cellPhoneNO != ""'>
+			AND cellPhoneNO = #{cellPhoneNO}
+			</if>
+			<if test='cellPhoneNO_like != null and cellPhoneNO_like != ""'>
+			AND cellPhoneNO LIKE CONCAT('%', #{cellPhoneNO_like}, '%')
+			</if>
+			
+			<if test='joinDT_start != null and joinDT_start != ""'>
+			AND joinDT >= #{joinDT_start}
+			</if>
+			<if test='joinDT_end != null and joinDT_end != ""'>
+			AND DATE(DATE_ADD(#{joinDT_end}, INTERVAL 1 DAY)) > joinDT
+			</if>
+			
+			<if test='deleteYN != null and deleteYN != 0'>
+			AND tb_user.deleteYN = #{deleteYN}
+			</if>
+		</trim>
 	</select>
 	
-<!--
-	<resultMap id="sample" type="egovframework.example.sample.service.SampleVO">
-		<result property="id" column="id"/>
-		<result property="name" column="name"/>
-		<result property="description" column="description"/>
-		<result property="useYn" column="use_yn"/>
-		<result property="regUser" column="reg_user"/>
-	</resultMap>
+	<select id="insertUser" parameterType="HashMap" resultType="Long">
+		SET @userCD = (SELECT IFNULL(MAX(userCD), 0) + 1 FROM tb_user);
+		
+		INSERT INTO tb_user (
+			userCD
+			,userID
+			,userPW
+			,userNM
+			,userType
+			,email
+			,cellPhoneNO
+			,insertUserCD
+			
+		) VALUES (
+			@userCD
+			,#{userID}
+			,#{userPW}
+			,#{userNM}
+			,#{userType}
+			,#{email}
+			,#{cellPhoneNO}
+			,#{insertUserCD}
+		);
+		
+		SELECT @userCD;
+	</select>
 	
-	<insert id="insertSample" parameterType="SampleVO">
-
-			INSERT INTO SAMPLE
-				( ID
-				  , NAME
-				  , DESCRIPTION
-				  , USE_YN
-				  , REG_USER )
-			VALUES ( #{id}
-				  , #{name}
-				  , #{description}
-				  , #{useYn}
-				  , #{regUser} )
-
-	</insert>
-
-	<update id="updateSample">
-
-			UPDATE SAMPLE
-			SET ID=#{id}
-				, NAME=#{name}
-				, DESCRIPTION=#{description}
-				, USE_YN=#{useYn}
-				  WHERE ID=#{id}
-
+	<update id="updateUser" parameterType="HashMap">
+		UPDATE tb_user
+		<set>
+			<if test='userID != null'>
+			userID = #{userID},
+			</if>
+			<if test='userNM != null'>
+			userNM = #{userNM},
+			</if>
+			<if test='email != null'>
+			email = #{email},
+			</if>
+			<if test='cellPhoneNO != null'>
+			cellPhoneNO = #{cellPhoneNO},
+			</if>
+			
+			<!-- 업데이트 관련 -->
+			<if test='updateUserCD != null and updateUserCD != 0'>
+			updateUserCD = #{updateUserCD},
+			updateDT = now(),
+			</if>
+			
+			<!-- 삭제 관련 -->
+			<if test='deleteYN != null and deleteYN == 1'>
+			deleteYN = #{deleteYN},
+			deleteDT = now(),
+				<if test='deleteUserCD != null and deleteUserCD != 0'>
+				deleteUserCD = #{deleteUserCD},
+				</if>
+			</if>
+			<if test='deleteYN != null and deleteYN == -1'>
+			deleteYN = #{deleteYN},
+			deleteDT = NULL,
+			deleteUserCD = NULL,
+			</if>
+		</set>
+		WHERE userCD = #{userCD};
 	</update>
-
-	<delete id="deleteSample">
-
-			DELETE FROM SAMPLE
-			WHERE ID=#{id}
-
-	</delete>
-
-	<select id="selectSample" resultMap="sample">
-
-			SELECT
-				ID, NAME, DESCRIPTION, USE_YN, REG_USER
-			FROM SAMPLE
-			WHERE ID=#{id}
-
-	</select>
-
-	<select id="selectSampleList" parameterType="searchVO" resultType="egovMap">
-
-			SELECT
-				ID, NAME, DESCRIPTION, USE_YN, REG_USER
-			FROM SAMPLE
-			WHERE 1=1
-			<if test="searchKeyword != null and searchKeyword != ''">
-		        <choose>
-		            <when test="searchCondition == 0">
-						AND	ID LIKE '%' || #{searchKeyword} || '%'
-					</when>
-		            <when test="searchCondition == 1">
-						AND	NAME LIKE '%' || #{searchKeyword} || '%'
-					</when>
-				</choose>
-			</if>
-			ORDER BY ID ASC
-			LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
-	</select>
-
-	<select id="selectSampleListTotCnt" parameterType="searchVO" resultType="int">
-
-			SELECT COUNT(*) totcnt
-			FROM SAMPLE
-			WHERE 1=1
-			<if test="searchKeyword != null and searchKeyword != ''">
-		        <choose>
-		            <when test="searchCondition == 0">
-						AND ID LIKE '%' || #{searchKeyword} || '%'
-					</when>
-		            <when test="searchCondition == 1">
-						AND	NAME LIKE '%' || #{searchKeyword} || '%'
-					</when>
-				</choose>
-			</if>
-	</select>
--->
-	
 </mapper>

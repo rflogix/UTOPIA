@@ -49,18 +49,18 @@ public class LogParamConfig implements HandlerInterceptor {
 						HashMap<String, Object> 세션변수 = GF.get세션변수(request);
 						if (세션변수.get(GC.세션KEY_로그인사용자) != null) {
 							Object objUser_Login = 세션변수.get(GC.세션KEY_로그인사용자);
-							Class<?> clsUserLogin = objUser_Login.getClass();
-							Method 클래스함수 = clsUserLogin.getMethod("getUserCD");
+							Class<?> clsLoginUser = objUser_Login.getClass();
+							Method 클래스함수 = clsLoginUser.getMethod("getUserCD");
 							클래스함수.setAccessible(true);
 							long userCD = (long)클래스함수.invoke(objUser_Login);
 							if (userCD != 0) {
 								map로그인사용자.put("userCD", userCD);
 								
-								클래스함수 = clsUserLogin.getMethod("getUserID");
+								클래스함수 = clsLoginUser.getMethod("getUserID");
 								클래스함수.setAccessible(true);
 								map로그인사용자.put("userID", 클래스함수.invoke(objUser_Login));
 								
-								클래스함수 = clsUserLogin.getMethod("getUserNM");
+								클래스함수 = clsLoginUser.getMethod("getUserNM");
 								클래스함수.setAccessible(true);
 								map로그인사용자.put("userNM", 클래스함수.invoke(objUser_Login));
 							}

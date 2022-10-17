@@ -1,6 +1,6 @@
 package config.custom;
 
-import java.math.BigDecimal;
+import java.io.File;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
@@ -23,25 +23,17 @@ public class GF {
 	* request 관련 함수
 	***********************************************************************************/
 	
-	public static HashMap<String,Object> get파라미터(HttpServletRequest request) {
+	public static HashMap<String,Object> get파라미터(HttpServletRequest request) throws Exception {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		try {
-			Enumeration<String> enumber = request.getParameterNames();
-			while (enumber.hasMoreElements()) {
-				String key = enumber.nextElement().toString();
-				map.put(key, request.getParameter(key));  
-			}
-		
-		} catch(Exception e) {
-			map = new HashMap<String, Object>();
-			log.debug("{}", e);
+		Enumeration<String> enumber = request.getParameterNames();
+		while (enumber.hasMoreElements()) {
+			String key = enumber.nextElement().toString();
+			map.put(key, request.getParameter(key));  
 		}
-		
 		return map;
 	}
 	
-	public static String get에러코드(HttpServletRequest request) {
+	public static String get에러코드(HttpServletRequest request) throws Exception {
 		return getString(request.getAttribute(GC.응답에러_에러코드));
 	}
 	
@@ -53,61 +45,25 @@ public class GF {
 	***********************************************************************************/
 	
 	@SuppressWarnings("unchecked")
-	public static HashMap<String, Object> get세션변수(HttpSession session) {
-		HashMap<String, Object> mapSession;
-		
-		try {
-			mapSession = (HashMap<String, Object>)session.getAttribute(GC.세션KEY);
-			if (mapSession == null) {
-				mapSession = new HashMap<String, Object>();
-			}
-		} catch(Exception e) {mapSession = new HashMap<String, Object>();}
-		
+	public static HashMap<String, Object> get세션변수(HttpSession session) throws Exception {
+		HashMap<String, Object> mapSession = (HashMap<String, Object>)session.getAttribute(GC.세션KEY);
+		if (mapSession == null) {
+			mapSession = new HashMap<String, Object>();
+		}
 		return mapSession;
 	}
-	public static HashMap<String, Object> get세션변수(HttpServletRequest request) {
+	public static HashMap<String, Object> get세션변수(HttpServletRequest request) throws Exception {
 		return get세션변수(request.getSession(false));
 	}
-	public static HashMap<String, Object> set세션변수(HttpServletRequest request, HashMap<String, Object> mapSession) {
-		try {
-			HttpSession session = request.getSession(false);
-			if (mapSession == null) {
-				mapSession = new HashMap<String, Object>();
-			}
-			session.setAttribute(GC.세션KEY, mapSession);
-			
-		} catch(Exception e) {mapSession = new HashMap<String, Object>();}
-		
+	public static HashMap<String, Object> set세션변수(HttpSession session, HashMap<String, Object> mapSession) throws Exception {
+		if (mapSession == null) {
+			mapSession = new HashMap<String, Object>();
+		}
+		session.setAttribute(GC.세션KEY, mapSession);
 		return mapSession;
 	}
-	
-	
-	
-	/***********************************************************************************
-	* 문자열 관련 함수
-	***********************************************************************************/
-	
-	// getString 함수
-	public static String getString(Object p_String) {
-		String strReturn = "";
-		try {
-			strReturn = StringUtils.trimToEmpty(p_String.toString());
-		} catch(Exception e) {}
-		return strReturn;
-	}
-	
-	// JSON 으로 변환
-	public static String getJson(Object p_obj) {
-		String json = "{}";
-		
-		try {
-			json = (new ObjectMapper()).writerWithDefaultPrettyPrinter().writeValueAsString(p_obj);
-			
-		} catch(Exception e) {
-			log.debug("{}", e);
-		}
-		
-		return json;
+	public static HashMap<String, Object> set세션변수(HttpServletRequest request, HashMap<String, Object> mapSession) throws Exception {
+		return set세션변수(request.getSession(false), mapSession);
 	}
 	
 	
@@ -118,7 +74,7 @@ public class GF {
 	***********************************************************************************/
 	
 	// 날짜 조정 - ex) 2016-01-01 13:04:45 형태로 들어오면 2016-03-03 13:04:45 형태로 반환 
-	public static String addTime(String p_Date, int p_AddType, int p_AddTime) {
+	public static String addTime(String p_Date, int p_AddType, int p_AddTime) throws Exception {
 		Calendar calDate	= Calendar.getInstance();
 		int intYear, intMonth, intDay, intHour, intMinute, intSecond;
 		String strReturn = "";
@@ -162,16 +118,16 @@ public class GF {
 		}
 		return strReturn;
 	}
-	public static String addTime_Year(String p_Date, int p_AddTime) {
+	public static String addTime_Year(String p_Date, int p_AddTime) throws Exception {
 		return addTime(p_Date, Calendar.YEAR, p_AddTime);
 	}
-	public static String addTime_Month(String p_Date, int p_AddTime) {
+	public static String addTime_Month(String p_Date, int p_AddTime) throws Exception {
 		return addTime(p_Date, Calendar.MONTH, p_AddTime);
 	}
-	public static String addTime_Day(String p_Date, int p_AddTime) {
+	public static String addTime_Day(String p_Date, int p_AddTime) throws Exception {
 		return addTime(p_Date, Calendar.DATE, p_AddTime);
 	}
-	public static String addTime_Second(String p_Date, int p_AddTime) {
+	public static String addTime_Second(String p_Date, int p_AddTime) throws Exception {
 		return addTime(p_Date, Calendar.SECOND, p_AddTime);
 	}
 	
@@ -181,9 +137,30 @@ public class GF {
 	/***********************************************************************************
 	* 숫자 관련
 	***********************************************************************************/
+
+	// getInt 함수
+	public static int getInt(Object p_Object) throws Exception {
+		int intReturn = 0;
+		if (p_Object != null) {
+			String strReturn = StringUtils.trimToEmpty(p_Object.toString());
+			intReturn = Integer.parseInt(strReturn.equals("")?"0":strReturn);
+		}
+		
+		return intReturn;
+	}
+
+	// getLong 함수
+	public static long getLong(Object p_Object) throws Exception {
+		long lngReturn = 0;
+		if (p_Object != null) {
+			String strReturn = StringUtils.trimToEmpty(p_Object.toString());
+			lngReturn = Long.parseLong(strReturn.equals("")?"0":strReturn);
+		}
+		return lngReturn;
+	}
 	
 	// 숫자인지 체크하는 함수
-	public static boolean isNumber(String p_Number) {
+	public static boolean isNumber(String p_Number) throws Exception {
 		boolean result = true;
 		String strCheck = p_Number;
 		
@@ -218,114 +195,61 @@ public class GF {
 	/***********************************************************************************
 	* 문자열 관련
 	***********************************************************************************/
-	
-	// left 함수
-	public static String left(Object p_Original, int p_Count) {
-		String strError = "(GF) left 에러 : ";
+
+	// getString 함수
+	public static String getString(Object p_Object) throws Exception {
 		String strReturn = "";
-		
-		try {
-			strReturn = StringUtils.left(getString(p_Original.toString()), p_Count);
-			
-		} catch(Exception e) {
-			System.out.println(strError + e.getMessage());
+		if (p_Object != null) {
+			strReturn = StringUtils.trimToEmpty(p_Object.toString());
 		}
-		
 		return strReturn;
 	}
-	public static String left(int p_Original, int p_Count) {
-		return left(String.valueOf(p_Original), p_Count);
+	
+	// JSON 으로 변환
+	public static String getJson(Object p_obj) throws Exception {
+		return (new ObjectMapper()).writerWithDefaultPrettyPrinter().writeValueAsString(p_obj);
 	}
-	public static String left(long p_Original, int p_Count) {
-		return left(String.valueOf(p_Original), p_Count);
-	}
-	public static String left(BigDecimal p_Original, int p_Count) {
-		return left(String.valueOf(p_Original), p_Count);
+	
+	// left 함수
+	public static String left(Object p_Object, int p_Count) throws Exception {
+		String strReturn = "";
+		if (p_Object != null) {
+			strReturn = StringUtils.left(getString(p_Object.toString()), p_Count);
+		}
+		return strReturn;
 	}
 	
 	// right 함수 (오른쪽부터 일정개수 자르기)
-	public static String right(String p_Original, int p_Count) {
-		String strError = "(GF) right 에러 : ";
+	public static String right(Object p_Object, int p_Count) throws Exception {
 		String strReturn = "";
-		
-		try {
-			strReturn = StringUtils.right(getString(p_Original.toString()), p_Count);
-			
-		} catch(Exception e) {
-			System.out.println(strError + e.getMessage());
+		if (p_Object != null) {
+			strReturn = StringUtils.right(getString(p_Object.toString()), p_Count);
 		}
-		
 		return strReturn;
-	}
-	public static String right(int p_Original, int p_Count) {
-		return right(String.valueOf(p_Original), p_Count);
-	}
-	public static String right(long p_Original, int p_Count) {
-		return right(String.valueOf(p_Original), p_Count);
-	}
-	public static String right(BigDecimal p_Original, int p_Count) {
-		return right(String.valueOf(p_Original), p_Count);
 	}
 	
 	// mid 함수 (가운데부터 일정개수 자르기)
-	public static String mid(String p_Original, int p_StartPosition, int p_Count) {
-		String strError = "(GF) mid 에러 : ";
+	public static String mid(Object p_Object, int p_StartPosition, int p_Count) throws Exception {
 		String strReturn = "";
-		
-		try {
-			strReturn = StringUtils.mid(getString(p_Original.toString()), p_StartPosition, p_Count);
-			
-		} catch(Exception e) {
-			System.out.println(strError + e.getMessage());
+		if (p_Object != null) {
+			strReturn = StringUtils.mid(getString(p_Object.toString()), p_StartPosition, p_Count);
 		}
-		
 		return strReturn;
 	}
-	public static String mid(int p_Original, int p_StartPosition, int p_Count) {
-		return mid(String.valueOf(p_Original), p_StartPosition, p_Count);
-	}
-	public static String mid(long p_Original, int p_StartPosition, int p_Count) {
-		return mid(String.valueOf(p_Original), p_StartPosition, p_Count);
-	}
-	public static String mid(BigDecimal p_Original, int p_StartPosition, int p_Count) {
-		return mid(String.valueOf(p_Original), p_StartPosition, p_Count);
-	}
-	// mid 함수 (가운데 시작위치부터 끝까지 모두 반환)
-	public static String mid(String p_Original, int p_StartPosition) {
-		String strError = "(GF) mid 에러 : ";
+	public static String mid(Object p_Object, int p_StartPosition) {
 		String strReturn = "";
-		
-		try {
-			if (p_Original != null) {
-				strReturn = p_Original;
-				int intLength = strReturn.length();
-				
-				if (p_StartPosition > 0) {
-					strReturn = (intLength < p_StartPosition)?"": strReturn.substring(p_StartPosition-1);
-				}
-		
-			} else {
-				strReturn = "";
+		if (p_Object != null) {
+			strReturn = p_Object.toString();
+			int intLength = strReturn.length();
+			if (p_StartPosition > 0) {
+				strReturn = (intLength < p_StartPosition)?"": strReturn.substring(p_StartPosition-1);
 			}
-			
-		} catch(Exception e) {
-			System.out.println(strError + e.getMessage());
 		}
-		
 		return strReturn;
-	}
-	public static String mid(int p_Original, int p_StartPosition) {
-		return mid(String.valueOf(p_Original), p_StartPosition);
-	}
-	public static String mid(long p_Original, int p_StartPosition) {
-		return mid(String.valueOf(p_Original), p_StartPosition);
-	}
-	public static String mid(BigDecimal p_Original, int p_StartPosition) {
-		return mid(String.valueOf(p_Original), p_StartPosition);
 	}
 	
 	// MD5 로 인코딩
-	public static String encodeMD5(String p_Origin) {
+	public static String encodeMD5(String p_Origin) throws Exception {
 		String strReturn = "";
 		byte[] bResult = null;
 		
@@ -346,5 +270,31 @@ public class GF {
 			}
 		}
 		return strReturn;
+	}
+	
+	
+	
+	
+	/***********************************************************************************
+	* 파일 관련
+	***********************************************************************************/
+
+	// makeDir 함수
+	public static boolean makeDir(String p_OriginPath) {
+		boolean blnReturn = false;
+		
+		try {
+			String strTempDir = p_OriginPath;
+			File tempFile = new File(strTempDir);
+			if (tempFile.exists() == false) {
+				tempFile.mkdir();
+			}
+			blnReturn = true;
+			
+		} catch(Exception e) {
+			log.debug("{}", e.toString());
+		}
+		
+		return blnReturn;
 	}
 }

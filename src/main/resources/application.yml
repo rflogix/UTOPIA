@@ -5,13 +5,17 @@
 mybatis-db:
   buildingpoint: # MybatisConfig.java 정의된 패키지명
     admin:
-      jdbcUrl: jdbc:log4jdbc:mysql://db.rflogix.com:3306/geo_test?characterEncoding=UTF-8&serverTimezone=UTC
+      jdbcUrl: jdbc:log4jdbc:mysql://db.rflogix.com:3306/geo_test?allowMultiQueries=true&characterEncoding=UTF-8&serverTimezone=UTC
       username: root
       password: rfself99
     
   siaa: # MybatisConfig.java 정의된 패키지명
     admin:
-      jdbcUrl: jdbc:log4jdbc:mysql://db.rflogix.com:3306/siaa?characterEncoding=UTF-8&serverTimezone=UTC
+      jdbcUrl: jdbc:log4jdbc:mysql://db.rflogix.com:3306/siaa?allowMultiQueries=true&characterEncoding=UTF-8&serverTimezone=UTC
+      username: root
+      password: rfself99
+    www:
+      jdbcUrl: jdbc:log4jdbc:mysql://db.rflogix.com:3306/siaa?allowMultiQueries=true&characterEncoding=UTF-8&serverTimezone=UTC
       username: root
       password: rfself99
 
@@ -65,10 +69,10 @@ spring:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
 
-  devtools: # spring-boot-devtools : jsp파일 서버 재시작 없이 바로 적용하기
+  devtools: # 서버 재시작 없이 바로 적용하기 - 반드시 Project > Build Automatically 실행되어있어야한다
     livereload:
       enabled: true
-
+    
 logging: # 로그 설정
   level:
     root: warn # 기본 레벨

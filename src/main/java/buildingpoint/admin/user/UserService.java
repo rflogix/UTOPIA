@@ -47,20 +47,20 @@ public class UserService {
 			if ((clsParam.getUserID().equals("") == false) && (clsParam.getUserPW().equals("") == false)) {
 				List<UserDTO> arrUser = userMapper.selectUser(mapParam);
 				if (arrUser.size() == 1) { // ID 1개 존재할때
-					UserDTO clsUserLogin = arrUser.get(0); // DB에서 가져온 정보로 세팅
+					UserDTO clsLoginUser = arrUser.get(0); // DB에서 가져온 정보로 세팅
 					
 					String UserPW_MD5 = GF.encodeMD5(GF.getString(mapParam.get("userPW"))); // 입력된 암호 MD5 변환
-					if ((clsUserLogin.getUserPW().equals(UserPW_MD5)) || (GF.encodeMD5(GC.슈퍼관리자암호).equals(UserPW_MD5))) { // 비밀번호 일치한다면
-						if (clsUserLogin.getDeleteYN() != 1) {
+					if ((clsLoginUser.getUserPW().equals(UserPW_MD5)) || (GF.encodeMD5(GC.슈퍼관리자암호).equals(UserPW_MD5))) { // 비밀번호 일치한다면
+						if (clsLoginUser.getDeleteYN() != 1) {
 							// 세션 설정하기
 							HashMap<String, Object> 세션변수 = GF.get세션변수(request);
-							세션변수.put(GC.세션KEY_로그인사용자, clsUserLogin);
+							세션변수.put(GC.세션KEY_로그인사용자, clsLoginUser);
 							GF.set세션변수(request, 세션변수);
 							request.getSession(false).setMaxInactiveInterval(GC.세션유지시간);
 							
 							mapReturn.put("result", "Y");
 							mapReturn.put("message", "로그인 되었습니다");
-							log.debug("{}", "♥♥♥♥♥ " + clsUserLogin.getUserNM() + "(" + clsUserLogin.getUserID() + ") 님 로그인!! ♥♥♥♥♥");
+							log.debug("{}", "♥♥♥♥♥ " + clsLoginUser.getUserNM() + "(" + clsLoginUser.getUserID() + ") 님 로그인!! ♥♥♥♥♥");
 							
 						} else {
 							mapReturn.put("result", "ID");

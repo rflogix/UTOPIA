@@ -45,9 +45,9 @@ $(document).ready(function() {
 	// ESC 처리
 	$(document).keyup(function(e) {
 		if (e.keyCode == 27) { // ESC
-			if ($(".popup_wrap.active").length > 0) {
+			if ($(".popup_bg.active").length > 0) {
 				if (($(".popup_alert").hasClass("active") == false) && ($(".popup_confirm").hasClass("active") == false) && ($(".popup_loading").hasClass("active") == false)) {
-					closePopup($(".popup_wrap.active"));
+					closePopup($(".popup_bg.active"));
 				}
 			}
 		}
@@ -165,428 +165,49 @@ $.fn.scrollToMe = function (p_margin_top, p_parent, p_delay) {
 	}
 };
 
-
-
-
-/***********************************************************************************
-* 팝업 관련
-***********************************************************************************/
-
-// 팝업창 관련
-function openPopup(p_class, p_param) {
-	//if ($(".popup_"+p_class).hasClass("animate") == false) {
-		var blnCheck = true;
-		var queDelay = 0;
-		var queFunction = function() {$(this).dequeue();};
-		if (p_class == "image_upload") { // 이미지 업로드 팝업창일때
-			if ($(".popup_image_upload .img_list_wrap .btn_check.active").length == 0) { // 아직 이미지 업로드창에서 선택된게 없을때
-				if (p_param) {
-					if (p_param == "insert_receipt") { // 영수증 등록
-						$("#IMG_DIVISION").val(p_param);
-						$("#IMG_SIZE_LIST").val($("#IMG_SIZE_LIST_RECEIPT").val());
-						$("#IMG_SIZE_SHOW").val($("#IMG_SIZE_SHOW_RECEIPT").val());
-						$("#IMG_QUALITY").val($("#IMG_QUALITY_RECEIPT").val());
-		
-						$(".popup_"+p_class+" .btn_upload").attr("onclick", "insertReceipt();");
-						$(".popup_"+p_class+" .btn_album").attr("onclick", "selectAlbumMulti();");
-						
-					} else if (p_param == "chat_insert") { // 채팅창
-						$("#IMG_DIVISION").val(p_param);
-						$("#IMG_SIZE_LIST").val($("#IMG_SIZE_LIST_CHAT").val());
-						$("#IMG_SIZE_SHOW").val($("#IMG_SIZE_SHOW_CHAT").val());
-						$("#IMG_QUALITY").val($("#IMG_QUALITY_CHAT").val());
-						
-						$(".popup_"+p_class+" .btn_upload").attr("onclick", "sendChatImage();");
-						$(".popup_"+p_class+" .btn_album").attr("onclick", "selectAlbumMulti();");
-					} 
-					// 안드로이드일때는 카메라 모드로 바로 진입
-					if ($("#DeviceType").val() == DEVICE_TYPE_ANDROID) {
-						selectCamera();
-						blnCheck = false;
-						
-					// 아이폰일때는 카메라 모드로 바로 진입	
-					} else if ($("#DeviceType").val() == DEVICE_TYPE_IOS) {
-						selectCamera();
-						blnCheck = false;
-						
-					} else { // 기타는 이미지 업로드 팝업 보이게
-						if ($(".popup_"+p_class+" .swiper-slide").length == 0) {
-							$(".popup_"+p_class+" .img_show_wrap .swiper-wrapper").append(
-								"<div class='swiper-slide'>"
-									+"<div class='img_show empty'></div>"
-								+"</div>"
-							);
-							$(".popup_"+p_class+" .img_list_wrap .swiper-wrapper").append(
-								"<div class='swiper-slide'>"
-									+"<div class='img_list empty'></div>"
-								+"</div>"
-							);
-							updateImageUploadCNT();
-						}
-						queFunction = function(){swiper_image_upload_thumbs.update(); swiper_image_upload.update(); $(this).dequeue();};
-					}
-				}
-			} // 이미지 업로드한적이 있고 선택된것도 있다면 팝업창을 먼저 띄워줌
-			
-		} else if (p_class == "image") { // 이미지 팝업창일때
-			if (p_param) {
-				window.open(p_param);//"image_popup.jsp"+"?url="+p_param);
+// 사용자 로그아웃
+function logoutUser() {
+	if (confirm("로그아웃 하시겠습니까?", function() {
+		$.post("/user/logout", "", function(p_data, p_status) {
+			if (p_data.result == "Y") { // 로그아웃 했다면
+				location.replace("/");
+				
+			} else {
+				alert(p_data.message);
 			}
-			blnCheck = false;
 			
-		} else if (p_class == "url") { // URL 팝업창일때
-			if (p_param) {
-				if ($("#DeviceType").val() == DEVICE_TYPE_IOS) {
-					location.href = p_param;
-					
-				} else {
-					window.open(p_param);
-				}
-			}
-			blnCheck = false;
-			
-		} else if (p_class == "receipt_duplicate") { // 중복의심 영수증
-			queFunction = function(){swiper_receipt_duplicate.slideTo(0); swiper_receipt_duplicate.update(); $(this).dequeue();};
-			
-		} else if (p_class == "user") { // 사용자 팝업이라면
-			queFunction = function(){$(".popup_user input[name='UserNM']").select().focus(); $(this).dequeue();};
-			
-		} else if (p_class == "visit") { // 대기환자 리스트 팝업이라면
-			queFunction = function(){$(this).dequeue();};
-			
-		} else if (p_class == "hospital") { // 병원등록 팝업이라면
-			// 초기화
-			$(".popup_hospital input[name='HospitalNM']").val("");
-			$("#api_result").empty();
-			queFunction = function(){$(this).dequeue();};
-			
-		} else if (p_class == "px") { // 처방전 팝업이라면
-			queFunction = function(){$(".popup_px input[name='MedicineNM_kr']").focus(); $(this).dequeue();};
-			
-		} else if (p_class == "appointment") { // 진료예약 팝업이라면
-			queFunction = function(){$(this).dequeue();};
-			
-		} else if (p_class == "medicine") { // 약등록 팝업이라면
-			queFunction = function(){$(".popup_px input[name='MedicineNM_kr']").focus(); $(this).dequeue();};
-
-		} else if (p_class == "company") { // 사업자 팝업이라면
-			queFunction = function(){$(".popup_company input[name='CompanyNO']").select().focus(); $(this).dequeue();};
-
-		} else if (p_class == "board") { // 게시물 팝업이라면
-			$(".popup_board .popup_top .title").html("게시물 보기");
-			
-		} else if (p_class == "notice") { // 공지사항 팝업이라면
-			$(".popup_notice .popup_top .title").html("공지사항 등록");
-		
-		} else if (p_class == "fcm") { // fcm 팝업이라면
-			queFunction = function(){$(".popup_"+p_class+" textarea[name='FCM_TEXT']").val(""); $(".popup_"+p_class+" textarea[name='FCM_TEXT']").focus(); $(this).dequeue();};
-			
-		} else  if (p_class == "receipt") { // 영수증 팝업이라면
-			queFunction = function(){hideMINI_CAL(); $(this).dequeue();};
-
-		} else  if (p_class == "tax") { // 계산서 팝업이라면
-			queFunction = function(){hideMINI_CAL(); $(".popup_tax input[name='CompanyNO_Sell']").focus(); $(this).dequeue();};
-			
-		} else if (p_class == "chat") { // 채팅 팝업이라면
-			queFunction = function(){$(".popup_chat .list_wrap").animate({scrollTop : $(".popup_chat .list_wrap")[0].scrollHeight}, 0); $(".popup_chat textarea[name='ChatTalk']").select().focus(); $(this).dequeue();};
-			
-		} else if (p_class == "login") { // 로그인 팝업이라면
-			queDelay = 200;
-			queFunction = function(){$(".popup_"+p_class+" input[name='UserID']").focus(); $(this).dequeue();};
-			
-		} else if (p_class == "logout") { // 로그아웃 팝업이라면
-			confirm("로그아웃 하시겠습니까 ?","로그아웃","취소", function(){
-				$(".popup_"+p_class+" input[name='UserPW_Origin']").val("");
-				queFunction = function(){$(".popup_"+p_class+" input[name='UserPW_Origin']").focus(); $(this).dequeue();};
-				$(".popup_"+p_class).css("display", "flex").addClass("active animate").delay(300).removeClass("animate").queue(queFunction);
-			});
-			blnCheck = false;
-			
-		} else if (p_class == "alert") { // 알림 팝업이라면
-			queFunction = function(){$(".popup_"+p_class+" .btn_close").focus(); $(this).dequeue();};
-			
-		} else if (p_class == "confirm") { // 컨펌 팝업이라면
-			queFunction = function(){$(".popup_"+p_class+" .btn_ok").focus(); $(this).dequeue();};
-		}
-		if (blnCheck) {
-			$(".popup_"+p_class).addClass("animate").css("display", "flex").delay(0).queue(function(){$(this).addClass("active").dequeue();}).delay(queDelay).queue(queFunction).delay(300).queue(function(){$(this).removeClass("animate").dequeue();});
-		}
-		
-	//}
+		}, "JSON").fail(function(jqXHR, textStatus, errorThrown){
+			alert("네트워크 문제로 로그아웃 되지 않았습니다");
+		});
+	}));
 }
-function closePopup(p_obj, p_param) {
-	if (jQuery.type(p_obj) === "string") {
-		p_obj = $(".popup_"+p_obj);
-	}
-	var blnCheck = true;
-	var element = $(p_obj);
-	while (($(element).hasClass("popup_wrap") == false) && ($(element).get(0).tagName != "BODY")) {
-		element = $(element).parent();
-	}
-	if ($(element).hasClass("popup_wrap")) {
-		if ($(element).hasClass("popup_receipt")) {
-			//if ($("#THIS_PAGE_NM").val() == "receipt_summary.jsp") {
-			//	clickSearch();
-			//}
-		} else if ($(element).hasClass("popup_image_upload")) { // 이미지 업로드 팝업이라면
-			if ($(element).find(".img_list.active").length > 0) {
-				blnCheck = false;
-				confirm("선택된 이미지가 총 "+ $(element).find(".img_list.active").length +"개 있습니다.<br/>화면을 닫으시겠습니까 ?","화면닫기","아니요", function(){
-					$(element).addClass("animate").removeClass("active").delay(300).css("display", "none").removeClass("animate");
-				});
-			}
-		} else if($(element).hasClass("popup_auth")){
-			document.getElementById("MINI_CAL").style.display = "none";
-		}
+
+// 메뉴 클릭
+function selectMenu(main_menu_cd, sub_menu_cd) {
+	if ((main_menu_cd == 0) && (sub_menu_cd == 0)) {
+		location.href = "/";
+		
+	} else if ((main_menu_cd == 1) && (sub_menu_cd == 1)) {
+		location.href = "/user_summary";
+		
+	} else if ((main_menu_cd == 2) && (sub_menu_cd == 1)) {
+		location.href = "/board_summary";
 		
 	} else {
-		blnCheck = false;
-	}
-	if (blnCheck) {
-		$(element).addClass("animate").removeClass("active").delay(300).queue(function(){$(this).css("display", "none").removeClass("animate").dequeue();});
+		location.href = "/";
 	}
 }
-
-// goBack
-function goBack() {
-	if (window.android) {
-		// Alert 창이 떠있다면 멈춤
-		if ($(".popup_alert").hasClass("active") == true) {
-			
-		// 로딩중 팝업 있다면 멈춤
-		} else if ($(".popup_loading").hasClass("active") == true) {
-		
-		// popup_confirm 떠있다면 취소 - 닫기
-		} else if ($(".popup_confirm").hasClass("active") == true) {
-			closePopup_confirm();
-		
-		// popup_logout 팝업 닫기
-		} else if ($(".popup_logout").hasClass("active") == true) {
-			closePopup("logout");
-			
-		// popup_userdelete 팝업 닫기
-		} else if ($(".popup_userdelete").hasClass("active") == true) {
-			closePopup_UserDelete();
-			
-		// popup_scan_insert 팝업 닫기
-		} else if ($(".popup_scan_insert").hasClass("active") == true) {
-			closePopup_ScanInsert();
-			
-		// popup_receipt_add : 영수증 추가버튼 팝업 닫기
-		} else if ($(".popup_receipt_add").hasClass("active") == true) {
-			closePopup_ReceiptAdd();
-			
-		// popup_setting 닫기
-		} else if ($(".popup_setting").hasClass("active") == true) {
-			closePopup_Setting();
-			
-		// popup_wrap.receipt : 영수증 팝업 닫기
-		} else if ($(".popup_wrap.receipt").hasClass("active") == true) {
-			closePopup_Receipt();
-			
-		// popup_wrap.chat 닫기
-		} else if ($(".popup_wrap.chat").hasClass("active") == true) {
-			closePopup_Chat();
-			
-		// popup_scan_info 팝업 닫기
-		} else if ($(".popup_scan_info").hasClass("active") == true) {
-			closePopup_ScanInfo();
-			
-		// popup_policy 닫기
-		} else if ($(".popup_policy").hasClass("active") == true) {
-			closePopup_Policy();
-			
-		// popup_join 닫기
-		} else if ($(".popup_join").hasClass("active") == true) {
-			closePopup_Join();
-		
-		// popup_url 닫기
-		} else if ($(".popup_url").hasClass("active") == true) {
-			closePopup_url();
-			
-		// popup_chat
-		} else if ($(".popup_chat").hasClass("active") == true) {
-			closePopup_Chat();
-			
-		} else {
-			window.android.goBack();
-		}
-	}
+function showMenu(main_menu_cd, sub_menu_cd) {
+	$(".page_header .main_menu").removeClass("choice");
+	$(".page_header .main_menu.menu_cd_"+main_menu_cd).addClass("choice");
+	
+	$(".page_left .main_menu").css("display", "none");
+	$(".page_left .main_menu.menu_cd_"+main_menu_cd).css("display", "block");
+	$(".page_left .sub_menu").removeClass("choice");
+	$(".page_left .sub_menu.menu_cd_"+main_menu_cd+"_"+sub_menu_cd).addClass("choice");
+	
+	$(".page_content .search_title .menu_nm").text($(".page_left .sub_menu.menu_cd_"+main_menu_cd+"_"+sub_menu_cd).text());
 }
-
-// Alert 관련
-/*var _alert_new;
-function alert(p_content, p_ok, p_ok_function) {
-	_alert_new = new _objAlert(p_content, p_ok, p_ok_function);
-}
-var _objAlert = function(p_content, p_ok, p_ok_function) {
-	this.ok_function = function(){};
-	
-	// 내용 text 설정
-	if (p_content) {
-		$(".popup_alert .content").html(p_content);
-	}
-	
-	// OK버튼 text 설정
-	var strClose = "확인";
-	if (p_ok) {
-		if (typeof p_ok === "string") {
-			strClose = p_ok;
-			
-		} else if (typeof p_ok === "function") {
-			p_ok_function = p_ok;
-		}
-	}
-	$(".popup_alert .btn_close").html(strClose);
-	
-	// OK function 설정
-	if (p_ok_function) {
-		this.ok_function = p_ok_function;
-	}
-	
-	openPopup("alert");
-	
-	this.onClick = function() {
-		closePopup("alert");
-		this.ok_function();
-	};
-};*/
-$(document).ready(function() {
-	$(".popup_alert .btn_close").on("click", function(e) {
-		e.preventDefault(); e.stopPropagation();
-		_alert_new.onClick();
-		
-	}).keydown(function(e) {
-		if ((e.keyCode == 27) || (e.keyCode == 13) || (e.keyCode == 32)) { // ESC(27) or 엔터(13) or 스페이스바(32)
-			e.preventDefault(); e.stopPropagation();
-		}
-		
-	}).keyup(function(e) {
-		if ((e.keyCode == 27) || (e.keyCode == 13) || (e.keyCode == 32)) { // ESC(27) or 엔터(13) or 스페이스바(32)
-			e.preventDefault(); e.stopPropagation();
-			_alert_new.onClick();
-		}
-	});
-});
-
-// Confirm 관련
-/*var _confirm_new;
-function confirm(p_content, p_ok, p_close, p_ok_function, p_close_function) {
-	_confirm_new = new _objConfirm(p_content, p_ok, p_close, p_ok_function, p_close_function);
-}
-var _objConfirm = function(p_content, p_ok, p_close, p_ok_function, p_close_function) {
-	this.ok_function = function(){};
-	this.ok_function_SetYN = false;
-	this.close_function = function(){};
-	this.close_function_SetYN = false;
-	
-	// 내용 text 설정
-	if (p_content) {
-		$(".popup_confirm .content").html(p_content);
-	}
-	
-	// OK버튼 text 설정
-	var strOK = "확인";
-	if (p_ok) {
-		if (typeof p_ok === "string") {
-			strOK = p_ok;
-			
-		} else if (typeof p_ok === "function") {
-			this.ok_function = p_ok;
-			this.ok_function_SetYN = true;
-		}
-	}
-	$(".popup_confirm .btn_ok").html(strOK);
-	
-	// CLOSE버튼 text 설정
-	var strClose = "취소";
-	if (p_close) {
-		if (typeof p_close === "string") {
-			strClose = p_close;
-			
-		} else if (typeof p_close === "function") {
-			if (this.ok_function_SetYN) {
-				this.close_function = p_close;
-				this.close_function_SetYN = true;
-				
-			} else {
-				this.ok_function = p_close;
-				this.ok_function_SetYN = true;
-			}
-		}
-	}
-	$(".popup_confirm .btn_close").html(strClose);
-	
-	// OK function 설정
-	if (p_ok_function) {
-		if (typeof p_ok_function === "function") {
-			if (this.ok_function_SetYN) {
-				this.close_function = p_ok_function;
-				this.close_function_SetYN = true;
-				
-			} else {
-				this.ok_function = p_ok_function;
-				this.ok_function_SetYN = true;
-			}
-		}
-	}
-	
-	// CLOSE function 설정
-	if (p_close_function) {
-		if (typeof p_close_function === "function") {
-			this.close_function = p_close_function;
-		}
-	}
-	
-	openPopup("confirm");
-	
-	this.onOK = function() {
-		closePopup("confirm");
-		this.ok_function();
-	};
-	
-	this.onClose = function() {
-		closePopup("confirm");
-		this.close_function();
-	};
-};*/
-$(document).ready(function() {
-	$(".popup_confirm .btn_close").on("click", function(e) {
-		e.preventDefault(); e.stopPropagation();
-		_confirm_new.onClose();
-		
-	}).keydown(function(e) {
-		if ((e.keyCode == 27) || (e.keyCode == 13) || (e.keyCode == 32)) { // ESC(27) or 엔터(13) or 스페이스바(32)
-			e.preventDefault(); e.stopPropagation();
-		}
-		
-	}).keyup(function(e) {
-		if ((e.keyCode == 27) || (e.keyCode == 13) || (e.keyCode == 32)) { // ESC(27) or 엔터(13) or 스페이스바(32)
-			e.preventDefault(); e.stopPropagation();
-			_confirm_new.onClose();
-		}
-	});
-	$(".popup_confirm .btn_ok").on("click", function(e) {
-		e.preventDefault(); e.stopPropagation();
-		_confirm_new.onOK();
-		
-	}).keydown(function(e) {
-		if ((e.keyCode == 27) || (e.keyCode == 13) || (e.keyCode == 32)) { // ESC(27) or 엔터(13) or 스페이스바(32)
-			e.preventDefault(); e.stopPropagation();
-		}
-		
-	}).keyup(function(e) {
-		if ((e.keyCode == 13) || (e.keyCode == 32)) { // 엔터(13) or 스페이스바(32)
-			e.preventDefault(); e.stopPropagation();
-			_confirm_new.onOK();
-			
-		} else if (e.keyCode == 27) { // ESC(27)
-			e.preventDefault(); e.stopPropagation();
-			_confirm_new.onClose();
-		}
-	});
-});
-
 
 
 
@@ -660,22 +281,31 @@ function clickSearch(p_page) {
 		$.post(GRID_URL, strParam, function(p_data, p_status) {
 			if (p_data.result == "Y") {
 				CLICK_SEARCH_YN = false;
-				console.log(p_data.list);
-				GRID_DATA.beginUpdate();
-				GRID_DATA.setItems(p_data.list);
-				GRID_DATA.endUpdate();
-				GRID.setData(p_data.list) // 2021-12-17 주재범 GRID 컴포넌트 드래그 앤 드롭 추가로 인해  추가 
-				GRID.setSelectedRows([]); // 선택삭제
-				GRID.scrollRowToTop(0); // 제일 위로 스크롤
-				GRID.invalidate(); // 그리드 다시 그리기
 				
-				if (GRID_DATA.getLength() == 0) {
+				if (p_data.list.length == 0) {
+					GRID_DATA.beginUpdate();
+					GRID_DATA.setItems([]);
+					GRID_DATA.endUpdate();
+					//GRID.setData([]) // 2021-12-17 주재범 GRID 컴포넌트 드래그 앤 드롭 추가로 인해  추가 
+					GRID.setSelectedRows([]); // 선택삭제
+					GRID.scrollRowToTop(0); // 제일 위로 스크롤
+					GRID.invalidate(); // 그리드 다시 그리기
+					
 					$(".search_result .GRID_msg").html("검색 결과가 없습니다.");
 					$(".search_result .GRID_msg").addClass("show");
 					//$(".search_result .GRID_pager").removeClass("show");
 					//$(".search_result .GRID_pager .total_cnt").html("검색결과 총 : 0 건");
 					$(".search_result .GRID_pager .page_list").html("");
+
 				} else {
+					GRID_DATA.beginUpdate();
+					GRID_DATA.setItems(p_data.list);
+					GRID_DATA.endUpdate();
+					//GRID.setData(p_data.list); // 2021-12-17 주재범 GRID 컴포넌트 드래그 앤 드롭 추가로 인해  추가 
+					GRID.setSelectedRows([]); // 선택삭제
+					GRID.scrollRowToTop(0); // 제일 위로 스크롤
+					GRID.invalidate(); // 그리드 다시 그리기
+					
 					$(".search_result .GRID_msg").removeClass("show");
 					//$(".search_result .GRID_pager").addClass("show");
 					var total_cnt = "검색결과 총 : "+formatMoney(p_data.Search_ResultCNT)+" 건";
@@ -921,192 +551,6 @@ function deleteDate(p_ID) {
 
 
 
-
-/***********************************************************************************
-* 로그인 관련
-***********************************************************************************/
-
-// 로그인
-var LOGIN_USER_CLICK_YN = false;
-function loginUser() {
-	if (LOGIN_USER_CLICK_YN == false) {
-		var strID;
-		
-		strID = "#frmLogin input[name='UserID']";
-		$(strID).val($.trim($(strID).val()));
-		if ($(strID).val() == "") { // 아이디 입력 안됐을때
-			alert("ID를 입력해 주세요.", function(){
-				$(strID).focus();
-			});
-			return false;
-		}
-		
-		strID = "#frmLogin input[name='UserPW_Origin']";
-		$(strID).val($.trim($(strID).val())).val();
-		if ($(strID).val() == "") { // 비번 입력 안됐을때
-			alert("비밀번호를 입력해 주세요.", function(){
-				$(strID).focus();
-			});
-			return false;
-		}
-		
-		LOGIN_USER_CLICK_YN = true;
-		var strParam = $("#frmLogin").serialize()
-			+ "&StoreCD="+encodeURIComponent($("#StoreCD").val())
-			;
-		$.post(USER_LOGIN_URL, strParam, function(p_data, p_status) {
-			if (p_data.result == "Y") { // 로그인 했다면
-				location.replace(p_data.이전URL);
-			
-			} else if (p_data.result == "ID") {
-				alert(p_data.message, function() {
-					$("#frmLogin input[name='UserID']").select().focus();
-				});
-				
-			} else if (p_data.result == "PW") {
-				alert(p_data.message, function() {
-					$("#frmLogin input[name='UserPW_Origin']").select().focus();
-				});
-				
-			} else if (p_data.result == "RE") {
-				alert(p_data.message, function() {
-					$("#frmLogin input[name='UserID']").select().focus();
-				});
-				
-			} else {
-				alert(p_data.message);
-			}
-			LOGIN_USER_CLICK_YN = false;
-		},"JSON").fail(function(p_data, p_status){
-			alert(p_data.message);
-		});;
-	}
-}
-
-// 사용자 로그아웃
-function clickUserLogout() {
-	if (confirm("로그아웃 하시겠습니까?", function() {
-		var strParam = "UserCD="+encodeURIComponent($("#UserCD_Login").val());
-		$.post(USER_LOGOUT_URL, strParam, function(p_data, p_status) {
-			if (p_data.result == "Y") {
-				location.replace(p_data.이전URL);
-				
-			} else {
-				alert("정상적으로 로그아웃 되지 않았습니다.");
-			}
-		},"JSON").fail(function(p_data, p_status){
-			alert(p_data.message);
-		});;
-	}));
-}
-
-// 비번변경
-function openPopup_UserPW() {
-	$(".popup_userpw .UserPW").val("");
-	$(".popup_userpw .UserPW_Check").val("");
-	openPopup("userpw");
-	$(".popup_userpw .UserPW").focus();
-}
-function closePopup_UserPW() {
-	closePopup("userpw");
-}
-
-
-
-
-/***********************************************************************************
-* 우편번호 관련
-***********************************************************************************/
-
-function execDaumPostcode(p_Param) {
-	var strParam = "";
-	
-	new daum.Postcode({
-		oncomplete: function(data) {
-			var fullRoadAddr = data.roadAddress;
-			var extraRoadAddr = "";
-			if(data.bname !== "" && /[동|로|가]$/g.test(data.bname)){
-				extraRoadAddr += data.bname;
-			}
-			if(data.buildingName !== "" && data.apartment === "Y"){
-			   extraRoadAddr += (extraRoadAddr !== "" ? ", " + data.buildingName : data.buildingName);
-			}
-			if(extraRoadAddr !== ""){
-				extraRoadAddr = " (" + extraRoadAddr + ")";
-			}
-			if(fullRoadAddr !== ""){
-				fullRoadAddr += extraRoadAddr;
-			} else {
-				if (data.autoRoadAddress) {
-					fullRoadAddr = data.autoRoadAddress + extraRoadAddr;
-				}
-			}
-			if (data.jibunAddress == "") {
-				if (data.autoJibunAddress) {
-					data.jibunAddress = data.autoJibunAddress;
-				}
-			}
-			
-			if (p_Param) {
-				strParam = p_Param;
-			}
-			// 우편번호와 주소 정보를 해당 필드에 넣는다.
-			$("#"+strParam+"ZipCD").val(data.zonecode); // 5자리 새우편번호 사용
-	 		$("#"+strParam+"Address1").val(fullRoadAddr); // 새주소
-			$("#"+strParam+"Address1_new").val(fullRoadAddr); // 새주소
-	 		$("#"+strParam+"Address1_old").val(data.jibunAddress); // 지번주소
-			
-			$("#"+strParam+"Address2").val("");
-			$("#"+strParam+"Address2").select();
-			$("#"+strParam+"Address2").focus(); // 커서를 상세주소 필드로 이동한다.
-		}
-	}).open();
-}
-
-
-
-/***********************************************************************************
-* 팝업창 관련
-***********************************************************************************/
-function openWindow(p_URL, p_WindowName, p_Width, p_Height, p_Param) {
-	if ((!p_WindowName) || (p_WindowName == "")) {
-		p_WindowName = new String(Math.round(Math.random() * 100000));
-	}
-	if (!p_Width) {
-		p_Width = 1060;
-	}
-	if (!p_Height) {
-		p_Height = 500;
-	}
-	if (!p_Param) {
-		p_Param = "fix";
-	}
-	
-	var x = p_Width;
-	var y = p_Height;
-	var sy = window.screen.height / 2 - y / 2 - 70;
-	
-	if (p_Param == 'fix') {
-		p_Param = "toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0";
-		sy = window.screen.height / 2 - y / 2 - 40;
-	} else { //if (p_Param == 'resize') {
-		p_Param = "toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1";
-		sy = window.screen.height / 2 - y / 2 - 40;
-	}
-	var sx = window.screen.width  / 2 - x / 2;
-	if (sy < 0 ) {
-		sy = 0;
-	}
-	var sz = ",top=" + sy + ",left=" + sx;
-	p_Param = p_Param + ",width=" + x + ",height=" + y + sz;
-	
-	var objNewWin = window.open(p_URL, p_WindowName, p_Param);
-	objNewWin.focus();
-}
-
-
-
-
 /***********************************************************************************
 * select box 색상변경
 ***********************************************************************************/
@@ -1290,9 +734,16 @@ function sendMail(p_MailBean) {
 }
 
 
+
+
 /***********************************************************************************
 * 포멧 관련
 ***********************************************************************************/
+
+// 알파벳만 빼고 지우기
+function onlyAlphabet(ele) {
+	ele.value = $(ele).val().replace(/[^\!-Z]/gi,"");
+}
 
 // 3자리마다 콤마(화폐표시)
 function formatMoney(p_param) {
@@ -1421,73 +872,131 @@ function formatTel(p_param) {
 
 function removeHTML(text) {
 	text = text.replace(/<br\/>/ig, "\n");
-	text = text.replace(/<(\/)?([a-zA-Z]*)(\s[a-zA-Z]*=[^>]*)?(\s)*(\/)?>/ig, "");
-	return text;
+	return text.replace(/<[^>]*>?/g, "");
 }
 
 
 
 
 /***********************************************************************************
-* 공통 팝업창 관련
+* 외부 팝업창 관련
+***********************************************************************************/
+function openWindow(p_URL, p_WindowName, p_Width, p_Height, p_Param) {
+	if ((!p_WindowName) || (p_WindowName == "")) {
+		p_WindowName = new String(Math.round(Math.random() * 100000));
+	}
+	if (!p_Width) {
+		p_Width = 1060;
+	}
+	if (!p_Height) {
+		p_Height = 500;
+	}
+	if (!p_Param) {
+		p_Param = "fix";
+	}
+	
+	var x = p_Width;
+	var y = p_Height;
+	var sy = window.screen.height / 2 - y / 2 - 70;
+	
+	if (p_Param == 'fix') {
+		p_Param = "toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0";
+		sy = window.screen.height / 2 - y / 2 - 40;
+	} else { //if (p_Param == 'resize') {
+		p_Param = "toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1";
+		sy = window.screen.height / 2 - y / 2 - 40;
+	}
+	var sx = window.screen.width  / 2 - x / 2;
+	if (sy < 0 ) {
+		sy = 0;
+	}
+	var sz = ",top=" + sy + ",left=" + sx;
+	p_Param = p_Param + ",width=" + x + ",height=" + y + sz;
+	
+	var objNewWin = window.open(p_URL, p_WindowName, p_Param);
+	objNewWin.focus();
+}
+
+
+
+
+/***********************************************************************************
+* 내부 팝업창 관련
 ***********************************************************************************/
 
-// popup_image
-function openPopup_image(p_ImageURL, p_this) {
-	var strImage = "";
-	if (p_ImageURL) {
-		if (p_ImageURL != "") {
-			strImage = p_ImageURL;
+// 내부 팝업창 열기 (ex. openPopup("board"); openPopup("user", "userNM"); )
+function openPopup(p_class, p_param) {
+	//if ($(".popup_"+p_class).hasClass("animate") == false) {
+		var blnCheck = true;
+		var queDelay = 0;
+		var queFunction = function() {$(this).dequeue();};
+		if (p_class == "image") { // 이미지 팝업창일때
+			if (p_param) {
+				window.open(p_param);//"image_popup.jsp"+"?url="+p_param);
+			}
+			blnCheck = false;
+			
+		} else if (p_class == "user") { // 사용자 팝업이라면
+			queFunction = focusPopupByName(p_class, "userNM");
+			
+		} else if (p_class == "board") { // 게시물 팝업이라면
+			queFunction = focusPopupByName(p_class, "titleHtml");
+			
+		} else if (p_class == "login") { // 로그인 팝업이라면
+			queDelay = 200;
+			queFunction = focusPopupByName(p_class, "userID");
+			
+		} else if (p_class == "alert") { // 알림 팝업이라면
+			queFunction = focusPopupByClass(p_class, "btn_close");
+			
+		} else if (p_class == "confirm") { // 컨펌 팝업이라면
+			queFunction = focusPopupByClass(p_class, "btn_ok");
 		}
-	} else {
-		if ($(p_this).attr("data-image").length > 0) {
-			strImage = $(p_this).attr("data-image");
+		if (blnCheck) {
+			$(".popup_"+p_class).addClass("animate").css("display", "flex").delay(0).queue(function(){$(this).addClass("active").dequeue();}).delay(queDelay).queue(queFunction).delay(300).queue(function(){$(this).removeClass("animate").dequeue();});
 		}
-	}
-	if (strImage != "") {
-		openWindow(strImage, "openPopup_image", "1080", "900");
-		//openPopup_loading();
-		//$(".popup_wrap.image .popup_content img").attr("src", $(p_this).attr("data-image"));
-		//$(".popup_wrap.image").showElement();
-		//closePopup_loading();
-	}
 		
+	//}
 }
-function closePopup_image() {
-	$(".popup_wrap.image").hideElement();
+function focusPopupByName(p_class, p_InputName) {
+	return function(){$(`.popup_${p_class} [name=${p_InputName}]`).select().focus(); $(this).dequeue();}
 }
-
-// Alert 관련
-var alert_int = null;
-var alert_close = false;
-function openPopup_alert(p_content) {
-	$(".popup_alert .alert_content").html(p_content);
-	$(".popup_alert").addClass("active").addClass("show");
-}
-function closePopup_alert() {
-	$(".popup_alert").removeClass("show")
-	setTimeout(function(){$(".popup_alert").removeClass("active");}, 300);
-	alert_close = true;
+function focusPopupByClass(p_class, p_ClassName) {
+	return function(){$(`.popup_${p_class} .${p_ClassName}`).select().focus(); $(this).dequeue();}
 }
 
-// Confirm 관련
-var confirm_int = null;
-var confirm_ok = false, confirm_close = false;
-function openPopup_confirm(p_content, p_cancel, p_ok) {
-	$(".popup_confirm .confirm_content").html(p_content);
-	$(".popup_confirm .btn_close").html(p_cancel);
-	$(".popup_confirm .btn_ok").html(p_ok);
-	$(".popup_confirm").addClass("active").addClass("show");
-}
-function closePopup_confirm() {
-	$(".popup_confirm").removeClass("show")
-	setTimeout(function(){$(".popup_confirm").removeClass("active");}, 300);
-	confirm_close = true;
-}
-function okPopup_confirm() {
-	$(".popup_confirm").removeClass("show")
-	setTimeout(function(){$(".popup_confirm").removeClass("active");}, 300);
-	confirm_ok = true;
+// 내부 팝업창 닫기
+function closePopup(p_obj, p_param) {
+	if (jQuery.type(p_obj) === "string") {
+		p_obj = $(".popup_"+p_obj);
+	}
+	var blnCheck = true;
+	var element = $(p_obj);
+	while (($(element).hasClass("popup_bg") == false) && ($(element).get(0).tagName != "BODY")) {
+		element = $(element).parent();
+	}
+	if ($(element).hasClass("popup_bg")) {
+		if ($(element).hasClass("popup_receipt")) {
+			//if ($("#THIS_PAGE_NM").val() == "receipt_summary.jsp") {
+			//	clickSearch();
+			//}
+		} else if ($(element).hasClass("popup_image_upload")) { // 이미지 업로드 팝업이라면
+			if ($(element).find(".img_list.active").length > 0) {
+				blnCheck = false;
+				confirm("선택된 이미지가 총 "+ $(element).find(".img_list.active").length +"개 있습니다.<br/>화면을 닫으시겠습니까 ?","화면닫기","아니요", function(){
+					$(element).addClass("animate").removeClass("active").delay(300).css("display", "none").removeClass("animate");
+				});
+			}
+		} else if($(element).hasClass("popup_auth")){
+			document.getElementById("MINI_CAL").style.display = "none";
+		}
+		
+	} else {
+		blnCheck = false;
+	}
+	if (blnCheck) {
+		$(element).addClass("animate").removeClass("active").delay(300).queue(function(){$(this).css("display", "none").removeClass("animate").dequeue();});
+	}
 }
 
 // 로딩 팝업
@@ -1512,49 +1021,271 @@ function closePopup_loading() {
 	}, 300);
 }
 
+// 이미지
+function openPopup_image(p_ImageURL, p_this) {
+	var strImage = "";
+	if (p_ImageURL) {
+		if (p_ImageURL != "") {
+			strImage = p_ImageURL;
+		}
+	} else {
+		if ($(p_this).attr("data-image").length > 0) {
+			strImage = $(p_this).attr("data-image");
+		}
+	}
+	if (strImage != "") {
+		openPopup_loading();
+		$(".popup_bg.image .popup_content img").attr("src", $(p_this).attr("data-image"));
+		$(".popup_bg.image").showElement();
+		closePopup_loading();
+	}
+		
+}
+function closePopup_image() {
+	$(".popup_bg.image").hideElement();
+}
+
+// 비번변경
+function openPopup_UserPW() {
+	$(".popup_userpw .UserPW").val("");
+	$(".popup_userpw .UserPW_Check").val("");
+	openPopup("userpw");
+	$(".popup_userpw .UserPW").focus();
+}
+function closePopup_UserPW() {
+	closePopup("userpw");
+}
+
+
+
 
 /***********************************************************************************
-* 이용약관 관련
+* Alert 오버라이딩
 ***********************************************************************************/
 
-function openPopup_terms() {	
-	$(".popup_terms").addClass("active").addClass("show");
-	
-	openPopup_blur(); // blur 처리
+var _alert_new;
+function alert(p_content, p_ok, p_ok_function) {
+	_alert_new = new _objAlert(p_content, p_ok, p_ok_function);
 }
-function closePopup_terms() {
-	$(".popup_terms").removeClass("show");
-	setTimeout(function(){$(".popup_terms").removeClass("active");}, 300);
+var _objAlert = function(p_content, p_ok, p_ok_function) {
+	this.ok_function = function(){};
 	
-	closePopup_blur(); // blur 처리
+	// 내용 text 설정
+	if (p_content) {
+		$(".popup_alert .content").html(p_content);
+	}
+	
+	// OK버튼 text 설정
+	var strClose = "확인";
+	if (p_ok) {
+		if (typeof p_ok === "string") {
+			strClose = p_ok;
+			
+		} else if (typeof p_ok === "function") {
+			p_ok_function = p_ok;
+		}
+	}
+	$(".popup_alert .btn_close").html(strClose);
+	
+	// OK function 설정
+	if (p_ok_function) {
+		this.ok_function = p_ok_function;
+	}
+	
+	openPopup("alert");
+	
+	this.onClick = function() {
+		closePopup("alert");
+		this.ok_function();
+	};
+};
+let _alert_keypress_yn = false;
+$(document).ready(function() {
+	$(".popup_alert .btn_close").click(function(e) {
+		e.preventDefault(); e.stopPropagation();
+		_alert_new.onClick();
+		
+	}).keydown(function(e) {
+		if ((e.keyCode == 27) || (e.keyCode == 13) || (e.keyCode == 32)) { // ESC(27) or 엔터(13) or 스페이스바(32)
+			e.preventDefault(); e.stopPropagation();
+			_alert_keypress_yn = true;
+		}
+		
+	}).keyup(function(e) {
+		if ((e.keyCode == 27) || (e.keyCode == 13) || (e.keyCode == 32)) { // ESC(27) or 엔터(13) or 스페이스바(32)
+			e.preventDefault(); e.stopPropagation();
+			if (_alert_keypress_yn == true) {
+				_alert_new.onClick();
+			}
+			_alert_keypress_yn = false;
+		}
+	});
+});
+
+var alert_int = null;
+var alert_close = false;
+function openPopup_alert(p_content) {
+	$(".popup_alert .alert_content").html(p_content);
+	$(".popup_alert").addClass("active").addClass("show");
 }
+function closePopup_alert() {
+	$(".popup_alert").removeClass("show")
+	setTimeout(function(){$(".popup_alert").removeClass("active");}, 300);
+	alert_close = true;
+}
+
 
 
 
 /***********************************************************************************
-* 개인정보 및 마케팅활용 수신 관련
+* Confirm 오버라이딩
 ***********************************************************************************/
 
-function openPopup_privacy() {	
-	$(".popup_privacy").addClass("active").addClass("show");
+var _confirm_new;
+function confirm(p_content, p_ok, p_close, p_ok_function, p_close_function) {
+	_confirm_new = new _objConfirm(p_content, p_ok, p_close, p_ok_function, p_close_function);
+}
+var _objConfirm = function(p_content, p_ok, p_close, p_ok_function, p_close_function) {
+	this.ok_function = function(){};
+	this.ok_function_SetYN = false;
+	this.close_function = function(){};
+	this.close_function_SetYN = false;
 	
-	openPopup_blur(); // blur 처리
-}
-function closePopup_privacy() {
-	$(".popup_privacy").removeClass("show");
-	setTimeout(function(){$(".popup_privacy").removeClass("active");}, 300);
+	// 내용 text 설정
+	if (p_content) {
+		$(".popup_confirm .content").html(p_content);
+	}
 	
-	closePopup_blur(); // blur 처리
+	// OK버튼 text 설정
+	var strOK = "확인";
+	if (p_ok) {
+		if (typeof p_ok === "string") {
+			strOK = p_ok;
+			
+		} else if (typeof p_ok === "function") {
+			this.ok_function = p_ok;
+			this.ok_function_SetYN = true;
+		}
+	}
+	$(".popup_confirm .btn_ok").html(strOK);
+	
+	// CLOSE버튼 text 설정
+	var strClose = "취소";
+	if (p_close) {
+		if (typeof p_close === "string") {
+			strClose = p_close;
+			
+		} else if (typeof p_close === "function") {
+			if (this.ok_function_SetYN) {
+				this.close_function = p_close;
+				this.close_function_SetYN = true;
+				
+			} else {
+				this.ok_function = p_close;
+				this.ok_function_SetYN = true;
+			}
+		}
+	}
+	$(".popup_confirm .btn_close").html(strClose);
+	
+	// OK function 설정
+	if (p_ok_function) {
+		if (typeof p_ok_function === "function") {
+			if (this.ok_function_SetYN) {
+				this.close_function = p_ok_function;
+				this.close_function_SetYN = true;
+				
+			} else {
+				this.ok_function = p_ok_function;
+				this.ok_function_SetYN = true;
+			}
+		}
+	}
+	
+	// CLOSE function 설정
+	if (p_close_function) {
+		if (typeof p_close_function === "function") {
+			this.close_function = p_close_function;
+		}
+	}
+	
+	openPopup("confirm");
+	
+	this.onOK = function() {
+		closePopup("confirm");
+		this.ok_function();
+	};
+	
+	this.onClose = function() {
+		closePopup("confirm");
+		this.close_function();
+	};
+};
+let _confirm_keypress_yn = false;
+$(document).ready(function() {
+	$(".popup_confirm .btn_close").click(function(e) {
+		e.preventDefault(); e.stopPropagation();
+		_confirm_new.onClose();
+		
+	}).keydown(function(e) {
+		if ((e.keyCode == 27) || (e.keyCode == 13) || (e.keyCode == 32)) { // ESC(27) or 엔터(13) or 스페이스바(32)
+			e.preventDefault(); e.stopPropagation();
+			_confirm_keypress_yn = true;
+		}
+		
+	}).keyup(function(e) {
+		if ((e.keyCode == 27) || (e.keyCode == 13) || (e.keyCode == 32)) { // ESC(27) or 엔터(13) or 스페이스바(32)
+			e.preventDefault(); e.stopPropagation();
+			if (_confirm_keypress_yn == true) {
+				_confirm_new.onClose();
+			}
+			_confirm_keypress_yn = false;
+		}
+	});
+	$(".popup_confirm .btn_ok").on("click", function(e) {
+		e.preventDefault(); e.stopPropagation();
+		_confirm_new.onOK();
+		
+	}).keydown(function(e) {
+		if ((e.keyCode == 27) || (e.keyCode == 13) || (e.keyCode == 32)) { // ESC(27) or 엔터(13) or 스페이스바(32)
+			e.preventDefault(); e.stopPropagation();
+			_confirm_keypress_yn = true;
+		}
+		
+	}).keyup(function(e) {
+		if ((e.keyCode == 13) || (e.keyCode == 32)) { // 엔터(13) or 스페이스바(32)
+			e.preventDefault(); e.stopPropagation();
+			if (_confirm_keypress_yn == true) {
+				_confirm_new.onOK();
+			}
+			_confirm_keypress_yn = false;
+			
+		} else if (e.keyCode == 27) { // ESC(27)
+			e.preventDefault(); e.stopPropagation();
+			if (_confirm_keypress_yn == true) {
+				_confirm_new.onClose();
+			}
+			_confirm_keypress_yn = false;
+		}
+	});
+});
+
+//Confirm 관련
+var confirm_int = null;
+var confirm_ok = false, confirm_close = false;
+function openPopup_confirm(p_content, p_cancel, p_ok) {
+	$(".popup_confirm .confirm_content").html(p_content);
+	$(".popup_confirm .btn_close").html(p_cancel);
+	$(".popup_confirm .btn_ok").html(p_ok);
+	$(".popup_confirm").addClass("active").addClass("show");
 }
-
-
-
-/*function onlyAlphabet(ele) {
-	ele.value = $(ele).val().replace(/[^\!-z]/gi,"");
-}*/
-
-function onlyAlphabet(ele) {
-	ele.value = $(ele).val().replace(/[^\!-Z]/gi,"");
+function closePopup_confirm() {
+	$(".popup_confirm").removeClass("show")
+	setTimeout(function(){$(".popup_confirm").removeClass("active");}, 300);
+	confirm_close = true;
 }
-
-
+function okPopup_confirm() {
+	$(".popup_confirm").removeClass("show")
+	setTimeout(function(){$(".popup_confirm").removeClass("active");}, 300);
+	confirm_ok = true;
+}

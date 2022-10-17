@@ -1,0 +1,30 @@
+/***********************************************************************************
+* Copyright (C)RFLOGIX since 2010.08.24 (rflogix@rflogix.com)
+************************************************************************************
+* ○ 파일 : board.css
+* ○ 설명 : 게시판 CSS
+***********************************************************************************/
+
+.popup_board .popup_wrap {width: 1200px; height: calc(100% - 100px);}
+
+.popup_board .popup_content {width: calc(100% - 40px); height: calc(100% - 40px); padding: 20px;}
+.popup_board .popup_content > div:first-child {margin-top: 0;}
+.popup_board .popup_content > div:nth-child(2) {margin-top: 0;}
+.popup_board .popup_content .title {width: 100px; height: 35px; line-height: 35px; margin-top:10px; font-size: 15px; color: #333; float:left;}
+.popup_board .popup_content .content {width: calc(100% - 100px); height: 35px; line-height: 35px; margin-top:10px; font-size: 15px; color: #333; float:left;}
+.popup_board .popup_content .content select {height: 35px; line-height: 35px;}
+.popup_board .popup_content .content input {width: calc(100% - 10px - 2px); height: calc(100% - 2px); line-height: 33px; font-size: 15px; padding: 0 5px; outline: 0;}
+.popup_board .popup_content .content input[name=writeUserNM] {width: 200px; text-align: left; float: left; border: 1px solid transparent;}
+.popup_board .popup_content .content .write_dt {width: 270px; height: 100%; float: right;}
+.popup_board .popup_content .content .write_dt > div {margin-top:0;}
+.popup_board .popup_content .content .write_dt input {text-align: right; border: 1px solid transparent;}
+.popup_board .popup_content .content.editor {height: auto;}
+.popup_board .popup_content > .write_user {display:block;}
+.popup_board .popup_content > .write_user.hidden {display:none;}
+.popup_board .popup_content::after {content:""; display:block; clear:both;}
+
+.popup_board .popup_bot .button.delete {height: 28x; margin-right: 50px; border: 1px solid #eee; background-color: white; color: #666666;}
+.popup_board .popup_bot .button.delete:hover {background-color: #aaa; color: white;}
+.popup_board .popup_bot .button.delete {display: flex;}
+.popup_board .popup_bot .button.delete.hidden {display: none;}
+.popup_board .popup_bot .button.delete i {color: red;}

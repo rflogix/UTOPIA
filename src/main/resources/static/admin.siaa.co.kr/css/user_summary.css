@@ -1,0 +1,89 @@
+/***********************************************************************************
+* Copyright (C)RFLOGIX since 2010.08.24 (rflogix@rflogix.com)
+************************************************************************************
+* ● 프로젝트	: 꽃장부-관리자
+* ○ 파일		: user_summary.css
+* ○ 생성		: 2016.05.31(화요일)
+* ○ 최종변경	: 2016.05.31(화요일)
+************************************************************************************/
+
+
+
+
+/***********************************************************************************
+* 화면
+***********************************************************************************/
+
+.GRID .UserCD {color:blue; cursor:pointer;}
+.GRID .UserNM {color:blue; cursor:pointer;}
+.GRID .Profile_URL {width:30px; height:30px; cursor:pointer;}
+
+.GRID .CompanyCD {color:blue; cursor:pointer;}
+.GRID .CompanyNM {color:blue; cursor:pointer;}
+.GRID .CompanyImageURL {width:40px; height:40px; cursor:pointer;}
+
+
+
+
+/***********************************************************************************
+* 사용자 팝업
+***********************************************************************************/
+
+.popup_user .popup_wrap {width:510px;}
+
+.popup_user .user_company_wrap {width:100%; height:auto; overflow-y:auto; display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start;}
+
+.popup_user .user_wrap {width:calc(100% - 20px - 2px); margin:10px; border:1px solid #ccc;}
+.popup_user .user_wrap .caption {width:30px; height:100%; border-right:1px solid #ccc; font-size:14px; line-height:25px; text-align:center; color:#666; font-weight:bold; background-color:#eee;}
+.popup_user .user_wrap .content_wrap {flex:1; padding:10px;}
+.popup_user .user_wrap .content_wrap > div {width:100%; margin-top:10px; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_user .user_wrap .content_wrap > div:first-child {margin-top:0;}
+.popup_user .user_wrap .content_wrap .title {width:130px; color:#292F36; font-size:15px; letter-spacing:1px; display:flex; align-items:center; justify-content:flex-start;}
+.popup_user .user_wrap .content_wrap .content {flex:1; display:flex; align-items:center; justify-content:flex-end;}
+.popup_user .user_wrap .content_wrap .content input {width:calc(100% - 20px); height:calc(34px - 13px); padding:5px 10px 5px 10px; color:#292F36; font-size:16px; text-align:left; border:1px solid #ccc; border-radius:3px;}
+.popup_user .user_wrap .content_wrap .content input::-webkit-input-placeholder {color:#ccc;}
+.popup_user .user_wrap .content_wrap .content input:-moz-placeholder {color:#ccc;}
+.popup_user .user_wrap .content_wrap .content select {width:100%; height:36px; border:1px solid #ddd; padding:5px 10px 8px 10px; color:#292F36; font-size:16px; background-color:white; border:1px solid #ccc; border-radius:3px;}
+.popup_user .user_wrap .content_wrap .content select:focus {border:2px dotted #888; background-color:#4ECDC4;}
+
+.popup_user .company_wrap {width:calc(100% - 20px); margin:10px; border:1px solid #ccc;}
+.popup_user .company_wrap.active {border:1px solid #ef7070;}
+.popup_user .company_wrap .caption {width:30px; height:100%; border-right:1px solid #ccc; color:#aaa; font-size:14px; line-height:25px; text-align:center; color:#666; font-weight:bold; background-color:#eee;}
+.popup_user .company_wrap.active .caption {color:#e62324; background:#fff6f6; border-right:1px solid #ef7070;}
+.popup_user .company_wrap .content_wrap {flex:1;}
+.popup_user .company_wrap .content_wrap > div {height:35px; border-bottom:1px solid #ccc; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.popup_user .company_wrap .content_wrap > div:last-child {border-bottom:0 !important;}
+.popup_user .company_wrap.active .content_wrap > div {height:35px; border-bottom:1px solid #efc7c7;}
+.popup_user .company_wrap .content_wrap > div > div:last-child {width:auto; flex:1;}
+.popup_user .company_wrap .title {width:60px; height:100%; font-size:13px; color:#292F36; text-align:center; border-left:1px solid #ccc; border-right:1px solid #ccc; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_user .content_wrap .title.vertical {width:25px; writing-mode:vertical-rl; text-orientation:upright;}
+.popup_user .company_wrap .title:first-child {border-left:0 !important;}
+.popup_user .company_wrap.active .title {color:#e62324; background-color:#fff6f6; border-left:1px solid #efc7c7; border-right:1px solid #efc7c7;}
+.popup_user .company_wrap .content {width:calc(50% - 62px); height:100%; font-size:13px;}
+.popup_user .company_wrap .content.full {width:calc(100% - 61px);}
+.popup_user .company_wrap .content.name {width:250px;}
+.popup_user .company_wrap .content input {width:calc(100% - 10px); height:100%; padding:0 5px; font-size:16px;}
+.popup_user .company_wrap .content input[name='CompanyNO'] {font-size:18px; font-weight:bold; letter-spacing:1px;}
+/*.popup_user .company_wrap .content input[name='CompanyAddress'] {width:calc(100% - 10px);}
+.popup_user .company_wrap .content input[name='CompanyEmail'] {width:calc(100% - 10px);}*/
+
+.popup_user .etc_wrap {width:calc(100% - 20px); margin:10px; border:1px solid #ccc;}
+.popup_user .etc_wrap .caption {width:30px; height:100%; border-right:1px solid #ccc; font-size:14px; line-height:25px; text-align:center; color:#666; font-weight:bold; background-color:#eee;}
+.popup_user .etc_wrap .content_wrap {flex:1; padding:10px;}
+.popup_user .etc_wrap .content_wrap > div {width:100%; margin-top:10px; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_user .etc_wrap .content_wrap > div:first-child {margin-top:0;}
+.popup_user .etc_wrap .content_wrap .title {width:130px; color:#292F36; font-size:15px; letter-spacing:1px; display:flex; align-items:center; justify-content:flex-start;}
+.popup_user .etc_wrap .content_wrap .content {flex:1; display:flex; align-items:center; justify-content:flex-end;}
+.popup_user .etc_wrap .content_wrap .content input {width:calc(100% - 20px); height:calc(34px - 13px); padding:5px 10px 5px 10px; color:#292F36; font-size:16px; text-align:left; border:1px solid #ccc; border-radius:3px;}
+.popup_user .etc_wrap .content_wrap .content input::-webkit-input-placeholder {color:#ccc;}
+.popup_user .etc_wrap .content_wrap .content input:-moz-placeholder {color:#ccc;}
+.popup_user .etc_wrap .content_wrap .content select {width:100%; height:36px; border:1px solid #ddd; padding:5px 10px 8px 10px; color:#292F36; font-size:16px; background-color:white; border:1px solid #ccc; border-radius:3px;}
+.popup_user .etc_wrap .content_wrap .content select:focus {border:2px dotted #888; background-color:#4ECDC4;}
+
+.popup_user .btn_wrap {width:calc(100% - 20px); height:60px; padding:0 10px; background:white; overflow:hidden; display:flex; flex-direction:row; align-items:center; justify-content:space-between;}/* right:0; bottom:0; position:absolute;*/
+.popup_user .btn_wrap .btn_delete {width:calc((100% - 20px)/2); padding:10px 0; font-size:16px; letter-spacing:3px; background-color:white; color:#bbb; border:1px solid #bbb; border-radius:3px; overflow:hidden; cursor:pointer; display:flex; align-items:center; justify-content:center; opacity:0.7; transition:opacity 0.3s, background 0.3s, color 0.3s, border 0.3s;}
+.popup_user .btn_wrap .btn_delete:hover {background-color:#bbb; border-color:#bbb; color:white;}
+.popup_user .btn_wrap .btn_update {width:calc((100% - 20px)/2); padding:10px 0; font-size:16px; letter-spacing:3px; background-color:white; color:#bbb; border:1px solid #bbb; border-radius:3px; overflow:hidden; cursor:pointer; display:flex; align-items:center; justify-content:center; opacity:0.7; transition:opacity 0.3s, background 0.3s, color 0.3s, border 0.3s;}
+.popup_user .btn_wrap .btn_update:hover {background-color:#4ECDC4; border-color:#4ECDC4; color:white; opacity:1;}
+.popup_user .btn_wrap .btn_update:focus {padding:8px 0; background-color:#4ECDC4; border:2px dotted #888; color:white; opacity:1;}
+

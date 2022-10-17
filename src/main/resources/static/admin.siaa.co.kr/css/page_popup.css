@@ -1,0 +1,618 @@
+/***********************************************************************************
+* Copyright (C)RFLOGIX since 2010.08.24 (rflogix@rflogix.com)
+************************************************************************************
+* �뿈 �봽濡쒖젥�듃	: 苑껋옣遺�-愿�由ъ옄
+* �뿃 �뙆�씪		: page_popup.css
+* �뿃 �깮�꽦		: 2016.05.31(�솕�슂�씪)
+* �뿃 理쒖쥌蹂�寃�	: 2016.05.31(�솕�슂�씪)
+************************************************************************************/
+
+
+
+
+/***********************************************************************************
+* �궗�슜�옄 �뙘�뾽
+***********************************************************************************/
+
+.popup_user .popup_top {width:1080px;}
+.popup_user .popup_content {width:1080px; display:flex; flex-direction:row;}
+
+/* �궗�뾽�옄 �씠誘몄� */
+.popup_user .img_wrap {width:570px;}
+
+
+/* �궗�뾽�옄 �궡�슜 */
+.popup_user .user_company_wrap {width:calc(100% - 571px); height:calc(100% - 70px); padding-bottom:70px; border-left:1px solid rgba(99,99,99,0.2); overflow-y:auto; display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start;}
+
+.popup_user .user_wrap {width:calc(100% - 20px); margin:10px; border:1px solid #ccc;}
+.popup_user .user_wrap .caption {width:30px; height:100%; border-right:1px solid #ccc; font-size:14px; line-height:25px; text-align:center; color:#666; font-weight:bold; background-color:#eee;}
+.popup_user .user_wrap .content_wrap {flex:1; padding:10px;}
+.popup_user .user_wrap .content_wrap > div {width:100%; margin-top:10px; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_user .user_wrap .content_wrap > div:first-child {margin-top:0;}
+.popup_user .user_wrap .content_wrap .title {width:130px; color:#292F36; font-size:15px; letter-spacing:1px; display:flex; align-items:center; justify-content:flex-start;}
+.popup_user .user_wrap .content_wrap .content {flex:1; display:flex; align-items:center; justify-content:flex-end;}
+.popup_user .user_wrap .content_wrap .content input {width:calc(100% - 20px); height:calc(34px - 13px); padding:5px 10px 5px 10px; color:#292F36; font-size:16px; text-align:left; border:1px solid #ccc; border-radius:3px;}
+.popup_user .user_wrap .content_wrap .content input::-webkit-input-placeholder {color:#ccc;}
+.popup_user .user_wrap .content_wrap .content input:-moz-placeholder {color:#ccc;}
+.popup_user .user_wrap .content_wrap .content select {width:100%; height:36px; border:1px solid #ddd; padding:5px 10px 8px 10px; color:#292F36; font-size:16px; background-color:white; border:1px solid #ccc; border-radius:3px;}
+.popup_user .user_wrap .content_wrap .content select:focus {border:2px dotted #888; background-color:#4ECDC4;}
+
+.popup_user .company_wrap {width:calc(100% - 20px); margin:10px; border:1px solid #ccc;}
+.popup_user .company_wrap.active {border:1px solid #ef7070;}
+.popup_user .company_wrap .caption {width:30px; height:100%; border-right:1px solid #ccc; color:#aaa; font-size:14px; line-height:25px; text-align:center; color:#666; font-weight:bold; background-color:#eee;}
+.popup_user .company_wrap.active .caption {color:#e62324; background:#fff6f6; border-right:1px solid #ef7070;}
+.popup_user .company_wrap .content_wrap {flex:1;}
+.popup_user .company_wrap .content_wrap > div {height:35px; border-bottom:1px solid #ccc; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.popup_user .company_wrap .content_wrap > div:last-child {border-bottom:0 !important;}
+.popup_user .company_wrap.active .content_wrap > div {height:35px; border-bottom:1px solid #efc7c7;}
+.popup_user .company_wrap .content_wrap > div > div:last-child {width:auto; flex:1;}
+.popup_user .company_wrap .title {width:60px; height:100%; font-size:13px; color:#292F36; text-align:center; border-left:1px solid #ccc; border-right:1px solid #ccc; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_user .content_wrap .title.vertical {width:25px; writing-mode:vertical-rl; text-orientation:upright;}
+.popup_user .company_wrap .title:first-child {border-left:0 !important;}
+.popup_user .company_wrap.active .title {color:#e62324; background-color:#fff6f6; border-left:1px solid #efc7c7; border-right:1px solid #efc7c7;}
+.popup_user .company_wrap .content {width:calc(50% - 62px); height:100%; font-size:13px;}
+.popup_user .company_wrap .content.full {width:calc(100% - 61px);}
+.popup_user .company_wrap .content.name {width:250px;}
+.popup_user .company_wrap .content input {width:calc(100% - 10px); height:100%; padding:0 5px; font-size:16px;}
+.popup_user .company_wrap .content input[name='CompanyNO'] {font-size:18px; font-weight:bold; letter-spacing:1px;}
+/*.popup_user .company_wrap .content input[name='CompanyAddress'] {width:calc(100% - 10px);}
+.popup_user .company_wrap .content input[name='CompanyEmail'] {width:calc(100% - 10px);}*/
+
+.popup_user .etc_wrap {width:calc(100% - 20px); margin:10px; border:1px solid #ccc;}
+.popup_user .etc_wrap .caption {width:30px; height:100%; border-right:1px solid #ccc; font-size:14px; line-height:25px; text-align:center; color:#666; font-weight:bold; background-color:#eee;}
+.popup_user .etc_wrap .content_wrap {flex:1; padding:10px;}
+.popup_user .etc_wrap .content_wrap > div {width:100%; margin-top:10px; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_user .etc_wrap .content_wrap > div:first-child {margin-top:0;}
+.popup_user .etc_wrap .content_wrap .title {width:130px; color:#292F36; font-size:15px; letter-spacing:1px; display:flex; align-items:center; justify-content:flex-start;}
+.popup_user .etc_wrap .content_wrap .content {flex:1; display:flex; align-items:center; justify-content:flex-end;}
+.popup_user .etc_wrap .content_wrap .content input {width:calc(100% - 20px); height:calc(34px - 13px); padding:5px 10px 5px 10px; color:#292F36; font-size:16px; text-align:left; border:1px solid #ccc; border-radius:3px;}
+.popup_user .etc_wrap .content_wrap .content input::-webkit-input-placeholder {color:#ccc;}
+.popup_user .etc_wrap .content_wrap .content input:-moz-placeholder {color:#ccc;}
+.popup_user .etc_wrap .content_wrap .content select {width:100%; height:36px; border:1px solid #ddd; padding:5px 10px 8px 10px; color:#292F36; font-size:16px; background-color:white; border:1px solid #ccc; border-radius:3px;}
+.popup_user .etc_wrap .content_wrap .content select:focus {border:2px dotted #888; background-color:#4ECDC4;}
+
+.popup_user .btn_wrap {width:calc(100% - 571px - 20px); height:60px; margin:0 10px; overflow:hidden; display:flex; flex-direction:row; align-items:center; justify-content:space-between; right:0; bottom:0; position:absolute;}
+.popup_user .btn_wrap .btn_delete {width:calc((100% - 20px)/2); padding:10px 0; font-size:16px; letter-spacing:3px; background-color:white; color:#bbb; border:1px solid #bbb; border-radius:3px; overflow:hidden; cursor:pointer; display:flex; align-items:center; justify-content:center; opacity:0.7; transition:opacity 0.3s, background 0.3s, color 0.3s, border 0.3s;}
+.popup_user .btn_wrap .btn_delete:hover {background-color:#bbb; border-color:#bbb; color:white;}
+.popup_user .btn_wrap .btn_update {width:calc((100% - 20px)/2); padding:10px 0; font-size:16px; letter-spacing:3px; background-color:white; color:#bbb; border:1px solid #bbb; border-radius:3px; overflow:hidden; cursor:pointer; display:flex; align-items:center; justify-content:center; opacity:0.7; transition:opacity 0.3s, background 0.3s, color 0.3s, border 0.3s;}
+.popup_user .btn_wrap .btn_update:hover {background-color:#4ECDC4; border-color:#4ECDC4; color:white; opacity:1;}
+.popup_user .btn_wrap .btn_update:focus {padding:8px 0; background-color:#4ECDC4; border:2px dotted #888; color:white; opacity:1;}
+
+
+
+
+
+/***********************************************************************************
+* �궗�뾽�옄 �뙘�뾽
+***********************************************************************************/
+
+.popup_company .popup_top {width:1080px;}
+.popup_company .popup_content {width:1080px; display:flex; flex-direction:row;}
+
+/* �궗�뾽�옄 �씠誘몄� */
+.popup_company .img_wrap {width:570px;}
+
+
+/* �궗�뾽�옄 �궡�슜 */
+.popup_company .user_company_wrap {width:calc(100% - 571px); height:calc(100% - 70px); padding-bottom:70px; border-left:1px solid rgba(99,99,99,0.2); overflow-y:auto; display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start;}
+
+.popup_company .user_wrap {width:calc(100% - 20px); margin:10px; border:1px solid #ccc;}
+.popup_company .user_wrap .caption {width:30px; height:100%; border-right:1px solid #ccc; font-size:14px; line-height:25px; text-align:center; color:#666; font-weight:bold; background-color:#eee;}
+.popup_company .user_wrap .content_wrap {flex:1; padding:10px;}
+.popup_company .user_wrap .content_wrap > div {width:100%; margin-top:10px; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_company .user_wrap .content_wrap > div:first-child {margin-top:0;}
+.popup_company .user_wrap .content_wrap .title {width:130px; color:#292F36; font-size:15px; letter-spacing:1px; display:flex; align-items:center; justify-content:flex-start;}
+.popup_company .user_wrap .content_wrap .content {flex:1; display:flex; align-items:center; justify-content:flex-end;}
+.popup_company .user_wrap .content_wrap .content input {width:calc(100% - 20px); height:calc(34px - 13px); padding:5px 10px 5px 10px; color:#292F36; font-size:16px; text-align:left; border:1px solid #ccc; border-radius:3px;}
+.popup_company .user_wrap .content_wrap .content input::-webkit-input-placeholder {color:#ccc;}
+.popup_company .user_wrap .content_wrap .content input:-moz-placeholder {color:#ccc;}
+.popup_company .user_wrap .content_wrap .content select {width:100%; height:36px; border:1px solid #ddd; padding:5px 10px 8px 10px; color:#292F36; font-size:16px; background-color:white; border:1px solid #ccc; border-radius:3px;}
+.popup_company .user_wrap .content_wrap .content select:focus {border:2px dotted #888; background-color:#4ECDC4;}
+
+.popup_company .company_wrap {width:calc(100% - 20px); margin:10px; border:1px solid #ccc;}
+.popup_company .company_wrap.active {border:1px solid #ef7070;}
+.popup_company .company_wrap .caption {width:30px; height:100%; border-right:1px solid #ccc; color:#aaa; font-size:14px; line-height:25px; text-align:center; color:#666; font-weight:bold; background-color:#eee;}
+.popup_company .company_wrap.active .caption {color:#e62324; background:#fff6f6; border-right:1px solid #ef7070;}
+.popup_company .company_wrap .content_wrap {flex:1;}
+.popup_company .company_wrap .content_wrap > div {height:35px; border-bottom:1px solid #ccc; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.popup_company .company_wrap .content_wrap > div:last-child {border-bottom:0 !important;}
+.popup_company .company_wrap.active .content_wrap > div {height:35px; border-bottom:1px solid #efc7c7;}
+.popup_company .company_wrap .content_wrap > div > div:last-child {width:auto; flex:1;}
+.popup_company .company_wrap .title {width:60px; height:100%; font-size:13px; color:#292F36; text-align:center; border-left:1px solid #ccc; border-right:1px solid #ccc; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_company .content_wrap .title.vertical {width:25px; writing-mode:vertical-rl; text-orientation:upright;}
+.popup_company .company_wrap .title:first-child {border-left:0 !important;}
+.popup_company .company_wrap.active .title {color:#e62324; background-color:#fff6f6; border-left:1px solid #efc7c7; border-right:1px solid #efc7c7;}
+.popup_company .company_wrap .content {width:calc(50% - 62px); height:100%; font-size:13px;}
+.popup_company .company_wrap .content.full {width:calc(100% - 61px);}
+.popup_company .company_wrap .content.name {width:250px;}
+.popup_company .company_wrap .content input {width:calc(100% - 10px); height:100%; padding:0 5px; font-size:16px;}
+.popup_company .company_wrap .content input[name='CompanyNO'] {font-size:18px; font-weight:bold; letter-spacing:1px;}
+/*.popup_company .company_wrap .content input[name='CompanyAddress'] {width:calc(100% - 10px);}
+.popup_company .company_wrap .content input[name='CompanyEmail'] {width:calc(100% - 10px);}*/
+
+.popup_company .etc_wrap {width:calc(100% - 20px); margin:10px; border:1px solid #ccc;}
+.popup_company .etc_wrap .caption {width:30px; height:100%; border-right:1px solid #ccc; font-size:14px; line-height:25px; text-align:center; color:#666; font-weight:bold; background-color:#eee;}
+.popup_company .etc_wrap .content_wrap {flex:1; padding:10px;}
+.popup_company .etc_wrap .content_wrap > div {width:100%; margin-top:10px; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_company .etc_wrap .content_wrap > div:first-child {margin-top:0;}
+.popup_company .etc_wrap .content_wrap .title {width:130px; color:#292F36; font-size:15px; letter-spacing:1px; display:flex; align-items:center; justify-content:flex-start;}
+.popup_company .etc_wrap .content_wrap .content {flex:1; display:flex; align-items:center; justify-content:flex-end;}
+.popup_company .etc_wrap .content_wrap .content input {width:calc(100% - 20px); height:calc(34px - 13px); padding:5px 10px 5px 10px; color:#292F36; font-size:16px; text-align:left; border:1px solid #ccc; border-radius:3px;}
+.popup_company .etc_wrap .content_wrap .content input::-webkit-input-placeholder {color:#ccc;}
+.popup_company .etc_wrap .content_wrap .content input:-moz-placeholder {color:#ccc;}
+.popup_company .etc_wrap .content_wrap .content select {width:100%; height:36px; border:1px solid #ddd; padding:5px 10px 8px 10px; color:#292F36; font-size:16px; background-color:white; border:1px solid #ccc; border-radius:3px;}
+.popup_company .etc_wrap .content_wrap .content select:focus {border:2px dotted #888; background-color:#4ECDC4;}
+
+.popup_company .btn_wrap {width:calc(100% - 571px - 20px); height:60px; margin:0 10px; overflow:hidden; display:flex; flex-direction:row; align-items:center; justify-content:space-between; right:0; bottom:0; position:absolute;}
+.popup_company .btn_wrap .btn_delete {width:calc((100% - 20px)/2); padding:10px 0; font-size:16px; letter-spacing:3px; background-color:white; color:#bbb; border:1px solid #bbb; border-radius:3px; overflow:hidden; cursor:pointer; display:flex; align-items:center; justify-content:center; opacity:0.7; transition:opacity 0.3s, background 0.3s, color 0.3s, border 0.3s;}
+.popup_company .btn_wrap .btn_delete:hover {background-color:#bbb; border-color:#bbb; color:white;}
+.popup_company .btn_wrap .btn_update {width:calc((100% - 20px)/2); padding:10px 0; font-size:16px; letter-spacing:3px; background-color:white; color:#bbb; border:1px solid #bbb; border-radius:3px; overflow:hidden; cursor:pointer; display:flex; align-items:center; justify-content:center; opacity:0.7; transition:opacity 0.3s, background 0.3s, color 0.3s, border 0.3s;}
+.popup_company .btn_wrap .btn_update:hover {background-color:#4ECDC4; border-color:#4ECDC4; color:white; opacity:1;}
+.popup_company .btn_wrap .btn_update:focus {padding:8px 0; background-color:#4ECDC4; border:2px dotted #888; color:white; opacity:1;}
+
+
+
+
+
+/***********************************************************************************
+* �쁺�닔利� �뙘�뾽
+***********************************************************************************/
+
+.popup_receipt .popup_top {width:840px; margin-top:30px;}
+.popup_receipt .popup_top.img_open {width:1440px;}
+.popup_receipt .popup_top .btn_img {height:26px; position:absolute; left:20px; top:6px; padding:0 10px; line-height:28px; font-size:16px; color:#666; background-color:#eee; border:1px solid #ddd; border-radius:5px; cursor:pointer; transition:all 0.3s; display:flex; flex-direction:row; align-items:center; user-select:none;}
+.popup_receipt .popup_top .btn_img i {margin-right:5px;}
+.popup_receipt .popup_top .btn_img:hover {background-color:#ddd; border:1px solid #aaa; color:#333;}
+.popup_receipt .popup_top .btn_close {width:50px;}
+
+.popup_receipt .popup_content {width:840px; height:calc(100% - 106px); margin-bottom:30px; overflow:visible; border-radius:0 0 4px 4px;}
+.popup_receipt .popup_content.img_open {width:1440px;}
+.popup_receipt .popup_content #frmReceipt {width:100%; height:100%; display:flex; flex-direction:row; overflow:visible;}
+
+/* �쁺�닔利� �씠誘몄� */
+.popup_receipt .receipt_img {width:600px; height:100%; overflow:hidden; border-right:1px solid rgba(99,99,99,0.2); display:none;}
+.popup_receipt .receipt_img .plus {position:absolute; right:10px; top:10px; font-size:30px; color:red; font-weight:bold; display:none;}
+.popup_receipt .receipt_img .plus.active {display:block;}
+.popup_receipt .popup_content.img_open .receipt_img {display:inline-block;}
+
+.popup_receipt .receipt_img .btn_upload {position:absolute; right:20px; bottom:10px; z-index:999;}
+.popup_receipt .receipt_img .btn_upload > div {padding:5px 20px; font-size:17px; line-height:20px; color:#666; background-color:#eee; border:1px solid #ddd; border-radius:5px; cursor:pointer; transition:all 0.3s; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_receipt .receipt_img .btn_upload > div:hover {background-color:#4ECDC4; color:white; border:1px solid #4ECDC4;}
+.popup_receipt .receipt_img .btn_upload .title {margin-left:5px; transition:all 0.3s;}
+.popup_receipt .receipt_img .btn_upload > div:hover .title {color:white;}
+.popup_receipt .receipt_img .btn_upload.IMG_UPLOADED > div {background-color:#9be4a1;}
+.popup_receipt .receipt_img .btn_upload.IMG_UPLOADED .upload_no {opacity:0;}
+.popup_receipt .receipt_img .btn_upload.IMG_UPLOADED .upload_ok {opacity:1;}
+
+/* �쁺�닔利� �궡�슜 */
+.popup_receipt .receipt_content {width:840px; height:100%; display:flex; flex-direction:column; align-content:space-between; justify-items:center;}
+
+.popup_receipt .receipt_wrap {width:calc(100% - 40px); padding:25px 20px 20px 20px; flex:1; overflow-y:auto;}
+
+.popup_receipt .receipt_info {width:796px; border:2px solid #ef7070; overflow:hidden;}
+.popup_receipt .receipt_info > .title {width:100%; height:49px; font-size:20px; font-weight:bold; color:#e62324; background-color:#fff6f6; border-bottom:2px solid #ef7070; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_receipt .ReceiptCompany {display:flex; flex-direction:row; align-items:stretch; justify-content:space-between;}
+.popup_receipt .ReceiptCompany .caption {font-size:13px; line-height:20px; letter-spacing:5px; padding-left:5px; text-align:center; color:#666; font-weight:bold; background-color:#eee; flex:1; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_receipt .ReceiptCompany .content_wrap > div {width:100%; height:35px; border-bottom:1px solid #efc7c7; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.popup_receipt .ReceiptCompany .content_wrap > div:last-child {border-bottom:0 !important;}
+.popup_receipt .ReceiptCompany .content_wrap > div > div:first-child {border-left:0 !important;}
+.popup_receipt .ReceiptCompany .content_wrap .title {width:60px; height:100%; font-size:13px; color:#e62324; text-align:center; border-right:1px solid #efc7c7; border-left:1px solid #efc7c7; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_receipt .ReceiptCompany .content_wrap .title.vertical {width:25px; writing-mode:vertical-rl; text-orientation:upright;}
+.popup_receipt .ReceiptCompany .content_wrap .content {flex:1; height:100%; font-size:13px; color:#e62324; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.popup_receipt .ReceiptCompany .content_wrap .content.none {width:50px; flex:none;}
+.popup_receipt .ReceiptCompany .content_wrap .content.name {width:85px; flex:none;}
+.popup_receipt .ReceiptCompany .content_wrap.CompanySell {width:calc(50% - 24px);}
+.popup_receipt .ReceiptCompany .content_wrap.CompanyBuy {width:calc(50% - 25px);}
+.popup_receipt .ReceiptCompany input {width:calc(100% - 10px); height:100%; border:0; padding:0 5px; font-size:13px; transition:background-color 0.3s; ime-mode:active;}
+.popup_receipt .ReceiptCompany input.readonly {background:white;}
+
+.popup_receipt .ReceiptCompany .CompanySell > div {border-bottom:1px solid #ccc;}
+.popup_receipt .ReceiptCompany .CompanySell .title {color:#999; border-right:1px solid #ccc; border-left:1px solid #ccc;}
+.popup_receipt .ReceiptCompany .CompanySell.caption {border-right:1px solid #aaa;}
+.popup_receipt .ReceiptCompany .CompanySell input:hover {background-color:#fff9af;}
+.popup_receipt .ReceiptCompany .CompanySell input.readonly:hover {background-color:white;}
+.popup_receipt .ReceiptCompany .CompanySell input:focus {background-color:#fff9af;}
+.popup_receipt .ReceiptCompany .CompanySell input.readonly:focus {background-color:white;}
+.popup_receipt .ReceiptCompany .CompanySell.active.caption {background-color:#fff6f6; color:#e62324; border-right:1px solid #ef7070;}
+.popup_receipt .ReceiptCompany .CompanySell.active.content_wrap > div {border-bottom:1px solid #efc7c7;}
+.popup_receipt .ReceiptCompany .CompanySell.active .title {background-color:#fff6f6; color:#e62324; border-right:1px solid #efc7c7; border-left:1px solid #efc7c7;}
+.popup_receipt .ReceiptCompany .CompanySell input[name='CompanyNO_Sell'] {font-size:16px; letter-spacing:3px;}
+.popup_receipt .ReceiptCompany .CompanySell.active input[name='CompanyNO_Sell'] {color:#e62324; font-weight:bold;}
+.popup_receipt .ReceiptCompany .CompanySell input[name='CompanyEmail_Sell'] {ime-mode:disabled;}
+
+.popup_receipt .ReceiptCompany .CompanyBuy > div {border-bottom:1px solid #ccc;}
+.popup_receipt .ReceiptCompany .CompanyBuy .title {color:#999; border-right:1px solid #ccc; border-left:1px solid #ccc;}
+.popup_receipt .ReceiptCompany .CompanyBuy.caption {border-right:1px solid #aaa; border-left:1px solid #aaa;}
+.popup_receipt .ReceiptCompany .CompanyBuy input:hover {background-color:#fff9af;}
+.popup_receipt .ReceiptCompany .CompanyBuy input.readonly:hover {background-color:white;}
+.popup_receipt .ReceiptCompany .CompanyBuy input:focus {background-color:#fff9af;}
+.popup_receipt .ReceiptCompany .CompanyBuy input.readonly:focus {background-color:white;}
+.popup_receipt .ReceiptCompany .CompanyBuy.active.caption {background-color:#f0f6fd; color:#3070ad; border-right:1px solid #5b9adf; border-left:1px solid #5b9adf;}
+.popup_receipt .ReceiptCompany .CompanyBuy.active.content_wrap > div {border-bottom:1px solid #5b9adf;}
+.popup_receipt .ReceiptCompany .CompanyBuy.active .title {background-color:#f0f6fd; color:#3070ad; border-right:1px solid #5b9adf; border-left:1px solid #5b9adf;}
+.popup_receipt .ReceiptCompany .CompanyBuy input[name='CompanyNO_Buy'] {font-size:16px; letter-spacing:3px;}
+.popup_receipt .ReceiptCompany .CompanyBuy.active input[name='CompanyNO_Buy'] {color:#3070ad; font-weight:bold;}
+.popup_receipt .ReceiptCompany .CompanyBuy input[name='CompanyEmail_Buy'] {ime-mode:disabled;}
+
+.popup_receipt .WriteDT_Remark {width:100%; height:30px; border-top:1px solid #f58c8c; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.popup_receipt .WriteDT_Remark .caption {width:100px; height:100%; font-size:13px; letter-spacing:2px; color:#888; background-color:#f8f8f8; border-left:1px solid #dfdfdf; border-right:1px solid #dfdfdf; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_receipt .WriteDT_Remark .caption:first-child {border-left:0; border-right:1px solid #efc7c7;}
+.popup_receipt .WriteDT_Remark .content {flex:1; height:100%; font-size:13px; color:#e62324; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.popup_receipt .WriteDT_Remark input {width:calc(100% - 20px); height:100%; border:0; padding:0 10px; font-size:13px; text-align:left; transition:background-color 0.3s;}
+.popup_receipt .WriteDT_Remark input:hover {background-color:#fff9af;}
+.popup_receipt .WriteDT_Remark input.readonly:hover {background-color:white;}
+.popup_receipt .WriteDT_Remark input:focus {background-color:#fff9af;}
+.popup_receipt .WriteDT_Remark input.readonly:focus {background-color:white;}
+.popup_receipt .WriteDT_Remark .caption.WriteDT {color:#e62324; font-weight:bold; background-color:#fff6f6;}
+.popup_receipt .WriteDT_Remark .content.WriteDT {width:calc(50% - 100px - 1px); flex:none;}
+.popup_receipt .WriteDT_Remark .WriteDT > input {width:47px; font-size:16px;}
+.popup_receipt .WriteDT_Remark .WriteDT > input:hover {background-color:#fff9af;}
+.popup_receipt .WriteDT_Remark .WriteDT > input:focus {background-color:#fff9af;}
+.popup_receipt .WriteDT_Remark .WriteDT .ReceiptDT_ExistYN {height:100%; cursor:pointer; position:absolute; right:10px; top:0; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_receipt .WriteDT_Remark .WriteDT .ReceiptDT_ExistYN input {width:20px; height:20px; margin:0; padding:0; cursor:pointer;}
+.popup_receipt .WriteDT_Remark .WriteDT .ReceiptDT_ExistYN span {font-size:13px; user-select:none;}
+.popup_receipt .WriteDT_Remark .WriteDT .dash {height:100%; width:6px; font-size:16px; padding:0 1px; display:flex; flex-direction:row; align-items:center;}
+.popup_receipt .WriteDT_Remark input[name='ReceiptDT_yyyy'] {text-align:right; padding:0 0 0 10px;}
+.popup_receipt .WriteDT_Remark input[name='ReceiptDT_yyyy'].readonly:hover {background-color:white;}
+.popup_receipt .WriteDT_Remark input[name='ReceiptDT_yyyy'].readonly:focus {background-color:white;}
+.popup_receipt .WriteDT_Remark input[name='ReceiptDT_mmdd'] {text-align:left; padding:0 5px 0 0;}
+.popup_receipt .WriteDT_Remark input[name='ReceiptDT_mmdd'].readonly:hover {background-color:white;}
+.popup_receipt .WriteDT_Remark input[name='ReceiptDT_mmdd'].readonly:focus {background-color:white;}
+
+.popup_receipt .ReceiptPrice {width:100%; height:30px; border-top:1px solid #f58c8c; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.popup_receipt .ReceiptPrice .caption {width:100px; height:100%; font-size:13px; letter-spacing:2px; color:#888; background-color:#f8f8f8; border-left:1px solid #dfdfdf; border-right:1px solid #dfdfdf; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_receipt .ReceiptPrice .caption:first-child {border-left:0; border-right:1px solid #efc7c7;}
+.popup_receipt .ReceiptPrice .content {flex:1; height:100%; font-size:13px; color:#e62324; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.popup_receipt .ReceiptPrice input {width:calc(100% - 30px); height:100%; border:0; padding:0 20px 0 10px; font-size:13px; text-align:right; transition:background-color 0.3s;}
+.popup_receipt .ReceiptPrice .caption.TotalPrice {color:#e62324; font-weight:bold; background-color:#fff6f6;}
+.popup_receipt .ReceiptPrice input[name='TotalPrice'] {font-size:16px;}
+
+.popup_receipt .ReceiptGoods {border-top:1px solid #f58c8c; overflow:hidden;}
+.popup_receipt .ReceiptGoods .caption {width:100%; height:30px; border-bottom:1px solid #efc7c7; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.popup_receipt .ReceiptGoods .caption > div {flex:1; height:100%; font-size:13px; letter-spacing:2px; color:#e62324; font-weight:bold; background-color:#fff6f6; border-left:1px solid #efc7c7; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_receipt .ReceiptGoods .caption .ItemNM {border-left:0;}
+.popup_receipt .ReceiptGoods .caption .ItemNM .btn_add {height:24px; line-height:24px; padding:0 10px; font-size:11px; color:#666; background-color:#eee; border:1px solid #ddd; border-radius:3px; position:absolute; right:10px; top:3px;}
+.popup_receipt .ReceiptGoods .caption .ItemNM .btn_add i {margin:0 5px 0 0; padding:0;}
+.popup_receipt .ReceiptGoods .caption .ItemNM .btn_add:hover {background-color:#4ECDC4; border:1px solid #4ECDC4; color:white;}
+.popup_receipt .ReceiptGoods .caption .ItemNM .btn_add:focus {background-color:#4ECDC4; border:1px solid #4ECDC4; color:white;}
+.popup_receipt .ReceiptGoods .caption .Quantity {width:80px; flex:none;}
+.popup_receipt .ReceiptGoods .caption .UnitPrice {width:150px; flex:none;}
+.popup_receipt .ReceiptGoods .caption .SupplyPrice {width:150px; flex:none;}
+.popup_receipt .ReceiptGoods .caption .TaxPrice {width:80px; flex:none;}
+.popup_receipt .ReceiptGoods .goods_list .goods {width:100%; height:30px; border-bottom:1px solid #efc7c7; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.popup_receipt .ReceiptGoods .goods_list .goods:last-child {border-bottom:0;}
+.popup_receipt .ReceiptGoods .goods_list .goods > div {flex:1; height:100%; font-size:13px; color:#e62324; border-left:1px solid #efc7c7; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.popup_receipt .ReceiptGoods .goods_list .goods .ItemNM {border-left:0;}
+.popup_receipt .ReceiptGoods .goods_list .goods .ItemNM .btn_delete {height:100%; padding:0 10px; color:#bbb; font-size:20px; cursor:pointer; position:absolute; right:0; top:0; display:flex; flex-direction:row; align-items:center; justify-content:center; transition:all 0.3s;}
+.popup_receipt .ReceiptGoods .goods_list .goods .ItemNM .btn_delete:hover {color:red;}
+.popup_receipt .ReceiptGoods .goods_list .goods .Quantity {width:80px; flex:none;}
+.popup_receipt .ReceiptGoods .goods_list .goods .UnitPrice {width:150px; flex:none;}
+.popup_receipt .ReceiptGoods .goods_list .goods .SupplyPrice {width:150px; flex:none;}
+.popup_receipt .ReceiptGoods .goods_list .goods .TaxPrice {width:80px; flex:none;}
+.popup_receipt .ReceiptGoods .goods_list .goods .TaxPrice input:focus {background-color:white;}
+.popup_receipt .ReceiptGoods .goods_list .goods .TaxPrice input:hover {background-color:white;}
+.popup_receipt .ReceiptGoods input {width:calc(100% - 20px); height:100%; border:0; padding:0 10px; font-size:13px; text-align:right; transition:background-color 0.3s;}
+.popup_receipt .ReceiptGoods input:focus {background-color:#fff9af;}
+.popup_receipt .ReceiptGoods input:hover {background-color:#fff9af;}
+.popup_receipt .ReceiptGoods input[name='ReceiptGoodsNM'] {text-align:left;}
+.popup_receipt .ReceiptGoods input[name='Quantity'] {text-align:center;}
+
+.popup_receipt .ReceiptETC {border-top:1px solid #f58c8c; overflow:hidden; display:flex; flex-direction:row; align-items:strech; justify-content:flex-start;}
+.popup_receipt .ReceiptETC > div {flex:1;}
+.popup_receipt .ReceiptETC > div.Remark {width:300px; flex:none; border-left:1px solid #efc7c7; letter-spacing:2px; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_receipt .ReceiptETC > div > div {height:30px; border-bottom:1px solid #efc7c7; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.popup_receipt .ReceiptETC > div > div:last-child {border-bottom:0;}
+.popup_receipt .ReceiptETC .caption {flex:1; height:100%; font-size:13px; letter-spacing:2px; color:#e62324; background-color:#fff6f6; border-left:1px solid #efc7c7; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_receipt .ReceiptETC .caption:first-child {border-left:0;}
+.popup_receipt .ReceiptETC .content {flex:1; height:100%; font-size:13px; color:#e62324; border-left:1px solid #efc7c7; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.popup_receipt .ReceiptETC .content:first-child {border-left:0;}
+
+.popup_receipt .receipt_etc {width:800px; overflow:hidden;}
+.popup_receipt .receipt_etc > div {width:calc(50% - 10px); float:left; margin:10px 10px 0 10px; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_receipt .receipt_etc > div:nth-child(2n) {margin-right:0;}
+.popup_receipt .receipt_etc > div:nth-child(2n-1) {margin-left:0;}
+.popup_receipt .receipt_etc > div.ReceiptMemo_select {width:100%; margin:10px 0 0 0;}
+.popup_receipt .receipt_etc > div.ReceiptMemo {width:100%; margin:10px 0 0 0;}
+.popup_receipt .receipt_etc .title {width:117px; color:#292F36; font-size:15px; letter-spacing:1px; display:flex; align-items:center; justify-content:flex-start;}
+.popup_receipt .receipt_etc .content {flex:1; display:flex; align-items:center; justify-content:flex-end;}
+.popup_receipt .receipt_etc select {width:calc(100% - 20px); border:1px solid #ccc;}
+.popup_receipt .receipt_etc select:focus {border:1px dotted #888; background-color:#4ECDC4;}
+.popup_receipt .receipt_etc select:hover {border:1px dotted #888; background-color:#4ECDC4;}
+.popup_receipt .receipt_etc textarea {width:calc(100% - 42px); min-height:45px; line-height:20px; padding:5px 10px 8px 10px; color:#292F36; font-size:16px; text-align:left; border:1px solid #ccc; border-radius:3px;}
+.popup_receipt .receipt_etc textarea:focus {background-color:#fff9af;}
+.popup_receipt .receipt_etc textarea:hover {background-color:#fff9af;}
+.popup_receipt .receipt_etc > div.TaxCD {width:100%; margin:10px 0 0 0;}
+.popup_receipt .receipt_etc input {width:calc(100% - 42px); line-height:20px; padding:5px 10px 8px 10px; color:#292F36; font-size:16px; text-align:left; border:1px solid #ccc; border-radius:3px;}
+.popup_receipt .receipt_etc input:focus {background-color:#fff9af;}
+.popup_receipt .receipt_etc input:hover {background-color:#fff9af;}
+
+.popup_receipt .receipt_btn {width:calc(100% - 40px); margin:2px 20px 15px 20px; overflow:hidden; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.popup_receipt .receipt_btn.insert {justify-content:flex-end;}
+.popup_receipt .receipt_btn.insert .btn.prev {display:none;}
+.popup_receipt .receipt_btn.insert .btn.next {display:none;}
+.popup_receipt .receipt_btn.insert .btn.delete {display:none;}
+.popup_receipt .receipt_btn.insert .btn.minus {display:none;}
+.popup_receipt .receipt_btn .btn {width:calc((100% - 20px)/3); max-width:190px; padding:10px 0; margin-left:10px; font-size:16px; letter-spacing:3px; background-color:white; color:#bbb; border:1px solid #bbb; border-radius:3px; overflow:hidden; cursor:pointer; user-select:none; display:flex; align-items:center; justify-content:center; opacity:0.7; transition:opacity 0.3s, background 0.3s, color 0.3s, border 0.3s;}
+.popup_receipt .receipt_btn .btn:first-child {margin-left:0;}
+.popup_receipt .receipt_btn .btn:hover {background-color:#bbb; border-color:#bbb; color:white;}
+.popup_receipt .receipt_btn .btn.hidden {display:none;}
+
+.popup_receipt .receipt_btn .btn.delete:hover {background-color:#ff6b4d; border-color:#ff6b4d; color:white; opacity:1;}
+.popup_receipt .receipt_btn .btn.update:hover {background-color:#4ECDC4; border-color:#4ECDC4; color:white; opacity:1;}
+.popup_receipt .receipt_btn .btn.update:focus {padding:8px 0; background-color:#4ECDC4; border:2px dotted #888; color:white; opacity:1;}
+
+
+
+
+/***********************************************************************************
+* 以묐났 �뙘�뾽李�
+***********************************************************************************/
+
+.popup_receipt.duplicate {width:calc(100% - 100px); align-items:flex-start; padding-left:100px; overflow-x:auto;}
+
+.popup_receipt_duplicate {width:230px; height:100%; top:0; right:-235px; position:absolute; background:white; opacity:0; z-index:-1; transition:opacity 0.3s, z-index 0s 0.3s; display:none; flex-direction:column; align-items:center; justify-content:flex-start;}
+.popup_receipt_duplicate.active {display:flex; opacity:1; z-index:11; transition:opacity 0.1s, z-index 0s;}
+.popup_receipt_duplicate.show {opacity:1; z-index:11; transition:opacity 0.1s, z-index 0s;}
+
+.popup_receipt_duplicate .receipt_duplicate_title {width:100%; height:45px; left:0; top:-46px; border-bottom:1px solid #ddd; background:white; position:absolute; font-size:15px; font-weight:bold; color:red; letter-spacing:1px; border-radius:4px 4px 0 0; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+
+.popup_receipt_duplicate .receipt_duplicate_wrap {width:100%; overflow-y:auto; overflow-x:hidden;}
+.popup_receipt_duplicate .receipt_duplicate {width:calc(100% - 10px); margin:5px; overflow:hidden;}
+.popup_receipt_duplicate .receipt_duplicate img {opacity:0.4; transition:opacity 0.2s; z-index:1; cursor:pointer;}
+
+.popup_receipt_duplicate .receipt_duplicate .checkbox {left:5px; top:5px; position:absolute; font-size:40px; color:white; opacity:0.5; transition:color 0.2s, opacity 0.2s; cursor:pointer;}
+.popup_receipt_duplicate .receipt_duplicate .checkbox.active {color:red; opacity:1;}
+.popup_receipt_duplicate .receipt_duplicate:hover .checkbox {opacity:1;}
+
+.popup_receipt_duplicate .receipt_duplicate .receipt_status {left:45px; top:10px; position:absolute; z-index:3; color:black; font-size:20px;}
+/* .popup_receipt_duplicate .receipt_duplicate.active .checkbox.checked {opacity:1; z-index:2;}
+.popup_receipt_duplicate .receipt_duplicate.active .checkbox.uncheck {opacity:0;}
+.popup_receipt_duplicate .receipt_duplicate:hover .checkbox.uncheck {opacity:1; color:red;} */
+
+.popup_receipt_duplicate .receipt_duplicate.active img {opacity:1;}
+.popup_receipt_duplicate .receipt_duplicate:hover img {opacity:1;}
+
+.popup_receipt_duplicate .receipt_duplicate .btn_show {right:5px; top:5px; position:absolute; z-index:2; color:white; font-size:35px; opacity:0.5; transition:color 0.2s, opacity 0.2s; cursor:pointer;}
+.popup_receipt_duplicate .receipt_duplicate:hover .btn_show {opacity:1;}
+
+.duplicate_delete_btn_container .duplicate_delete_btn{text-align:center; background-color:red; margin:5px; color:white; font-size: 15px; padding: 5px; border-radius: 5px; cursor:pointer;}
+
+
+
+
+/***********************************************************************************
+* �쉶�궗寃��깋 �뙘�뾽李�
+***********************************************************************************/
+
+.popup_companylist {width:330px; /*calc(100% - 2px - 10px);*/ padding:5px; top:calc(100% + 1px); left:2px; position:absolute; border:1px solid #ccc; background-color:#eee; opacity:0; z-index:-1; transition:opacity 0.3s, z-index 0s 0.3s; display:none; flex-direction:column; align-items:center; justify-content:center;}
+.popup_companylist.active {display:flex; opacity:1; z-index:11; transition:opacity 0.1s, z-index 0s;}
+.popup_companylist.show {opacity:1; z-index:11; transition:opacity 0.1s, z-index 0s;}
+
+.popup_companylist .companylist {max-height:200px; overflow-y:auto;}
+.popup_companylist .companylist .companylist_wrap {width:auto; height:42px; padding:5px 0; background-color:#eee; display:flex; flex-direction:row; align-items:center; justify-content:space-between; cursor:pointer;}
+.popup_companylist .companylist .companylist_wrap:hover {background-color:#2ca02c;}
+.popup_companylist .companylist .companylist_wrap:focus {background-color:#2ca02c;}
+
+.popup_companylist .companylist .companylist_wrap .companynm {width:110px; height:100%; color:#333; font-size:12px; padding-left:5px; text-align:left; overflow:hidden;}
+.popup_companylist .companylist .companylist_wrap:hover .companynm {color:white;}
+.popup_companylist .companylist .companylist_wrap:focus .companynm {color:white;}
+
+.popup_companylist .companylist .companylist_wrap .companyno {width:90px; height:100%; color:#333; font-size:12px; padding-right:10px; text-align:right; overflow:hidden;}
+.popup_companylist .companylist .companylist_wrap:hover .companyno {color:white;}
+.popup_companylist .companylist .companylist_wrap:focus .companyno {color:white;}
+
+.popup_companylist .companylist .companylist_wrap .companyaddress {width:100px; height:100%; color:#333; font-size:12px; padding-right:5px; text-align:left; overflow:hidden;}
+.popup_companylist .companylist .companylist_wrap:hover .companyaddress {color:white;}
+.popup_companylist .companylist .companylist_wrap:focus .companyaddress {color:white;}
+
+/***********************************************************************************
+* �쉶�궗寃��깋 �뙘�뾽李�
+***********************************************************************************/
+
+.popup_tax_companylist {width:330px; /*calc(100% - 2px - 10px);*/ padding:5px; top:calc(100% + 1px); left:2px; position:absolute; border:1px solid #ccc; background-color:#eee; opacity:0; z-index:-1; transition:opacity 0.3s, z-index 0s 0.3s; display:none; flex-direction:column; align-items:center; justify-content:center;}
+.popup_tax_companylist.active {display:flex; opacity:1; z-index:11; transition:opacity 0.1s, z-index 0s;}
+.popup_tax_companylist.show {opacity:1; z-index:11; transition:opacity 0.1s, z-index 0s;}
+
+.popup_tax_companylist .companylist {max-height:200px; overflow-y:auto;}
+.popup_tax_companylist .companylist .companylist_wrap {width:auto; height:42px; padding:5px 0; background-color:#eee; display:flex; flex-direction:row; align-items:center; justify-content:space-between; cursor:pointer;}
+.popup_tax_companylist .companylist .companylist_wrap:hover {background-color:#2ca02c;}
+.popup_tax_companylist .companylist .companylist_wrap:focus {background-color:#2ca02c;}
+
+.popup_tax_companylist .companylist .companylist_wrap .companynm {width:110px; height:100%; color:#333; font-size:12px; padding-left:5px; text-align:left; overflow:hidden;}
+.popup_tax_companylist .companylist .companylist_wrap:hover .companynm {color:white;}
+.popup_tax_companylist .companylist .companylist_wrap:focus .companynm {color:white;}
+
+.popup_tax_companylist .companylist .companylist_wrap .companyno {width:90px; height:100%; color:#333; font-size:12px; padding-right:10px; text-align:right; overflow:hidden;}
+.popup_tax_companylist .companylist .companylist_wrap:hover .companyno {color:white;}
+.popup_tax_companylist .companylist .companylist_wrap:focus .companyno {color:white;}
+
+.popup_tax_companylist .companylist .companylist_wrap .companyaddress {width:100px; height:100%; color:#333; font-size:12px; padding-right:5px; text-align:left; overflow:hidden;}
+.popup_tax_companylist .companylist .companylist_wrap:hover .companyaddress {color:white;}
+.popup_tax_companylist .companylist .companylist_wrap:focus .companyaddress {color:white;}
+
+/***********************************************************************************
+* 怨꾩궛�꽌 �뙘�뾽
+***********************************************************************************/
+
+.popup_tax .popup_top {width:840px; margin-top:30px;}
+.popup_tax .popup_top.img_open {width:1440px;}
+.popup_tax .popup_top .btn_img {height:26px; position:absolute; left:20px; top:6px; padding:0 10px; line-height:28px; font-size:16px; color:#666; background-color:#eee; border:1px solid #ddd; border-radius:5px; cursor:pointer; transition:all 0.3s; display:flex; flex-direction:row; align-items:center; user-select:none;}
+.popup_tax .popup_top .btn_img i {margin-right:5px;}
+.popup_tax .popup_top .btn_img:hover {background-color:#ddd; border:1px solid #aaa; color:#333;}
+.popup_tax .popup_top .btn_close {width:50px;}
+
+.popup_tax .popup_content {width:840px; height:calc(100% - 100px); margin-bottom:30px; overflow:visible; border-radius:0 0 4px 4px;}
+.popup_tax .popup_content.img_open {width:1440px;}
+.popup_tax .popup_content #frmReceipt {width:100%; height:100%; display:flex; flex-direction:row; overflow:visible;}
+
+/* 怨꾩궛�꽌 �씠誘몄� */
+.popup_tax .tax_img {width:600px; height:100%; overflow:hidden; border-right:1px solid rgba(99,99,99,0.2); display:none;}
+.popup_tax .popup_content.img_open .tax_img {display:inline-block;}
+
+.popup_tax .tax_img .btn_upload {position:absolute; right:20px; bottom:10px; z-index:999;}
+.popup_tax .tax_img .btn_upload > div {padding:5px 20px; font-size:17px; line-height:20px; color:#666; background-color:#eee; border:1px solid #ddd; border-radius:5px; cursor:pointer; transition:all 0.3s; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_tax .tax_img .btn_upload > div:hover {background-color:#4ECDC4; color:white; border:1px solid #4ECDC4;}
+.popup_tax .tax_img .btn_upload .title {margin-left:5px; transition:all 0.3s;}
+.popup_tax .tax_img .btn_upload > div:hover .title {color:white;}
+.popup_tax .tax_img .btn_upload.IMG_UPLOADED > div {background-color:#9be4a1;}
+.popup_tax .tax_img .btn_upload.IMG_UPLOADED .upload_no {opacity:0;}
+.popup_tax .tax_img .btn_upload.IMG_UPLOADED .upload_ok {opacity:1;}
+
+/* 怨꾩궛�꽌 �궡�슜 */
+.popup_tax .tax_content {width:840px; height:100%; display:flex; flex-direction:column; align-content:space-between; justify-items:center;}
+
+.popup_tax .tax_wrap {width:calc(100% - 40px); padding:25px 20px 20px 20px; flex:1; overflow-y:auto;}
+
+.popup_tax .tax_info {width:796px; border:2px solid #ef7070; overflow:hidden;}
+.popup_tax .tax_info > .title {width:100%; height:49px; font-size:20px; font-weight:bold; color:#e62324; background-color:#fff6f6; border-bottom:2px solid #ef7070; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_tax .TaxCompany {display:flex; flex-direction:row; align-items:stretch; justify-content:space-between;}
+.popup_tax .TaxCompany .caption {font-size:13px; line-height:20px; letter-spacing:5px; padding-left:5px; text-align:center; color:#666; font-weight:bold; background-color:#eee; flex:1; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_tax .TaxCompany .content_wrap > div {width:100%; height:35px; border-bottom:1px solid #efc7c7; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.popup_tax .TaxCompany .content_wrap > div:last-child {border-bottom:0 !important;}
+.popup_tax .TaxCompany .content_wrap > div > div:first-child {border-left:0 !important;}
+.popup_tax .TaxCompany .content_wrap .title {width:60px; height:100%; font-size:13px; color:#e62324; text-align:center; border-right:1px solid #efc7c7; border-left:1px solid #efc7c7; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_tax .TaxCompany .content_wrap .title.vertical {width:25px; writing-mode:vertical-rl; text-orientation:upright;}
+.popup_tax .TaxCompany .content_wrap .content {flex:1; height:100%; font-size:13px; color:#e62324; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.popup_tax .TaxCompany .content_wrap .content.none {width:80px; flex:none;}
+.popup_tax .TaxCompany .content_wrap .content.name {width:85px; flex:none;}
+.popup_tax .TaxCompany .content_wrap.CompanySell {width:calc(50% - 24px);}
+.popup_tax .TaxCompany .content_wrap.CompanyBuy {width:calc(50% - 25px);}
+.popup_tax .TaxCompany input {width:calc(100% - 10px); height:100%; border:0; padding:0 5px; font-size:13px; transition:background-color 0.3s; ime-mode:active;}
+.popup_tax .TaxCompany input.readonly {background:white;}
+
+.popup_tax .TaxCompany .CompanySell > div {border-bottom:1px solid #ccc;}
+.popup_tax .TaxCompany .CompanySell .title {color:#999; border-right:1px solid #ccc; border-left:1px solid #ccc;}
+.popup_tax .TaxCompany .CompanySell.caption {border-right:1px solid #aaa;}
+.popup_tax .TaxCompany .CompanySell input:hover {background-color:#fff9af;}
+.popup_tax .TaxCompany .CompanySell input.readonly:hover {background-color:white;}
+.popup_tax .TaxCompany .CompanySell input:focus {background-color:#fff9af;}
+.popup_tax .TaxCompany .CompanySell input.readonly:focus {background-color:white;}
+.popup_tax .TaxCompany .CompanySell.active.caption {background-color:#fff6f6; color:#e62324; border-right:1px solid #ef7070;}
+.popup_tax .TaxCompany .CompanySell.active.content_wrap > div {border-bottom:1px solid #efc7c7;}
+.popup_tax .TaxCompany .CompanySell.active .title {background-color:#fff6f6; color:#e62324; border-right:1px solid #efc7c7; border-left:1px solid #efc7c7;}
+.popup_tax .TaxCompany .CompanySell input[name='CompanyNO_Sell'] {font-size:16px; letter-spacing:3px;}
+.popup_tax .TaxCompany .CompanySell.active input[name='CompanyNO_Sell'] {color:#e62324; font-weight:bold;}
+.popup_tax .TaxCompany .CompanySell input[name='CompanyEmail_Sell'] {ime-mode:disabled;}
+
+.popup_tax .TaxCompany .CompanyBuy > div {border-bottom:1px solid #ccc;}
+.popup_tax .TaxCompany .CompanyBuy .title {color:#999; border-right:1px solid #ccc; border-left:1px solid #ccc;}
+.popup_tax .TaxCompany .CompanyBuy.caption {border-right:1px solid #aaa; border-left:1px solid #aaa;}
+.popup_tax .TaxCompany .CompanyBuy input:hover {background-color:#fff9af;}
+.popup_tax .TaxCompany .CompanyBuy input.readonly:hover {background-color:white;}
+.popup_tax .TaxCompany .CompanyBuy input:focus {background-color:#fff9af;}
+.popup_tax .TaxCompany .CompanyBuy input.readonly:focus {background-color:white;}
+.popup_tax .TaxCompany .CompanyBuy.active.caption {background-color:#f0f6fd; color:#3070ad; border-right:1px solid #5b9adf; border-left:1px solid #5b9adf;}
+.popup_tax .TaxCompany .CompanyBuy.active.content_wrap > div {border-bottom:1px solid #5b9adf;}
+.popup_tax .TaxCompany .CompanyBuy.active .title {background-color:#f0f6fd; color:#3070ad; border-right:1px solid #5b9adf; border-left:1px solid #5b9adf;}
+.popup_tax .TaxCompany .CompanyBuy input[name='CompanyNO_Buy'] {font-size:16px; letter-spacing:3px;}
+.popup_tax .TaxCompany .CompanyBuy.active input[name='CompanyNO_Buy'] {color:#3070ad; font-weight:bold;}
+.popup_tax .TaxCompany .CompanyBuy input[name='CompanyEmail_Buy'] {ime-mode:disabled;}
+
+.popup_tax .WriteDT_Remark {width:100%; height:30px; border-top:1px solid #f58c8c; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.popup_tax .WriteDT_Remark .caption {width:100px; height:100%; font-size:13px; letter-spacing:2px; color:#888; background-color:#f8f8f8; border-left:1px solid #dfdfdf; border-right:1px solid #dfdfdf; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_tax .WriteDT_Remark .caption:first-child {border-left:0; border-right:1px solid #efc7c7;}
+.popup_tax .WriteDT_Remark .content {flex:1; height:100%; font-size:13px; color:#e62324; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.popup_tax .WriteDT_Remark input {width:calc(100% - 20px); height:100%; border:0; padding:0 10px; font-size:13px; text-align:left; transition:background-color 0.3s;}
+.popup_tax .WriteDT_Remark input:hover {background-color:#fff9af;}
+.popup_tax .WriteDT_Remark input.readonly:hover {background-color:white;}
+.popup_tax .WriteDT_Remark input:focus {background-color:#fff9af;}
+.popup_tax .WriteDT_Remark input.readonly:focus {background-color:white;}
+.popup_tax .WriteDT_Remark .caption.WriteDT {color:#e62324; font-weight:bold; background-color:#fff6f6;}
+.popup_tax .WriteDT_Remark .content.WriteDT {width:calc(50% - 100px - 1px); flex:none;}
+.popup_tax .WriteDT_Remark .WriteDT > input {width:100px; font-size:16px;}
+.popup_tax .WriteDT_Remark .WriteDT > input:hover {background-color:#fff9af;}
+.popup_tax .WriteDT_Remark .WriteDT > input:focus {background-color:#fff9af;}
+.popup_tax .WriteDT_Remark .WriteDT .dash {height:100%; width:6px; font-size:16px; padding:0 1px; display:flex; flex-direction:row; align-items:center;}
+
+.popup_tax .TaxPrice {width:100%; height:30px; border-top:1px solid #f58c8c; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.popup_tax .TaxPrice .caption {width:100px; height:100%; font-size:13px; letter-spacing:2px; color:#888; background-color:#f8f8f8; border-left:1px solid #dfdfdf; border-right:1px solid #dfdfdf; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_tax .TaxPrice .caption:first-child {border-left:0; border-right:1px solid #efc7c7;}
+.popup_tax .TaxPrice .content {flex:1; height:100%; font-size:13px; color:#e62324; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.popup_tax .TaxPrice input {width:calc(100% - 30px); height:100%; border:0; padding:0 20px 0 10px; font-size:13px; text-align:right; transition:background-color 0.3s;}
+.popup_tax .TaxPrice .caption.TotalPrice {color:#e62324; font-weight:bold; background-color:#fff6f6;}
+.popup_tax .TaxPrice input[name='TotalPrice'] {font-size:16px;}
+
+.popup_tax .TaxGoods {border-top:1px solid #f58c8c; overflow:hidden;}
+.popup_tax .TaxGoods .caption {width:100%; height:30px; border-bottom:1px solid #efc7c7; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.popup_tax .TaxGoods .caption > div {flex:1; height:100%; font-size:13px; letter-spacing:2px; color:#e62324; font-weight:bold; background-color:#fff6f6; border-left:1px solid #efc7c7; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_tax .TaxGoods .caption .ItemNM {border-left:0;}
+.popup_tax .TaxGoods .caption .ItemNM .btn_add {height:24px; line-height:24px; padding:0 10px; font-size:11px; color:#666; background-color:#eee; border:1px solid #ddd; border-radius:3px; position:absolute; right:10px; top:3px;}
+.popup_tax .TaxGoods .caption .ItemNM .btn_add i {margin:0 5px 0 0; padding:0;}
+.popup_tax .TaxGoods .caption .ItemNM .btn_add:hover {background-color:#4ECDC4; border:1px solid #4ECDC4; color:white;}
+.popup_tax .TaxGoods .caption .ItemNM .btn_add:focus {background-color:#4ECDC4; border:1px solid #4ECDC4; color:white;}
+.popup_tax .TaxGoods .caption .Quantity {width:80px; flex:none;}
+.popup_tax .TaxGoods .caption .UnitPrice {width:150px; flex:none;}
+.popup_tax .TaxGoods .caption .SupplyPrice {width:150px; flex:none;}
+.popup_tax .TaxGoods .caption .TaxPrice {width:80px; flex:none;}
+.popup_tax .TaxGoods .goods_list .goods {width:100%; height:30px; border-bottom:1px solid #efc7c7; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.popup_tax .TaxGoods .goods_list .goods:last-child {border-bottom:0;}
+.popup_tax .TaxGoods .goods_list .goods > div {flex:1; height:100%; font-size:13px; color:#e62324; border-left:1px solid #efc7c7; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.popup_tax .TaxGoods .goods_list .goods .ItemNM {border-left:0;}
+.popup_tax .TaxGoods .goods_list .goods .ItemNM .btn_delete {height:100%; padding:0 10px; color:#bbb; font-size:20px; cursor:pointer; position:absolute; right:0; top:0; display:flex; flex-direction:row; align-items:center; justify-content:center; transition:all 0.3s;}
+.popup_tax .TaxGoods .goods_list .goods .ItemNM .btn_delete:hover {color:red;}
+.popup_tax .TaxGoods .goods_list .goods .Quantity {width:80px; flex:none;}
+.popup_tax .TaxGoods .goods_list .goods .UnitPrice {width:150px; flex:none;}
+.popup_tax .TaxGoods .goods_list .goods .SupplyPrice {width:150px; flex:none;}
+.popup_tax .TaxGoods .goods_list .goods .TaxPrice {width:80px; flex:none;}
+.popup_tax .TaxGoods .goods_list .goods .TaxPrice input:focus {background-color:white;}
+.popup_tax .TaxGoods .goods_list .goods .TaxPrice input:hover {background-color:white;}
+.popup_tax .TaxGoods input {width:calc(100% - 20px); height:100%; border:0; padding:0 10px; font-size:13px; text-align:right; transition:background-color 0.3s;}
+.popup_tax .TaxGoods input:focus {background-color:#fff9af;}
+.popup_tax .TaxGoods input:hover {background-color:#fff9af;}
+.popup_tax .TaxGoods input[name='TaxGoodsNM'] {text-align:left;}
+.popup_tax .TaxGoods input[name='Quantity'] {text-align:center;}
+
+.popup_tax .TaxETC {border-top:1px solid #f58c8c; overflow:hidden; display:flex; flex-direction:row; align-items:strech; justify-content:flex-start;}
+.popup_tax .TaxETC > div {flex:1;}
+.popup_tax .TaxETC > div.Remark {width:300px; flex:none; border-left:1px solid #efc7c7; letter-spacing:2px; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_tax .TaxETC > div > div {height:30px; border-bottom:1px solid #efc7c7; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.popup_tax .TaxETC > div > div:last-child {border-bottom:0;}
+.popup_tax .TaxETC .caption {flex:1; height:100%; font-size:13px; letter-spacing:2px; color:#e62324; background-color:#fff6f6; border-left:1px solid #efc7c7; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_tax .TaxETC .caption:first-child {border-left:0;}
+.popup_tax .TaxETC .content {flex:1; height:100%; font-size:13px; color:#e62324; border-left:1px solid #efc7c7; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.popup_tax .TaxETC .content:first-child {border-left:0;}
+
+.popup_tax .tax_btn {width:calc(100% - 40px); margin:2px 20px 15px 20px; overflow:hidden; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.popup_tax .tax_btn.insert {justify-content:flex-end;}
+.popup_tax .tax_btn.insert .btn.prev {display:none;}
+.popup_tax .tax_btn.insert .btn.next {display:none;}
+.popup_tax .tax_btn.insert .btn.delete {display:none;}
+.popup_tax .tax_btn.insert .btn.minus {display:none;}
+.popup_tax .tax_btn .btn {width:calc((100% - 20px)/3); max-width:190px; padding:10px 0; margin-left:10px; font-size:16px; letter-spacing:3px; background-color:white; color:#bbb; border:1px solid #bbb; border-radius:3px; overflow:hidden; cursor:pointer; user-select:none; display:flex; align-items:center; justify-content:center; opacity:0.7; transition:opacity 0.3s, background 0.3s, color 0.3s, border 0.3s;}
+.popup_tax .tax_btn .btn:first-child {margin-left:0;}
+.popup_tax .tax_btn .btn:hover {background-color:#bbb; border-color:#bbb; color:white;}
+.popup_tax .tax_btn .btn.hidden {display:none;}
+
+.popup_tax .tax_btn .btn.delete:hover {background-color:#ff6b4d; border-color:#ff6b4d; color:white; opacity:1;}
+.popup_tax .tax_btn .btn.update:hover {background-color:#4ECDC4; border-color:#4ECDC4; color:white; opacity:1;}
+.popup_tax .tax_btn .btn.update:focus {padding:8px 0; background-color:#4ECDC4; border:2px dotted #888; color:white; opacity:1;}
+
+
+
+
+/***********************************************************************************
+* chat �뙘�뾽
+***********************************************************************************/
+
+.popup_chat.active {z-index:2;}
+.popup_chat .popup_top {width:1080px; font-size:18px; color:#2f2f2f;}
+.popup_chat .popup_content {width:1080px; background:#f2f3f3; overflow:hidden; display:flex; flex-direction:column;}
+
+.popup_chat .list_wrap {width:calc(100% - 32px); padding:0 16px; flex:1; overflow-y:auto; overflow-x:hidden;}
+.popup_chat .list_wrap .date_wrap {width:100%; height:23px; margin:24px 0 16px 0; overflow:hidden; display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.popup_chat .list_wrap .date_wrap .date {height:23px; padding:0 10px; line-height:23px; font-size:11px; color:#434343; border-radius:11.5px; text-align:center; background:#dae3e3;}
+.popup_chat .list_wrap .chat_wrap {width:100%; margin-top:8px; overflow:hidden; display:flex; flex-direction:row; align-items:flex-end; justify-content:flex-start;}
+.popup_chat .list_wrap .chat_wrap.me {flex-direction:row-reverse;}
+.popup_chat .list_wrap .chat_wrap .chat {width:auto; max-width:70%; padding:16px; margin-left:16p; font-size:15px; line-height:21px; color:#fff; background:#03a1a2; border-top-left-radius:0px; border-top-right-radius:16px; border-bottom-left-radius:16px; border-bottom-right-radius:16px; overflow:hidden;}
+.popup_chat .list_wrap .chat_wrap.me .chat {background:white; color:#303030; border-top-left-radius:16px; border-top-right-radius:0px;}
+.popup_chat .list_wrap .chat_wrap .time {padding:0 9px; font-size:11px; color:#969696;}
+
+.popup_chat .input_wrap {width:calc(100% - 2px - 87px - 32px); height:21px; min-height:21px; max-height:63px; padding:14px 46px 14px 41px; margin:16px 16px; background:white; border:1px solid #f2f3f3; border-top-left-radius:16px; border-bottom-left-radius:16px; border-bottom-right-radius:16px; overflow:hidden;}
+.popup_chat .input_wrap.active {border:1px solid #00cea7;}
+
+.popup_chat textarea[name='ChatTalk'] {width:100%; height:21px; min-height:21px; max-height:63px; line-height:21px; font-size:15px; color:#333;}
+
+.popup_chat .btn_img {width:15px; height:16px; padding:16px 9px 17px 17px; background-image:url('../image/common/ico_chat_file.png'); background-size:15px 16px; background-position:17px 16px; left:0; bottom:0; position:absolute;}
+
+.popup_chat .btn_send {height:21px; padding:14px 16px 14px 4px; line-height:21px; font-size:15px; letter-spacing:1px; color:#00cea7; opacity:0; right:0; bottom:0; position:absolute; transition:opacity 0.3s;}
+.popup_chat .input_wrap.active .btn_send {opacity:1;}

@@ -1,0 +1,23 @@
+
+.page_wrap.menu_cd_1_2 .content {
+width: 1043px;
+height: 1287px;
+background: #FFFFFF 0% 0% no-repeat padding-box;
+box-shadow: 6px 6px 8px #00000029;
+border: 1px solid #ECECEC;
+opacity: 1;
+
+margin:110px 0 175px calc((100% - 1043px)/2 + 115px);
+
+}
+
+.page_wrap.menu_cd_1_2 .content > div {float:left;}
+
+
+.page_wrap.menu_cd_1_2 .content .text {font-size:20px; line-height:30px; letter-spacing:-1px; text-align:left; color:#767676;}
+.page_wrap.menu_cd_1_2 .content .text.top {width:calc(100% - 385px); height:auto; padding:35px 15px 0 350px;}
+.page_wrap.menu_cd_1_2 .content .text.top .picture {width:340px; height:100%; position:absolute; left:-1px; top:-1px; background-color:white; border-right: 1px solid #ECECEC; border-bottom: 1px solid #ECECEC;}
+.page_wrap.menu_cd_1_2 .content .text.top .picture img {width:287px;}
+.page_wrap.menu_cd_1_2 .content .text.top .picture .name {width:287px; height:45px; line-height:45px; margin-top:10px; font-size:30px; font-weight:bold; color:#191919; text-align:center;}
+.page_wrap.menu_cd_1_2 .content .text.bot {width:calc(100% - 30px); height:auto; padding:24px 15px 0 15px;}
+.page_wrap.menu_cd_1_2 .content .sign {width:calc(100% - 20px); height:37px; margin:24px 20px 28px 0; line-height:30px; font-size:25px; letter-spacing:-1.25px; color:#767676; text-align:right;}

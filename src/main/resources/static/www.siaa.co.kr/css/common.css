@@ -1,0 +1,217 @@
+/***********************************************************************************
+* Copyright (C)RFLOGIX since 2010.08.24 (rflogix@rflogix.com)
+************************************************************************************
+* ● 프로젝트	: 크로닉-관리자
+* ○ 파일		: common.css
+* ○ 생성		: 2017.02.01(수요일)
+* ○ 최종변경	: 2017.02.01(수요일)
+************************************************************************************/
+
+
+
+
+/***********************************************************************************
+* 폰트 관련
+***********************************************************************************/
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+
+/***********************************************************************************
+* 기본
+***********************************************************************************/
+
+html, body, iframe, div, form, img, ul, li, span, a, textarea, input, select, button {font-family:'Nanum Gothic', sans-serif; font-size:12px; color:#666666; border:0px; margin:0px; padding:0px; outline-style:none; resize:none;}
+html, body {height:100%; width:100%; background-color:white; z-index:0;}
+body {overflow:auto;}
+
+div		{position:relative; background-repeat:no-repeat; background-size:contain; background-position:center;}
+form	{position:relative;}
+
+img		{width:100%; vertical-align:middle; background-position:center top; background-size:cover;} /* vertical-align:middle; 이거 안주면 밑에 3px 정도 뜸 */
+iframe, form {width:100%; height:100%;}
+ul		{width:100%; list-style:none; clear:both; overflow:hidden;}
+li		{float:left;}
+
+input {color: #666; border: 1px solid #ccc; border-radius: 3px; transition: border-color 0.3s; display: inherit;}
+input:hover {border: 1px solid #333;}
+input::-webkit-input-placeholder {color:#ccc;}
+input:-moz-placeholder {color:#ccc;}
+
+textarea {color: #666; border: 1px solid #ccc; border-radius: 3px; transition: border-color 0.3s;}
+textarea:hover {border: 1px solid #333;}
+textarea {transition:border-color 0.3s;}
+textarea::-webkit-input-placeholder {color:#ccc;}
+textarea:-moz-placeholder {color:#ccc;}
+
+a:link, a:visited, a:active, a:hover {text-decoration:none;}
+
+table {border-collapse:collapse;}
+
+select {height:30px; padding:0 30px 0 5px; border:1px solid #ccc; border-radius:3px; background:url("../image/button/select_arrow.png") no-repeat; background-position:calc(100% - 10px) center; background-color:white; cursor:pointer; -webkit-appearance:none; -moz-appearance:none; appearance:none; transition:border-color 0.3s;}
+select:hover {border:1px solid #333;}
+select::-ms-expand {display:none;}
+
+.fa, .fas, .far, .fal, .fad, .fab {line-height:unset !important;}
+
+.flex-row {display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.flex-row-start {display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.flex-row-end {display:flex; flex-direction:row; align-items:center; justify-content:flex-end;}
+.flex-row-between {display:flex; flex-direction:row; align-items:center; justify-content:space-between;}
+
+.flex-col {display:flex; flex-direction:column; align-items:center; justify-content:center;}
+.flex-col-start {display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start;}
+.flex-col-between {display:flex; flex-direction:column; align-items:flex-start; justify-content:space-between;}
+
+.button {width: auto; height: 30px; padding: 0 20px; font-size: 14px; letter-spacing: 1px; background-color: #38626b; color: white; border-radius: 3px; display:flex; flex-direction:row; align-items:center; justify-content:center; cursor:pointer; transition: background-color 0.3s, color 0.3s;}
+.button > i {font-size: 12px; margin-right: 5px;}
+.button:hover {background-color: #e6652e;}
+
+/*
+html {width:100%; height:100%; overflow:hidden; font-size:15px; color:#292F36; font-family:'Noto Sans KR', sans-serif;}
+body {width:100%; height:100%; overflow-y:auto; position:relative; font-size:15px; color:#292F36; font-family:'Noto Sans KR', sans-serif;}
+body, div, form, iframe, img, textarea, button, select {margin:0px; padding:0px; outline-style:none;}
+body, div, form, iframe, img {border:0px;}
+
+ul, li {border:0px; margin:0px; padding:0px; list-style-type:none;}
+
+div  {position:relative; background-repeat:no-repeat; background-size:contain; background-position:center;}
+a:link, a:visited, a:active, a:hover {color:#292F36; text-decoration:none;}
+
+img {width:100%; height:auto; vertical-align:middle; background-repeat:no-repeat; background-size:contain; background-position:center;}
+iframe {width:100%; height:100%;}
+form {width:100%;}
+
+select {vertical-align:middle; outline-style:none;}
+
+textarea {resize:none;}
+textarea::-webkit-input-placeholder, textarea:-moz-placeholder {color:#ccc;}
+
+input[type='file'] {display:none;}
+input::-webkit-input-placeholder, input:-moz-placeholder {color:#777777;}
+
+.flex-row {display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.flex-row-start {display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.flex-row-end {display:flex; flex-direction:row; align-items:center; justify-content:flex-end;}
+.flex-row-between {display:flex; flex-direction:row; align-items:center; justify-content:space-between;}
+
+.flex-col {display:flex; flex-direction:column; align-items:center; justify-content:center;}
+.flex-col-start {display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start;}
+.flex-col-between {display:flex; flex-direction:column; align-items:flex-start; justify-content:space-between;}
+*/
+
+
+
+/***********************************************************************************
+* 헤더
+***********************************************************************************/
+
+header {width:100%; height:auto; position:relative;}
+header .header_top {width:100%; height:99px; border-bottom:1px solid #8d8d8d; z-index:10;}
+header .header_top .top_wrap {width:100%; min-width:1480px; max-width:1900px; height:100%; margin:0 auto;}
+header .header_top .top_wrap > div {float:left;}
+header .header_top .top_wrap::after {content:""; display:block; clear:both;}
+header .header_top .top_wrap .logo {margin:25px 250px 0 99px; cursor:pointer;}
+header .header_top .top_wrap .logo img {width:auto; height:100%;}
+header .header_top .top_wrap .top_menu_wrap {width:auto; height:100%;}
+header .header_top .top_wrap .top_menu_wrap .main_menu {width:auto; height:100%; height:45px; padding:27px 30px; text-align: left; font-weight: normal; font-size: 25px; line-height:37px; letter-spacing: -1.25px; color: #000000; cursor:pointer;}
+header .header_top .top_wrap .top_menu_wrap .main_menu.select,
+header .header_top .top_wrap .top_menu_wrap .main_menu:hover {font-weight:700; color: #1B5580;}
+
+header .header_top .top_wrap .sub_menu_wrap {position:absolute; top:99px; left:calc((100% - 128px)/2); width:128px; max-height:0px; background-color:white; opacity: 0.75; transition:max-height 0.5s; overflow:hidden;}
+header .header_top .top_wrap .top_menu_wrap:hover .sub_menu_wrap {max-height:400px;}
+header .header_top .top_wrap .sub_menu_wrap div:first-child {margin-top:5px;}
+header .header_top .top_wrap .sub_menu_wrap div:last-child {margin-bottom:5px;}
+header .header_top .top_wrap .sub_menu_wrap .sub_menu {height:45px; line-height:45px; text-align:center; font-size:15px; letter-spacing:-0.75px; font-weight:normal; color:#191919; cursor:pointer;}
+header .header_top .top_wrap .sub_menu_wrap .sub_menu.select,
+header .header_top .top_wrap .sub_menu_wrap .sub_menu:hover {font-weight:bold; color:#1B5580;}
+
+header .header_bot {width:100%; height:177px; background-color:#1b5580; z-index:9; display:none;}
+header .header_bot .bot_wrap {width:100%; min-width:1480px; max-width:1900px; height:100%; margin:0 auto;}
+header .header_bot .bot_wrap .bot_title {width:100%; height:100%; font-size:40px; font-weight:700; color:white;}
+header .header_bot .bot_wrap .left_menu_wrap {display:none; position:absolute; left:30px; top:177px; width:200px;}
+header .header_bot .bot_wrap .left_menu_wrap.select {display:inline-block;}
+header .header_bot .bot_wrap .left_menu_wrap .main_menu {width:100%; height:75px; line-height:75px; text-align:center; background-color:#1b5580; font-size: 25px; font-weight:700; color:white;}
+header .header_bot .bot_wrap .left_menu_wrap .sub_menu_wrap {padding:15px 0; background-color:white; box-shadow: 0px 3px 6px #00000029;}
+header .header_bot .bot_wrap .left_menu_wrap .sub_menu_wrap .sub_menu {width:100%; height:85px; line-height:85px; margin-bottom:2px; text-align:center; font-size: 25px; font-weight:700; color:black; cursor:pointer;}
+header .header_bot .bot_wrap .left_menu_wrap .sub_menu_wrap .sub_menu::after {position:absolute; top:85px; left:56px; width:88px; height:2px; background-color:#d2d2d2; content:"";}
+header .header_bot .bot_wrap .left_menu_wrap .sub_menu_wrap > div:last-child {margin-bottom:0;}
+header .header_bot .bot_wrap .left_menu_wrap .sub_menu_wrap > div:last-child::after {height:0;}
+header .header_bot .bot_wrap .left_menu_wrap .sub_menu_wrap .sub_menu.select,
+header .header_bot .bot_wrap .left_menu_wrap .sub_menu_wrap .sub_menu:hover {font-weight:bold; color:#1B5580;}
+
+
+
+
+/***********************************************************************************
+* 내용
+***********************************************************************************/
+
+content {width:100%; height:auto; min-height:500px; position:relative;}
+content > .page_wrap {width:100%; height:auto; display:none;}
+content > .page_wrap.select {display:block;}
+
+
+
+
+/***********************************************************************************
+* 풋터
+***********************************************************************************/
+
+footer {width:100%; height:auto; position:relative;}
+footer .footer_top {width:100%; height:auto; border-bottom:1px solid #1b5580;}
+footer .footer_top .top_wrap {width:100%; height:56px; min-width:1480px; max-width:1900px; margin:0 auto;}
+footer .footer_top .top_wrap .link {width:auto; height:20px; line-height:20px; padding:18px 20px 18px 20px; margin-right:1px; font-size:14px; font-weight:500; letter-spacing:-0.7px; float:left; cursor:pointer;}
+footer .footer_top .top_wrap .link:first-child {margin-left:300px;}
+footer .footer_top .top_wrap .link::after {position:absolute; top:23px; right:-1px; width:1px; height:10px; background-color:#dbdbdb; content:"";}
+footer .footer_top .top_wrap .link:last-child::after {width:0;}
+footer .footer_top .top_wrap::after {content:""; display:block; clear:both;}
+
+footer .footer_bot {width:100%; height:auto;}
+footer .footer_bot .bot_wrap {width:100%; min-width:1480px; max-width:1900px; height:auto; margin:0 auto;}
+footer .footer_bot .bot_wrap .left_wrap {margin:49px 0 0 321px;}
+footer .footer_bot .bot_wrap .left_wrap .title {height:27px; line-height:27px; margin-bottom:15px; font-size:18px; letter-spacing:-0.9px; font-weight:bold; color:black;}
+footer .footer_bot .bot_wrap .left_wrap .info {height:19px; line-height:19px; margin-top:7px; font-size:13px; letter-spacing:-0.65px; color:#505050;}
+footer .footer_bot .bot_wrap .left_wrap .info .link {text-decoration:underline; color:#191919; cursor:pointer;}
+footer .footer_bot .bot_wrap .left_wrap .info > div {padding:0 12px 0 11px; float:left;}
+footer .footer_bot .bot_wrap .left_wrap .info > div:first-child {padding-left:0;}
+footer .footer_bot .bot_wrap .left_wrap .info > div::after {position:absolute; top:4px; right:-1px; width:1px; height:10px; background-color:#dbdbdb; content:"";}
+footer .footer_bot .bot_wrap .left_wrap .info > div:last-child::after {width:0;}
+footer .footer_bot .bot_wrap .left_wrap .info::after {content:""; display:block; clear:both;}
+footer .footer_bot .bot_wrap .left_wrap .copyright {height:19px; line-height:19px; margin:18px 0 40px 0; font-size:13px; letter-spacing:-0.65px; color:#505050;}
+
+footer .footer_bot .bot_wrap .right_wrap {margin:49px 319px 0 0;}
+footer .footer_bot .bot_wrap .right_wrap .title {height:27px; line-height:27px; margin-bottom:15px; font-size:18px; letter-spacing:-0.9px; font-weight:bold; color:black;}
+footer .footer_bot .bot_wrap .right_wrap .info {height:19px; line-height:19px; margin-top:7px; font-size:14px; letter-spacing:-0.7px; color:#000000;}
+
+
+
+
+/***********************************************************************************
+* 내부 팝업 관련
+***********************************************************************************/
+
+.popup_bg {width:100%; height:100%; top:0; left:0; position:fixed; overflow:hidden; background-color:rgba(0,0,0,0.7); opacity:0; z-index:-1; transition:opacity 0.3s, z-index 0s 0.3s; display:none; flex-direction:row; align-items:center; justify-content:center;}
+.popup_bg.active {opacity:1; z-index:90; transition:opacity 0.3s, z-index 0s;}
+
+.popup_bg .popup_wrap {width:30%; height:50%; background:white; border-radius: 5px; display:flex; flex-direction:column; align-items:space-between; justify-content:center;}
+
+.popup_bg .popup_top {width:100%; height:50px; line-height:50px; border-bottom:1px solid #dddddd;}
+.popup_bg .popup_top .btn_prev {width:50px; height:100%; color:#ccc; font-size:25px; cursor:pointer; position:absolute; top:0; left:0;}
+.popup_bg .popup_top .btn_prev:hover {color:#2f2f2f;}
+.popup_bg .popup_top .title {width:calc(100% - 100px); height:100%; padding: 0 50px; text-align:center; color:#2f2f2f; font-size:18px; font-weight:bold; letter-spacing:1px;}
+.popup_bg .popup_top .btn_close {width:50px; height:100%; text-align: center; cursor:pointer; position:absolute; top:0; right:0;}
+.popup_bg .popup_top .btn_close i {color:#ccc; font-size:25px; transition:transform 0.3s;}
+.popup_bg .popup_top .btn_close:hover i {color:#2f2f2f; transform:rotate(90deg);}
+
+.popup_bg .popup_content {width:100%; height:auto; overflow-y:auto; overflow-x:hidden; flex:1;}
+/*.popup_bg .popup_content .input {width:calc(100% - 48px); height:40px; margin:5px 24px 0 24px; padding-bottom:6px; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;
+background-image:linear-gradient(0deg,#cacaca 1px,hsla(0,0%,82%,0) 0); 
+}
+.popup_bg .popup_content .input.focus {background-image:linear-gradient(0deg,#1ac7c7 2px,rgba(156,39,176,0) 0)}
+.popup_bg .popup_content .input:first-child {margin-top:13px;}
+.popup_bg .popup_content .input .title {width:107px; color:#2f2f2f; font-size:16px; font-weight:bold; letter-spacing:1px;}
+.popup_bg .popup_content .input input {width:calc(100% - 107px); height:100%; color:#333333; font-size:16px; text-align:left;}
+*/
+
+.popup_bg .popup_bot {width: 100%; height: 50px; border-top: 1px solid #dddddd;}

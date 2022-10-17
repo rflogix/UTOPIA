@@ -19,10 +19,11 @@ public class DomainService {
 	private UserService userService;
 	
 	public HashMap<String, Object> 세션설정(HttpServletRequest request) {
-		// 세션변수 조회
-		HashMap<String, Object> 세션변수 = GF.get세션변수(request);
+		HashMap<String, Object> 세션변수;
 		
 		try {
+			세션변수 = GF.get세션변수(request); // 세션변수 조회
+			
 			// 페이지 설정
 			String 현재URL = request.getServletPath().substring(1); // 현재 페이지
 			if (request.getQueryString() != null) {
@@ -34,22 +35,23 @@ public class DomainService {
 			세션변수.put("이전URL", 이전URL);
 			
 			// 사용자 설정
-			UserDTO clsUserLogin = new UserDTO();
+			UserDTO clsLoginUser = new UserDTO();
 			if (세션변수.get(GC.세션KEY_로그인사용자) != null) {
-				clsUserLogin = (UserDTO)세션변수.get(GC.세션KEY_로그인사용자);
+				clsLoginUser = (UserDTO)세션변수.get(GC.세션KEY_로그인사용자);
 			}
-			long UserCD = clsUserLogin.getUserCD();
+			long UserCD = clsLoginUser.getUserCD();
 			if (UserCD != 0) { // 가입한 유저라면 - 실시간으로 적용하기 위해 매번 세팅
 				HashMap<String, Object> mapParam = new HashMap<String, Object>();
 				mapParam.put("userCD", UserCD);
-				clsUserLogin = userService.사용자ID조회(mapParam);
+				clsLoginUser = userService.사용자ID조회(mapParam);
 			}
-			세션변수.put(GC.세션KEY_로그인사용자, clsUserLogin);
+			세션변수.put(GC.세션KEY_로그인사용자, clsLoginUser);
 			
 			// 세션변수 설정
 			GF.set세션변수(request, 세션변수);
 			
 		} catch(Exception e) {
+			세션변수 = new HashMap<String, Object>();
 			log.error("{}", e.toString());
 		}
 		
@@ -64,12 +66,12 @@ public class DomainService {
 			}
 			
 			// 로그인 여부 체크
-			UserDTO clsUserLogin = new UserDTO();
+			UserDTO clsLoginUser = new UserDTO();
 			HashMap<String, Object> 세션변수 = GF.get세션변수(request);
 			if (세션변수.get(GC.세션KEY_로그인사용자) != null) {
-				clsUserLogin = (UserDTO)세션변수.get(GC.세션KEY_로그인사용자);
+				clsLoginUser = (UserDTO)세션변수.get(GC.세션KEY_로그인사용자);
 			}
-			if (clsUserLogin.getUserCD() == 0) {
+			if (clsLoginUser.getUserCD() == 0) {
 				페이지URL = "/login";
 			}
 			

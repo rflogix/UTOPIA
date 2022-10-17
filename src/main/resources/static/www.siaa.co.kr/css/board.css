@@ -1,0 +1,36 @@
+.page_wrap.board {width: 1022px; height: auto; margin:100px 0 158px calc((100% - 1022px)/2 + 115px);}
+
+.page_wrap.board .search_wrap {width:545px; height:48px; line-height:50px; margin:0 auto; border: 1px solid rgba(112, 112, 112, 1);}
+.page_wrap.board .search_wrap select {width:121px; height:48px; line-height:48px; font-size:17px; letter-spacing:-0.85px; border:0; padding:0; text-align:center; float:left;}
+.page_wrap.board .search_wrap input {width:calc(100% - 121px - 48px - 40px); height:48px; line-height:48px; padding:0 20px; font-size:22px; letter-spacing:-1.25px; border:0; float:left;}
+.page_wrap.board .search_wrap .btn_search {width:48px; height:48px; line-height:48px; font-size:20px; text-align:center; float:left; cursor:pointer;}
+.page_wrap.board .search_wrap::after {content:""; display:block; clear:both;}
+
+.page_wrap.board .label_wrap {width:100%; height:auto; margin-top:50px;}
+.page_wrap.board .label_wrap .label {width:100%; height:50px; line-height:50px; border-bottom:2px solid #9A9A9A; font-size:15px; color:#c3c3c3;}
+.page_wrap.board .label_wrap .label > div {float:left; text-align:center;}
+.page_wrap.board .label_wrap .label::after {content:""; display:block; clear:both;}
+.page_wrap.board .label_wrap .label .title {width:calc(100% - 130px - 140px - 90px - 30px); text-align:left; padding-left:30px;}
+.page_wrap.board .label_wrap .label .user {width:130px;}
+.page_wrap.board .label_wrap .label .date {width:140px;}
+.page_wrap.board .label_wrap .label .count {width:90px;}
+
+.page_wrap.board .board_wrap {width:100%; height:auto;}
+.page_wrap.board .board_wrap .board {width:100%; height:50px; line-height:50px; font-size:17px; letter-spacing:-0.85px; color:#191919; border-bottom:1px solid #D2D2D2;}
+.page_wrap.board .board_wrap > div:last-child {border-bottom:1px solid #9A9A9A;}
+.page_wrap.board .board_wrap .board > div {height:50px; float:left; text-align:center;}
+.page_wrap.board .board_wrap .board::after {content:""; display:block; clear:both;}
+.page_wrap.board .board_wrap .board .title {width:calc(100% - 130px - 140px - 90px - 30px); text-align:left; padding-left:30px; cursor:pointer;}
+.page_wrap.board .board_wrap .board .title:hover,
+.page_wrap.board .board_wrap .board.select .title {font-weight:bold;}
+.page_wrap.board .board_wrap .board .user {width:130px;}
+.page_wrap.board .board_wrap .board .date {width:140px; overflow: hidden;}
+.page_wrap.board .board_wrap .board .count {width:90px;}
+.page_wrap.board .board_wrap .empty {width:100%; height:300px; line-height:300px; font-size:20px; text-align:center;}
+.page_wrap.board .board_wrap .empty::after {content:"등록된 게시물이 없습니다"; display:block;}
+
+.page_wrap.board .page_wrap {width:fit-content; height:40px; margin:80px auto 0 auto;}
+.page_wrap.board .page_wrap .page {width:40px; height:40px; line-height:40px; text-align:center; font-size:15px; letter-spacing:-0.75px; color:#3a3a3a; float:left; cursor:pointer;}
+.page_wrap.board .page_wrap .page:hover {font-weight:bold;}
+.page_wrap.board .page_wrap .page::after {content:""; display:block; clear:both;}
+.page_wrap.board .page_wrap .page.select {width:38px; height:38px; line-height:38px; color:#191919; font-weight:bold; border:1px solid #DBDBDB;}
