@@ -20,7 +20,7 @@ public class GC {
 	public static final String 로그아웃_함수명 = "로그아웃"; // SessionConfig.java 에서 사용할 사용자서비스의 로그아웃 함수명
 	
 	// 세션 관련
-	public static final String 세션KEY = "mapSession"; // GF.java 의 세션변수조회, 세션변수설정에 사용
+	public static final String 세션KEY = "key_session"; // GF.java 의 세션변수조회, 세션변수설정에 사용
 	public static final String 세션KEY_로그인사용자 = "clsLoginUser"; // 세션변수중 로그인 사용자 클래스(UserDTO)
 	public static final String 세션KEY_셀프로그아웃 = "logoutSelfYN"; // SessionConfig.java 에서 사용할 셀프로그아웃 되었는지 여부 - UserService.java 에서 로그아웃 함수에서 세팅
 }

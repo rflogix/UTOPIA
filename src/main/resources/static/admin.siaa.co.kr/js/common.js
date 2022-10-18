@@ -192,19 +192,22 @@ function selectMenu(main_menu_cd, sub_menu_cd) {
 		
 	} else if ((main_menu_cd == 2) && (sub_menu_cd == 1)) {
 		location.href = "/board_summary";
+
+	} else if ((main_menu_cd == 3) && (sub_menu_cd == 1)) {
+		location.href = "/page_summary/page_1_1"; // 협회개요
 		
 	} else {
 		location.href = "/";
 	}
 }
 function showMenu(main_menu_cd, sub_menu_cd) {
-	$(".page_header .main_menu").removeClass("choice");
-	$(".page_header .main_menu.menu_cd_"+main_menu_cd).addClass("choice");
+	$(".page_header .main_menu").removeClass("select");
+	$(".page_header .main_menu.menu_cd_"+main_menu_cd).addClass("select");
 	
 	$(".page_left .main_menu").css("display", "none");
 	$(".page_left .main_menu.menu_cd_"+main_menu_cd).css("display", "block");
-	$(".page_left .sub_menu").removeClass("choice");
-	$(".page_left .sub_menu.menu_cd_"+main_menu_cd+"_"+sub_menu_cd).addClass("choice");
+	$(".page_left .sub_menu").removeClass("select");
+	$(".page_left .sub_menu.menu_cd_"+main_menu_cd+"_"+sub_menu_cd).addClass("select");
 	
 	$(".page_content .search_title .menu_nm").text($(".page_left .sub_menu.menu_cd_"+main_menu_cd+"_"+sub_menu_cd).text());
 }

@@ -1,5 +1,5 @@
 <jsp:directive.page contentType="text/html;charset=UTF-8" />
-<jsp:directive.page import="siaa.admin.common.*"/>
+<jsp:directive.page import="siaa.common.*"/>
 <%
 /***********************************************************************************
 * Copyright (C)RFLOGIX since 2010.08.24 (rflogix@rflogix.com)
@@ -29,7 +29,7 @@
 	<div class="page_header">
 		<!-- 로고 -->
 		<div class="logo">
-			<img src="image/logo_100.png" />
+			<img src="/image/logo_100.png" />
 			<span>&nbsp;</span>
 		</div>
 		
@@ -56,6 +56,9 @@
 			<li class="main_menu menu_cd_2" onclick="selectMenu(2,1)">
 				게시판 관리
 			</li>
+			<li class="main_menu menu_cd_3" onclick="selectMenu(3,1)">
+				페이지 관리
+			</li>
 		</ul>
 	</div>
 	
@@ -69,6 +72,11 @@
 		<ul class="leftmenu main_menu menu_cd_2">
 			<li class="level2 sub_menu menu_cd_2_1" onclick="selectMenu(2,1)">
 				게시판 관리
+			</li>
+		</ul>
+		<ul class="leftmenu main_menu menu_cd_3">
+			<li class="level2 sub_menu menu_cd_3_1" onclick="selectMenu(3,1)">
+				협회개요
 			</li>
 		</ul>
 	</div>

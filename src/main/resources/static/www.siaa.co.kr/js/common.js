@@ -29,7 +29,7 @@ $(document).ready(function() {
 	let param = {
 		pageURL: "/www.siaa.co.kr/index",
 	};
-	$.post("/page/setting", param, function(p_data, p_status) {
+	$.post("/page/search", param, function(p_data, p_status) {
 		if (p_data.result == "Y") {
 			for (let i = 0; i < p_data.list.length; i++) {
 				let clsPage = p_data.list[i];
@@ -43,6 +43,42 @@ $(document).ready(function() {
 		//
 	});
 	
+	var strParam = "boardType_in='공지사항','협회뉴스','구인/구직','협회서식'"
+		+ "&deleteYN=-1"
+		;
+	$.post("/board/grid_search", strParam, function(p_data, p_status) {
+		if (p_data.result == "Y") {
+			
+			$(".page_wrap.menu_cd_0_0 .board_wrap .board .content").html("");
+			
+			$(p_data.list).each(function(index, clsBoard) {
+				let className = "";
+				if (clsBoard.boardType == "공지사항") {
+					className = ".page_wrap.menu_cd_0_0 .board_wrap .board.notice .content";
+					
+				} else if (clsBoard.boardType == "협회뉴스") {
+					className = ".page_wrap.menu_cd_0_0 .board_wrap .board.news .content";
+					
+				} else if (clsBoard.boardType == "구인/구직") {
+					className = ".page_wrap.menu_cd_0_0 .board_wrap .board.incrut .content";
+					
+				} else if (clsBoard.boardType == "협회서식") {
+					className = ".page_wrap.menu_cd_0_0 .board_wrap .board.format .content";
+				}
+				$(className).append($("<div>").attr("class", "title").attr("onclick", `openPopup_board(${clsBoard.boardCD});`).text(clsBoard.titleText))
+					.append($("<div>").attr("class", "date").text(clsBoard.writeDT))
+					;
+			});
+		}
+		closePopup("loading");
+		BOARD_SEARCH_YN = false;
+		
+	},"JSON").fail(function(jqXHR, textStatus, errorThrown){
+		closePopup("loading");
+		BOARD_SEARCH_YN = false;
+		alert("네트워크 문제로 조회되지 않았습니다");
+	});
+
 	// ESC 처리
 	$(document).keyup(function(e) {
 		if (e.keyCode == 27) { // ESC
@@ -211,8 +247,14 @@ function selectMenu(main_menu_cd, sub_menu_cd) {
 	
 	if ((main_menu_cd == 0) && (sub_menu_cd == 0)) {
 		$("header .header_bot").css("display", "none");
+		
 	} else {
-		$("header .header_bot").css("display", "inline-block");
+		//if (main_menu_cd == 9) {
+		//	$("header .header_bot").css("display", "none");
+			
+		//} else {
+			$("header .header_bot").css("display", "inline-block");
+		//}
 		
 		if ((main_menu_cd == 2) && (sub_menu_cd == 1)) { // 주요사업 - 연대사업
 			BOARD_TYPE = "연대사업";
@@ -234,11 +276,24 @@ function selectMenu(main_menu_cd, sub_menu_cd) {
 			
 		} else if ((main_menu_cd == 5) && (sub_menu_cd == 2)) { // 회원사마당 - 문의 및 제안
 			BOARD_TYPE = "문의 및 제안";
-			
+		
+		} else if ((main_menu_cd == 9) && (sub_menu_cd == 1)) { // 온라인 변경신고
+			BOARD_TYPE = "온라인 변경신고";
+		
+		} else if ((main_menu_cd == 9) && (sub_menu_cd == 2)) { // 회원사 지원안내
+			BOARD_TYPE = "회원사 지원안내";
+
+		} else if ((main_menu_cd == 9) && (sub_menu_cd == 3)) { // 등록/신고 업무안내
+			BOARD_TYPE = "등록/신고 업무안내";
+
+		} else if ((main_menu_cd == 9) && (sub_menu_cd == 4)) { // 경력수첩 진위여부
+			BOARD_TYPE = "경력수첩 진위여부";
+		
 		} else {
 			BOARD_TYPE = "";
 		}
 		if (BOARD_TYPE != "") {
+			$(".header_bot .bot_title").text(BOARD_TYPE);
 			if ($(".page_wrap.menu_cd_"+main_menu_cd+"_"+sub_menu_cd).hasClass("already") == false) {
 				$(".page_wrap.menu_cd_"+main_menu_cd+"_"+sub_menu_cd).addClass("already"); // 이미 열어봤다는 태그
 				searchBoard();

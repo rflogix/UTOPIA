@@ -1,5 +1,5 @@
 <jsp:directive.page contentType="text/html;charset=UTF-8" />
-<jsp:directive.page import="siaa.www.common.*"/>
+<jsp:directive.page import="siaa.common.*"/>
 <%
 /***********************************************************************************
 * Copyright (C)RFLOGIX since 2010.08.24 (rflogix@rflogix.com)

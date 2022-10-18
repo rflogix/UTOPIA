@@ -137,6 +137,15 @@
 					<div class="sub_menu menu_cd_5_2" onclick="selectMenu(5,2)">문의 및 제안</div>
 				</div>
 			</div>
+			<div class="left_menu_wrap menu_cd_9">
+				<div class="main_menu">기타</div>
+				<div class="sub_menu_wrap">
+					<div class="sub_menu menu_cd_9_1" onclick="selectMenu(9,1)">온라인 변경신고</div>
+					<div class="sub_menu menu_cd_9_2" onclick="selectMenu(9,2)">회원사 지원안내</div>
+					<div class="sub_menu menu_cd_9_3" onclick="selectMenu(9,3)">등록/신고 업무안내</div>
+					<div class="sub_menu menu_cd_9_4" onclick="selectMenu(9,4)">경력수첩 진위여부</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </header>

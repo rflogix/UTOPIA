@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="siaa.user.UserMapper">
+	
+	<select id="selectUser" parameterType="HashMap" resultType="UserDTO">
+		SELECT *
+		FROM tb_user
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test='userCD != null and userCD != 0'>
+			AND userCD = #{userCD}
+			</if>
+			
+			<if test='userID != null and userID != ""'>
+			AND userID = #{userID}
+			</if>
+			<if test='userID_like != null and userID_like != ""'>
+			AND userID LIKE CONCAT('%', #{userID_like}, '%')
+			</if>
+			
+			<if test='userNM != null and userNM != ""'>
+			AND userNM = #{userNM}
+			</if>
+			<if test='userNM_like != null and userNM_like != ""'>
+			AND userNM LIKE CONCAT('%', #{userNM_like} ,'%')
+			</if>
+			
+			<if test='cellPhoneNO != null and cellPhoneNO != ""'>
+			AND cellPhoneNO = #{cellPhoneNO}
+			</if>
+			<if test='cellPhoneNO_like != null and cellPhoneNO_like != ""'>
+			AND cellPhoneNO LIKE CONCAT('%', #{cellPhoneNO_like}, '%')
+			</if>
+			
+			<if test='joinDT_start != null and joinDT_start != ""'>
+			AND joinDT >= #{joinDT_start}
+			</if>
+			<if test='joinDT_end != null and joinDT_end != ""'>
+			AND DATE(DATE_ADD(#{joinDT_end}, INTERVAL 1 DAY)) > joinDT
+			</if>
+			
+			<if test='deleteYN != null and deleteYN != 0'>
+			AND tb_user.deleteYN = #{deleteYN}
+			</if>
+		</trim>
+	</select>
+	
+	<select id="insertUser" parameterType="HashMap" resultType="Long">
+		SET @userCD = (SELECT IFNULL(MAX(userCD), 0) + 1 FROM tb_user);
+		
+		INSERT INTO tb_user (
+			userCD
+			,userID
+			,userPW
+			,userNM
+			,userType
+			,email
+			,cellPhoneNO
+			,insertUserCD
+			
+		) VALUES (
+			@userCD
+			,#{userID}
+			,#{userPW}
+			,#{userNM}
+			,#{userType}
+			,#{email}
+			,#{cellPhoneNO}
+			,#{insertUserCD}
+		);
+		
+		SELECT @userCD;
+	</select>
+	
+	<update id="updateUser" parameterType="HashMap">
+		UPDATE tb_user
+		<set>
+			<if test='userID != null'>
+			userID = #{userID},
+			</if>
+			<if test='userNM != null'>
+			userNM = #{userNM},
+			</if>
+			<if test='email != null'>
+			email = #{email},
+			</if>
+			<if test='cellPhoneNO != null'>
+			cellPhoneNO = #{cellPhoneNO},
+			</if>
+			
+			<!-- 업데이트 관련 -->
+			<if test='updateUserCD != null and updateUserCD != 0'>
+			updateUserCD = #{updateUserCD},
+			updateDT = now(),
+			</if>
+			
+			<!-- 삭제 관련 -->
+			<if test='deleteYN != null and deleteYN == 1'>
+			deleteYN = #{deleteYN},
+			deleteDT = now(),
+				<if test='deleteUserCD != null and deleteUserCD != 0'>
+				deleteUserCD = #{deleteUserCD},
+				</if>
+			</if>
+			<if test='deleteYN != null and deleteYN == -1'>
+			deleteYN = #{deleteYN},
+			deleteDT = NULL,
+			deleteUserCD = NULL,
+			</if>
+		</set>
+		WHERE userCD = #{userCD};
+	</update>
+</mapper>

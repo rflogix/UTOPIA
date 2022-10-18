@@ -91,7 +91,7 @@ select::-ms-expand {display:none;}
 
 .page_header .topmenu {clear:both; background:#2a407c; border-top:1px solid #4a4e81; border-bottom:1px solid #1e1e9a; box-shadow:0 0 8px black; width:95%; padding-left:5%;}
 .page_header .topmenu li {display:inline-block; color:#fff; padding:0 10px; height:35px; line-height:35px; letter-spacing:-1px; float:left; cursor:pointer;}
-.page_header .topmenu li.choice {font-weight:bold; background:#626e93;}
+.page_header .topmenu li.select {font-weight:bold; background:#626e93;}
 .page_header .topmenu:after {content:""; display:block; clear:both; font-size:0; width:0; height:0; line-height:0; overflow:hidden; visibility:hidden;}
 
 
@@ -163,17 +163,17 @@ select::-ms-expand {display:none;}
 .page_left .leftmenu {overflow:hidden; border-bottom:1px solid #ccc; display:none;}
 .page_left .leftmenu .level2 {border-top:1px solid #ccc; width:calc(100% - 13px); height:40px; line-height:40px; padding-left:13px; overflow:hidden; font-weight:bold; background:url(../image/leftmenu/left_menu_arr2.gif) right 18px no-repeat; display:block; cursor:pointer;}
 .page_left .leftmenu .level2:hover {font-weight:bold; background:url(../image/leftmenu/left_menu_arr2.gif) right -17px no-repeat; color:red;}
-.page_left .leftmenu .level2.choice {background:url(../image/leftmenu/left_menu_arr2.gif) right 18px no-repeat #2a407c; color:#fff;}
+.page_left .leftmenu .level2.select {background:url(../image/leftmenu/left_menu_arr2.gif) right 18px no-repeat #2a407c; color:#fff;}
 .page_left .leftmenu .level2.fold {background:url(../image/leftmenu/left_menu_arr1.gif) right 18px no-repeat; }
 .page_left .leftmenu .level2.fold:hover {background:url(../image/leftmenu/left_menu_arr1.gif) right -17px no-repeat; }
-.page_left .leftmenu .level2.choice.fold {background:url(../image/leftmenu/left_menu_arr2.gif) right -48px no-repeat #2a407c; color:#fff;}
+.page_left .leftmenu .level2.select.fold {background:url(../image/leftmenu/left_menu_arr2.gif) right -48px no-repeat #2a407c; color:#fff;}
 
 .page_left .leftmenu .level3 {width:175px; margin-left:15px; overflow:hidden;}
 .page_left .leftmenu .level3 a {background:url(../image/leftmenu/left_menu_arr2.gif) right 18px no-repeat; display:block; height:40px; line-height:40px; padding-left:13px;}
 .page_left .leftmenu .level3 a:hover,
 .page_left .leftmenu .level3 a:active,
 .page_left .leftmenu .level3 a:focus {font-weight:bold; background:url(../image/leftmenu/left_menu_arr2.gif) right -17px no-repeat; color:#cc2928;}
-.page_left .leftmenu .level3.choice a {font-weight:bold; color:#cc2928; font-weight:bold; background:url(../image/leftmenu/left_menu_arr2.gif) right -17px no-repeat;}
+.page_left .leftmenu .level3.select a {font-weight:bold; color:#cc2928; font-weight:bold; background:url(../image/leftmenu/left_menu_arr2.gif) right -17px no-repeat;}
 
 
 

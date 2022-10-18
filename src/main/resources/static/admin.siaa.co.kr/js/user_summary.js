@@ -221,9 +221,14 @@ function openPopup_User(p_UserCD) {
 					openPopup("user");
 				}
 			}
-			USER_LIST_CLICK_YN = false;
 			closePopup("loading");
-		},"JSON");
+			USER_LIST_CLICK_YN = false;
+			
+		},"JSON").fail(function(jqXHR, textStatus, errorThrown){
+			closePopup("loading");
+			USER_LIST_CLICK_YN = false;
+			alert("네트워크 문제로 조회되지 않았습니다");
+		});
 	}
 }
 
@@ -250,7 +255,12 @@ function updateUser() {
 				}
 				closePopup("loading");
 				USER_UPDATE_YN = false;
-			},"JSON");
+				
+			},"JSON").fail(function(jqXHR, textStatus, errorThrown){
+				closePopup("loading");
+				USER_UPDATE_YN = false;
+				alert("네트워크 문제로 저장되지 않았습니다");
+			});
 		});
 		
 	} else {
@@ -281,7 +291,12 @@ function deleteUser() {
 				}
 				closePopup("loading");
 				USER_UPDATE_YN = false;
-			},"JSON");
+				
+			},"JSON").fail(function(jqXHR, textStatus, errorThrown){
+				closePopup("loading");
+				USER_UPDATE_YN = false;
+				alert("네트워크 문제로 저장되지 않았습니다");
+			});
 		});
 		
 	} else {

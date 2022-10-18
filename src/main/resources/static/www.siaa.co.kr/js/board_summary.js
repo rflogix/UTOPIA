@@ -50,7 +50,15 @@ function searchBoard() {
 					
 				} else {
 					$(className).html("");
+					
+					console.log("p_data.list", p_data.list);//@@@@@@@@@@@@@@@
+
+					console.log("className", className);//@@@@@@@@@@@@@@@
+					
 					$(p_data.list).each(function(index, clsBoard) {
+
+						console.log("clsBoard", clsBoard.boardCD);//@@@@@@@@@@@@@@@
+						
 						$(className).append(
 							$($("<div>").attr("class", "board"))
 								.append($("<div>").attr("class", "title").attr("onclick", `openPopup_board(${clsBoard.boardCD});`).text(clsBoard.titleText))
@@ -92,10 +100,9 @@ function openPopup_board(p_BoardCD) {
 		$.post("/board/grid_search", strParam, function(p_data, p_status) {
 			if (p_data.result == "Y") {
 				if (p_data.list.length == 1) {
-					$(".popup_board .popup_top .title").html(BOARD_TYPE);
-					
 					// 조회된 정보 세팅
 					var clsBoard = p_data.list[0];
+					$(".popup_board .popup_top .title").html(clsBoard.boardType);
 					$(".popup_board form input").each(function() {
 						$(this).val(clsBoard[$(this).attr("name")]);
 					});

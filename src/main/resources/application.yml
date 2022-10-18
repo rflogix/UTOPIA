@@ -10,14 +10,9 @@ mybatis-db:
       password: rfself99
     
   siaa: # MybatisConfig.java 정의된 패키지명
-    admin:
-      jdbcUrl: jdbc:log4jdbc:mysql://db.rflogix.com:3306/siaa?allowMultiQueries=true&characterEncoding=UTF-8&serverTimezone=UTC
-      username: root
-      password: rfself99
-    www:
-      jdbcUrl: jdbc:log4jdbc:mysql://db.rflogix.com:3306/siaa?allowMultiQueries=true&characterEncoding=UTF-8&serverTimezone=UTC
-      username: root
-      password: rfself99
+    jdbcUrl: jdbc:log4jdbc:mysql://db.rflogix.com:3306/siaa?allowMultiQueries=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: rfself99
 
 
 

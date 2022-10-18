@@ -27,12 +27,8 @@ public class MybatisConfig {
 	public static final String 패키지1_마이바티스경로 = 패키지1; // 패키지 구조와 mybatis 경로가 다를경우 따로 설정
 	
 	// 패키지2부터는 @Primary 제외
-	public static final String 패키지2 = "siaa.admin";
+	public static final String 패키지2 = "siaa";
 	public static final String 패키지2_마이바티스경로 = 패키지2; // 패키지 구조와 mybatis 경로가 다를경우 따로 설정
-	
-	// 패키지2부터는 @Primary 제외
-	public static final String 패키지3 = "siaa.www";
-	public static final String 패키지3_마이바티스경로 = 패키지3; // 패키지 구조와 mybatis 경로가 다를경우 따로 설정
 }
 
 
@@ -113,47 +109,6 @@ class MybatisConfig_패키지2 {
 	//@Primary
 	@Bean(name = "DataSourceTransactionManager_패키지2")
 	public PlatformTransactionManager DataSourceTransactionManager_패키지2(@Qualifier("DataSource_패키지2") DataSource dataSource) {
-		return new DataSourceTransactionManager(dataSource);
-	}
-}
-
-
-
-
-//****************************************************************************
-// 패키지3
-//****************************************************************************
-
-@Configuration
-@MapperScan(basePackages = {MybatisConfig.패키지3}, sqlSessionFactoryRef = "SqlSessionFactory_패키지3", nameGenerator = BeanNameConfig.class)
-@EnableTransactionManagement
-class MybatisConfig_패키지3 {
-	//@Primary
-	@Bean(name = "DataSource_패키지3")
-	@ConfigurationProperties(prefix = GC.마이바티스_YML+"."+MybatisConfig.패키지3) // application.yml 의 도메인별 mybatis db 정보
-	public DataSource DataSource_패키지3() {
-		return DataSourceBuilder.create().build();
-	}
-	
-	//@Primary
-	@Bean(name = "SqlSessionFactory_패키지3")
-	public SqlSessionFactory SqlSessionFactory_패키지3(@Qualifier("DataSource_패키지3") DataSource dataSource) throws Exception {
-		SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
-		sqlSessionFactory.setDataSource(dataSource);
-		sqlSessionFactory.setTypeAliasesPackage(MybatisConfig.패키지3);
-		sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(GC.마이바티스_루트경로+MybatisConfig.패키지3_마이바티스경로.replaceAll("[.]", "/")+"/*.xml"));
-		return sqlSessionFactory.getObject();
-	}
-	
-	//@Primary
-	@Bean(name = "SqlSessionTemplate_패키지3")
-	public SqlSessionTemplate SqlSessionTemplate_패키지3(@Qualifier("SqlSessionFactory_패키지3") SqlSessionFactory sqlSessionFactory) throws Exception {
-		return new SqlSessionTemplate(sqlSessionFactory);
-	}
-	
-	//@Primary
-	@Bean(name = "DataSourceTransactionManager_패키지3")
-	public PlatformTransactionManager DataSourceTransactionManager_패키지3(@Qualifier("DataSource_패키지3") DataSource dataSource) {
 		return new DataSourceTransactionManager(dataSource);
 	}
 }

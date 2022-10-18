@@ -59,18 +59,10 @@
 						<div class="title">
 							공지사항
 						</div>
-						<div class="more"></div>
+						<div class="more" onclick="selectMenu(3,1)"></div>
 						<div class="content">
-							<div class="title">배드앤배스 -26% 폭락...나스닥도 -0.11% 출발</div>
-							<div class="date">2022-08-17</div>
-							<div class="title">코스피, 기관 '팔자'...2500선 하락 마감</div>
-							<div class="date">2022-08-18</div>
-							<div class="title">배드앤배스 -26% 폭락...나스닥도 -0.11% 출발</div>
-							<div class="date">2022-08-17</div>
-							<div class="title">코스피, 기관 '팔자'...2500선 하락 마감</div>
-							<div class="date">2022-08-18</div>
-							<div class="title">배드앤배스 -26% 폭락...나스닥도 -0.11% 출발</div>
-							<div class="date">2022-08-17</div>
+							<div class="title"></div>
+							<div class="date"></div>
 						</div>
 					</div>
 					
@@ -78,18 +70,10 @@
 						<div class="title">
 							협회뉴스
 						</div>
-						<div class="more"></div>
+						<div class="more" onclick="selectMenu(3,2)"></div>
 						<div class="content">
-							<div class="title">배드앤배스 -26% 폭락...나스닥도 -0.11% 출발</div>
-							<div class="date">2022-08-17</div>
-							<div class="title">코스피, 기관 '팔자'...2500선 하락 마감</div>
-							<div class="date">2022-08-18</div>
-							<div class="title">배드앤배스 -26% 폭락...나스닥도 -0.11% 출발</div>
-							<div class="date">2022-08-17</div>
-							<div class="title">코스피, 기관 '팔자'...2500선 하락 마감</div>
-							<div class="date">2022-08-18</div>
-							<div class="title">배드앤배스 -26% 폭락...나스닥도 -0.11% 출발</div>
-							<div class="date">2022-08-17</div>
+							<div class="title"></div>
+							<div class="date"></div>
 						</div>
 					</div>
 					</div>
@@ -98,18 +82,10 @@
 						<div class="title">
 							구인/구직
 						</div>
-						<div class="more"></div>
+						<div class="more" onclick="selectMenu(5,1)"></div>
 						<div class="content">
-							<div class="title">배드앤배스 -26% 폭락...나스닥도 -0.11% 출발</div>
-							<div class="date">2022-08-17</div>
-							<div class="title">코스피, 기관 '팔자'...2500선 하락 마감</div>
-							<div class="date">2022-08-18</div>
-							<div class="title">배드앤배스 -26% 폭락...나스닥도 -0.11% 출발</div>
-							<div class="date">2022-08-17</div>
-							<div class="title">코스피, 기관 '팔자'...2500선 하락 마감</div>
-							<div class="date">2022-08-18</div>
-							<div class="title">배드앤배스 -26% 폭락...나스닥도 -0.11% 출발</div>
-							<div class="date">2022-08-17</div>
+							<div class="title"></div>
+							<div class="date"></div>
 						</div>
 					</div>
 					
@@ -117,18 +93,10 @@
 						<div class="title">
 							협회서식
 						</div>
-						<div class="more"></div>
+						<div class="more" onclick="selectMenu(4,1)"></div>
 						<div class="content">
-							<div class="title">배드앤배스 -26% 폭락...나스닥도 -0.11% 출발</div>
-							<div class="date">2022-08-17</div>
-							<div class="title">코스피, 기관 '팔자'...2500선 하락 마감</div>
-							<div class="date">2022-08-18</div>
-							<div class="title">배드앤배스 -26% 폭락...나스닥도 -0.11% 출발</div>
-							<div class="date">2022-08-17</div>
-							<div class="title">코스피, 기관 '팔자'...2500선 하락 마감</div>
-							<div class="date">2022-08-18</div>
-							<div class="title">배드앤배스 -26% 폭락...나스닥도 -0.11% 출발</div>
-							<div class="date">2022-08-17</div>
+							<div class="title"></div>
+							<div class="date"></div>
 						</div>
 					</div>
 					
@@ -138,6 +106,13 @@
 				<!-- 회원사 -->
 				<div class="member_wrap">
 					<div class="title">회원사</div>
+					<div class="menu menu1" onclick="selectMenu(4,2)"></div><!-- 법령정보 = 증권법률 -->
+					<div class="menu menu2" onclick="selectMenu(9,1)"></div><!-- 온라인 변경신고 -->
+					<div class="menu menu3" onclick="selectMenu(9,2)"></div><!-- 회원사 지원안내 -->
+					<div class="menu menu4" onclick="selectMenu(5,1)"></div><!-- 구인/구직 정보 -->
+					<div class="menu menu5" onclick="selectMenu(9,3)"></div><!-- 등록/신고 업무안내 -->
+					<div class="menu menu6" onclick="selectMenu(9,4)"></div><!-- 경력수첩 진위여부 -->
+					<div class="menu menu7" onclick="selectMenu(4,1)"></div><!-- 서식자료실 = 협회서식 -->
 				</div>
 				
 				<!-- 협력업체 -->
@@ -169,6 +144,12 @@
 			<!-- 회원사마당 -->
 			<jsp:directive.include file="회원사마당/구인구직.jsp"/>
 			<jsp:directive.include file="회원사마당/문의및제안.jsp"/>
+			
+			<!-- 기타 -->
+			<jsp:directive.include file="기타/온라인변경신고.jsp"/>
+			<jsp:directive.include file="기타/회원사지원안내.jsp"/>
+			<jsp:directive.include file="기타/등록신고업무안내.jsp"/>
+			<jsp:directive.include file="기타/경력수첩진위여부.jsp"/>
 		</content>
 		
 		<jsp:directive.include file="page_popup.jsp"/>
