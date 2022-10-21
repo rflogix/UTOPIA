@@ -11,15 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import siaa.common.DomainService;
 import siaa.common.GC;
+import siaa.common.GF;
 
 @Controller
 @RequestMapping(value = "/{subDomain}."+GC.도메인)
 public class PageController {
-	@Autowired
-	private DomainService domainService;
-	
 	@Autowired
 	private PageService pageService;
 	
@@ -27,7 +24,7 @@ public class PageController {
 	public String 페이지관리_협회개요(HttpServletRequest request, Model model) throws Exception {
 		model.addAttribute("main_menu_cd", 3); // 노가다 코드 임시로 추가 @@@@@@@@@@@
 		model.addAttribute("sub_menu_cd", 1); // 노가다 코드 임시로 추가 @@@@@@@@@@@
-		return domainService.페이지이동(request, "/페이지관리/협회개요");
+		return GF.페이지이동(request, "/페이지관리/협회개요");
 	}
 	
 	@RequestMapping("/page/search")

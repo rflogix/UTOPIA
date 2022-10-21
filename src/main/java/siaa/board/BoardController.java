@@ -13,16 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import config.custom.GF;
-import siaa.common.DomainService;
+import siaa.common.GF;
 import siaa.common.GC;
 
 @Controller
 @RequestMapping(value = "/{subDomain}."+GC.도메인)
 public class BoardController {
-	@Autowired
-	private DomainService domainService;
-	
 	@Autowired
 	private BoardService boardService;
 	
@@ -32,7 +28,7 @@ public class BoardController {
 		model.addAttribute("sub_menu_cd", 1); // 노가다 코드 임시로 추가 @@@@@@@@@@@
 		//request.setAttribute("main_menu_cd", 2);
 		//request.setAttribute("sub_menu_cd", 1);
-		return domainService.페이지이동(request, "/board_summary");
+		return GF.페이지이동(request, "/board_summary");
 	}
 	
 	@RequestMapping("/board/grid_search")

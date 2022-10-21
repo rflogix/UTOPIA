@@ -10,7 +10,23 @@ import siaa.user.UserDTO;
 
 @Slf4j
 public class GF extends config.custom.GF {
-
+	
+	public static String 페이지이동(HttpServletRequest request, String 페이지URL) throws Exception {
+		페이지URL = GF.getString(페이지URL);
+		if ((페이지URL.equals("")) || (페이지URL.equals("/"))) {
+			페이지URL = "/index";
+		}
+		
+		// 도메인별로 로그인 여부 체크
+		if (GF.get서브도메인(request).equals("admin")) {
+			if (GF.로그인여부(request) == false) { // 로그인 여부 체크
+				페이지URL = "/login";
+			}
+		}
+		
+		return 페이지URL;
+	}
+	
 	public static String get서브도메인(HttpServletRequest request) throws Exception {
 		String 서브URL = "";
 		String[] 요청URI배열 = request.getRequestURI().split("/");

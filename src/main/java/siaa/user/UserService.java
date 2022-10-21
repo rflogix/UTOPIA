@@ -43,22 +43,6 @@ public class UserService {
 		return clsReturn;
 	}
 	
-	public UserDTO 사용자ID조회(HashMap<String, Object> mapParam) throws Exception {
-		UserDTO clsReturn = new UserDTO();
-		
-		try {
-			List<UserDTO> listUser = userMapper.selectUser(mapParam);
-			if (listUser.size() > 0) {
-				clsReturn = listUser.get(0);
-			}
-			
-		} catch(Exception e) {
-			log.error("{}", e.toString());
-		}
-		
-		return clsReturn;
-	}
-	
 	public HashMap<String, Object> 로그인(HashMap<String, Object> mapParam, HttpServletRequest request) throws Exception {
 		HashMap<String, Object> mapReturn = new HashMap<String, Object>();
 		
