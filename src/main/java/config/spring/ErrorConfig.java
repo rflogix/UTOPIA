@@ -14,7 +14,7 @@ import config.custom.GC;
 
 @Controller
 public class ErrorConfig implements ErrorController {
-	@Value("${server.error.path}") // application.yml 파일에 반드시 정의할것
+	@Value("${server.error.path}") // application.yml
 	private String 에러경로;
 	
 	@RequestMapping("/**${server.error.path}") // 에러경로
@@ -32,11 +32,17 @@ public class ErrorConfig implements ErrorController {
 				model.put(GC.응답에러_에러코드, "500");
 				break;
 		}
-		return new ModelAndView(GC.응답에러_뷰네임, model);
+		if (에러경로 == null) {
+			에러경로 = GC.응답에러_뷰네임;
+		}
+		return new ModelAndView(에러경로, model);
 	}
 	
 	@Override
 	public String getErrorPath() {
+		if (에러경로 == null) {
+			에러경로 = GC.응답에러_뷰네임;
+		}
 		return 에러경로;
 	}
 }

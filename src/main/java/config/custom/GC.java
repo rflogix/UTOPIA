@@ -9,7 +9,7 @@ public class GC {
 	// spring 세팅 관련
 	public static final String[] 리소스경로 = {"/js/", "/css/", "/image/"}; // LogParamConfig.java 에서 사용
 	
-	public static final String 마이바티스_YML = "mybatis-db"; // MybatisConfig.java 에서 정되는 application.yml 의 도메인별 mybatis db 정보 property
+	public static final String 마이바티스_YML = "custom.mybatis"; // MybatisConfig.java 에서 정되는 application.yml 의 도메인별 mybatis db 정보 property
 	public static final String 마이바티스_루트경로 = "classpath:mybatis/"; // MybatisConfig.java 에서 설정되는 esources 에서 mybatis 경로
 	
 	public static final String 응답에러_에러코드 = "customErrorCode"; // ErrorConfig.java 의 model 세팅에 사용

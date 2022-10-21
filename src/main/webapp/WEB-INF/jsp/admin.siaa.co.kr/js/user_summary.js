@@ -92,7 +92,7 @@ $(document).ready(function () {
 
 // formatterUserPopup
 function formatterUserPopup(row, cell, value, columnDef, dataContext) {
-	return "<div class='UserNM' onclick=\"openPopup_User('"+GRID_DATA.getItem(row)["userCD"]+"')\">"+value+"</div>";
+	return "<div class='user_cd' onclick=\"openPopup_User('"+GRID_DATA.getItem(row)["userCD"]+"')\">"+value+"</div>";
 }
 
 // 그리드 Footer 업데이트
@@ -115,70 +115,7 @@ function updateGridFooter(grid, columnIdx) {
 ***********************************************************************************/
 
 function setSearchParam() {
-	var strParam = $(".search_param").serialize()
-	
-	/*
-	// 회원 상태	
-	var UserStatus = "";
-	if ($("#UserStatus1").prop("checked") == true) {
-		UserStatus += ","+$("#UserStatus1").val();
-	}
-	if ($("#UserStatus2").prop("checked") == true) {
-		UserStatus += ","+$("#UserStatus2").val();
-	}
-	if ($("#UserStatus3").prop("checked") == true) {
-		UserStatus += ","+$("#UserStatus3").val();
-	}
-	if ($("#UserStatus4").prop("checked") == true) {
-		UserStatus += ","+$("#UserStatus4").val();
-	}
-	if ($("#UserStatus5").prop("checked") == true) {
-		UserStatus += ","+$("#UserStatus5").val();
-	}
-	if (UserStatus != "") {
-		UserStatus = UserStatus.substring(1);
-		strParam += "&UserStatus().In="+encodeURIComponent(UserStatus);
-	}
-	
-	// 플러스 회원 여부
-	var PlusYN = "";
-	if ($("#PlusYN_1").prop("checked") == true) {
-		PlusYN += ","+$("#PlusYN_1").val();
-	}
-	if ($("#PlusYN_2").prop("checked") == true) {
-		PlusYN += ","+$("#PlusYN_2").val();
-	}
-	if (PlusYN != "") {
-		PlusYN = PlusYN.substring(1);
-		strParam += "&PlusYN().In="+encodeURIComponent(PlusYN);
-	}
-	
-	// 접수유무
-	var ReceiptionYN = "";
-	if ($("#ReceiptionYN_1").prop("checked") == true) {
-		ReceiptionYN += ","+$("#ReceiptionYN_1").val();
-	}
-	if ($("#ReceiptionYN_2").prop("checked") == true) {
-		ReceiptionYN += ","+$("#ReceiptionYN_2").val();
-	}
-	if (ReceiptionYN != "") {
-		ReceiptionYN = ReceiptionYN.substring(1);
-		strParam += "&ReceiptionYN().In="+encodeURIComponent(ReceiptionYN);
-	}
-	
-	// 디바이스
-	var DeviceType = "";
-	if ($("#DeviceType_1").prop("checked") == true) {
-		DeviceType += ","+$("#DeviceType_1").val();
-	}
-	if ($("#DeviceType_2").prop("checked") == true) {
-		DeviceType += ","+$("#DeviceType_2").val();
-	}
-	if (DeviceType != "") {
-		DeviceType = DeviceType.substring(1);
-		strParam += "&clsDeviceBean.DeviceType().In="+encodeURIComponent(DeviceType);
-	}
-	*/
+	var strParam = $(".search_param").serialize();
 	
 	return strParam;
 }

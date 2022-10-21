@@ -13,19 +13,10 @@ public class GF extends config.custom.GF {
 
 	public static String get서브도메인(HttpServletRequest request) throws Exception {
 		String 서브URL = "";
-		
-		// URI가 도메인으로 시작되는지 체크
 		String[] 요청URI배열 = request.getRequestURI().split("/");
-		
-		System.out.println("서브요청URI배열 : "+요청URI배열);//@@@@@
-		
 		if (요청URI배열.length > 0) {
 			서브URL = 요청URI배열[1];
-			
-			System.out.println("서브URL : "+서브URL);//@@@@@
-			System.out.println("서브URL : "+서브URL.replace("."+GC.도메인, "").replace(GC.도메인, ""));//@@@@@
 			서브URL = 서브URL.replace("."+GC.도메인, "").replace(GC.도메인, "");
-			
 		}
 		
 		return 서브URL;

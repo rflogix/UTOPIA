@@ -2,17 +2,19 @@
 # 도메인별 세팅
 #################################################################################
 
-mybatis-db:
-  buildingpoint: # MybatisConfig.java 정의된 패키지명
-    admin:
-      jdbcUrl: jdbc:log4jdbc:mysql://db.rflogix.com:3306/geo_test?allowMultiQueries=true&characterEncoding=UTF-8&serverTimezone=UTC
+custom:
+  domains: www.siaa.co.kr, admin.siaa.co.kr
+  mybatis:
+    buildingpoint: # MybatisConfig.java 정의된 패키지명
+      admin:
+        jdbcUrl: jdbc:log4jdbc:mysql://db.rflogix.com:3306/geo_test?allowMultiQueries=true&characterEncoding=UTF-8&serverTimezone=UTC
+        username: root
+        password: rfself99
+
+    siaa: # MybatisConfig.java 정의된 패키지명
+      jdbcUrl: jdbc:log4jdbc:mysql://db.rflogix.com:3306/siaa?allowMultiQueries=true&characterEncoding=UTF-8&serverTimezone=UTC
       username: root
       password: rfself99
-    
-  siaa: # MybatisConfig.java 정의된 패키지명
-    jdbcUrl: jdbc:log4jdbc:mysql://db.rflogix.com:3306/siaa?allowMultiQueries=true&characterEncoding=UTF-8&serverTimezone=UTC
-    username: root
-    password: rfself99
 
 
 
@@ -39,7 +41,7 @@ spring:
 server:
   port: 80
   error:
-    path: /custom_error # 필수 설정!! ErrorConfig.java 에서 사용
+    path: /page_error # 필수 설정!! ErrorConfig.java 에서 사용
   servlet:    session:
       timeout: 1800 # 필수 설정!! SessionConfig.java 에서 사용 : 초단위이나 최소는 1분이므로 60초 이상
 
@@ -100,14 +102,14 @@ spring:
     activate:
       on-profile: local-server # 프로필 설정
 
-logging: # 로그 설정
+logging:
   level:
-    config: debug # 환경설정 레벨
-    #config.spring: trace 
-    jdbc: # SQL 로그 설정
+    config: debug # 환경설정 로그 레벨
+    #config.spring.UriViewConfig: trace  # URI 인터셉터 로그 레벨
+    jdbc: # SQL 로그 레벨
       sqltiming: debug
-    buildingpoint: debug # 패키지별 레벨
-    siaa: debug # 패키지별 레벨
+    buildingpoint: debug # 패키지별 로그 레벨
+    siaa: debug # 패키지별 로그 레벨
 
 
 
@@ -121,9 +123,9 @@ spring:
     activate:
       on-profile: dev-server # 프로필 설정
       
-logging: # 로그 설정
+logging:
   level:
-    root: warn # 기본 레벨
+    root: warn # 기본 로그 레벨
 
 
 
@@ -137,6 +139,6 @@ spring:
     activate:
       on-profile: prod-server # 프로필 설정
       
-logging: # 로그 설정
+logging:
   level:
-    root: error # 기본 레벨
+    root: error # 기본 로그 레벨

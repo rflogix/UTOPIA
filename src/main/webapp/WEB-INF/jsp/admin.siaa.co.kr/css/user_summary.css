@@ -14,13 +14,7 @@
 * 화면
 ***********************************************************************************/
 
-.GRID .UserCD {color:blue; cursor:pointer;}
-.GRID .UserNM {color:blue; cursor:pointer;}
-.GRID .Profile_URL {width:30px; height:30px; cursor:pointer;}
-
-.GRID .CompanyCD {color:blue; cursor:pointer;}
-.GRID .CompanyNM {color:blue; cursor:pointer;}
-.GRID .CompanyImageURL {width:40px; height:40px; cursor:pointer;}
+.GRID .user_cd {color: blue; cursor:pointer;}
 
 
 
