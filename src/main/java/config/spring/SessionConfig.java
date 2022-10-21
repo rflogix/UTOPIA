@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,13 +16,32 @@ import config.custom.GF;
 @Configuration
 public class SessionConfig implements HttpSessionListener {
 
-	@Value("${server.servlet.session.timeout}") // application.yml 파일에 반드시 정의할것
-	private int 세션만료시간;
+	@Value("${server.servlet.session.timeout}") // application.yml
+	private String 세션만료시간;
 	
+	// 세션 생성시 세션만료시간 설정 (따로 WAS 돌릴때만 필요)
 	public void sessionCreated(HttpSessionEvent se) {
-		se.getSession().setMaxInactiveInterval(세션만료시간); // 기본 세션만료시간 설정 (application.yml 파일에서 이미 설정이 되므로, 따로 WAS 돌릴때만 필요)
+		// application.yml 의 세션만료시간이 최우선이며, 설정이 안되었다면 GC 의 세션만료시간으로 세팅한다
+		int 만료시간 = GC.세션만료시간;
+		try {
+			if (GF.getString(세션만료시간).equals("") == false) {
+				if (세션만료시간.indexOf("m") > -1) {
+					만료시간 = Integer.parseInt(세션만료시간.replace("m", "")) * 60;
+					
+				} else if (세션만료시간.indexOf("s") > -1) {
+					만료시간 = Integer.parseInt(세션만료시간.replace("s", ""));
+					
+				} else {
+					만료시간 = Integer.parseInt(세션만료시간);
+				}
+			}
+		
+		} catch (Exception e) {}
+		
+		se.getSession().setMaxInactiveInterval(만료시간);
 	}
-
+	
+	// 세션 종료시 로그아웃 처리
 	public void sessionDestroyed(HttpSessionEvent se) {
 		HttpSession session = se.getSession();
 		try {

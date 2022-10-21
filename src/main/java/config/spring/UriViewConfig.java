@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -20,9 +19,6 @@ public class UriViewConfig implements HandlerInterceptor {
 	
 	@Autowired
 	ResourceLoader resourceLoader;
-
-	@Value("${server.error.path}") // application.yml 파일에 반드시 정의할것
-	private String 에러경로;
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

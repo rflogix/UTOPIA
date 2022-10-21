@@ -1,4 +1,4 @@
-package siaa.user;
+package buildingpoint.user;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import siaa.common.GC;
-import siaa.common.GF;
+import buildingpoint.common.GC;
+import buildingpoint.common.GF;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

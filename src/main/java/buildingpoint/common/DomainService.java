@@ -1,4 +1,4 @@
-package buildingpoint.admin.common;
+package buildingpoint.common;
 
 import java.util.HashMap;
 
@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import buildingpoint.admin.user.UserDTO;
-import buildingpoint.admin.user.UserService;
+import buildingpoint.user.UserDTO;
+import buildingpoint.user.UserService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -61,18 +61,15 @@ public class DomainService {
 	public String 페이지이동(HttpServletRequest request, String 페이지URL) {
 		try {
 			페이지URL = GF.getString(페이지URL);
-			if (페이지URL.equals("")) {
+			if ((페이지URL.equals("")) || (페이지URL.equals("/"))) {
 				페이지URL = "/index";
 			}
 			
-			// 로그인 여부 체크
-			UserDTO clsLoginUser = new UserDTO();
-			HashMap<String, Object> 세션변수 = GF.get세션변수(request);
-			if (세션변수.get(GC.세션KEY_로그인사용자) != null) {
-				clsLoginUser = (UserDTO)세션변수.get(GC.세션KEY_로그인사용자);
-			}
-			if (clsLoginUser.getUserCD() == 0) {
-				페이지URL = "/login";
+			// 도메인별로 로그인 여부 체크
+			if (GF.get서브도메인(request).equals("admin")) {
+				if (GF.로그인여부(request) == false) { // 로그인 여부 체크
+					페이지URL = "/login";
+				}
 			}
 			
 		} catch(Exception e) {

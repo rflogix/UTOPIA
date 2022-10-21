@@ -3,13 +3,12 @@
 #################################################################################
 
 custom:
-  domains: www.siaa.co.kr, admin.siaa.co.kr
+  domains: www.siaa.co.kr, admin.siaa.co.kr, admin.buildingpoint.co.kr
   mybatis:
     buildingpoint: # MybatisConfig.java 정의된 패키지명
-      admin:
-        jdbcUrl: jdbc:log4jdbc:mysql://db.rflogix.com:3306/geo_test?allowMultiQueries=true&characterEncoding=UTF-8&serverTimezone=UTC
-        username: root
-        password: rfself99
+      jdbcUrl: jdbc:log4jdbc:mysql://db.rflogix.com:3306/geo_test?allowMultiQueries=true&characterEncoding=UTF-8&serverTimezone=UTC
+      username: root
+      password: rfself99
 
     siaa: # MybatisConfig.java 정의된 패키지명
       jdbcUrl: jdbc:log4jdbc:mysql://db.rflogix.com:3306/siaa?allowMultiQueries=true&characterEncoding=UTF-8&serverTimezone=UTC
@@ -43,7 +42,7 @@ server:
   error:
     path: /page_error # 필수 설정!! ErrorConfig.java 에서 사용
   servlet:    session:
-      timeout: 1800 # 필수 설정!! SessionConfig.java 에서 사용 : 초단위이나 최소는 1분이므로 60초 이상
+      timeout: 1800 # 30m or 1800s or 1800 / SessionConfig.java 에서 사용 : 초단위이나 최소는 1분이므로 60초 이상
 
 spring:
   config:

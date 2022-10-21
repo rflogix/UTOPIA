@@ -1,32 +1,28 @@
-package siaa.user;
+package buildingpoint.user;
 
 import java.math.BigDecimal;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import siaa.common.GC;
-import siaa.common.DomainEntity;
+import buildingpoint.common.DomainDTO;
 
-@Entity(name=GC.도메인+"."+UserEntity.TABLE_NAME)
-@Table(name=UserEntity.TABLE_NAME)
 @Data
 @ToString(callSuper=true)
 @EqualsAndHashCode(callSuper=false)
+@JsonIgnoreProperties(ignoreUnknown=true)
 @SuppressWarnings("serial")
-public class UserEntity extends DomainEntity {
-	public static final String TABLE_NAME = "tc_user";
-	
-	@Id
+public class UserDTO extends DomainDTO {
 	private long userCD;
 	
-	private Long storeCD;
+	private long storeCD;
 	
 	private String userID;
 	private String userPW;
 	private String userPW_Origin;
+	private String userPW_Check; // 비밀번호 체크
 	private String userNM;
 	private String userNM_en;
 	private String userLastNM_en;
@@ -36,31 +32,31 @@ public class UserEntity extends DomainEntity {
 	private String companyTel;
 	private String email;
 	private String cellPhoneNO;
-	private Integer smsYN;
+	private int smsYN;
 	private String department;
 	private String position;
-	private Integer userType;
-	private Integer joinType;
+	private int userType;
+	private int joinType;
 	private String joinDT;
-	private Integer userLevel;
+	private int userLevel;
 	
 	private String zipCD;
 	private String address1;
 	private String address2;
 	private BigDecimal userPoint;
 	private String birth;
-	private Integer sex;
+	private int sex;
 	
 	private String deviceID;
 	private String fcmID;
-	private Integer noticeYN;
-	private Integer tickerYN;
-	private Integer soundYN;
-	private Integer vibrateYN;
+	private int noticeYN;
+	private int tickerYN;
+	private int soundYN;
+	private int vibrateYN;
 	
 	private String lastConnectDT;
-	private Integer loginCNT;
-	private Integer loginYN;
+	private int loginCNT;
+	private int loginYN;
 	private String loginIP;
 	private String loginBrowser;
 	private String loginSessionID;
@@ -69,7 +65,7 @@ public class UserEntity extends DomainEntity {
 	private String chargeUserNM;
 	private String area;
 	private String chargeUserNM_en;
-	private Integer oneID_YN;
+	private int oneID_YN;
 	private String userProfileURL;
-	private Integer oneID_PopupYN;
+	private int oneID_PopupYN;
 }

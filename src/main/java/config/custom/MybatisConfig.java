@@ -20,10 +20,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import config.spring.BeanNameConfig;
 
 public class MybatisConfig {
-	// 도메인별로 DB 접속 정보가 상이하므로 application.yml 에 도메인별로 세팅
+	// 도메인별로 DB 접속 정보가 상이하므로 application.yml 의 custom.mybatis 에 도메인별로 세팅
 	
 	// 패키지1 에는 @Primary 추가
-	public static final String 패키지1 = "buildingpoint.admin";
+	public static final String 패키지1 = "buildingpoint";
 	public static final String 패키지1_마이바티스경로 = 패키지1; // 패키지 구조와 mybatis 경로가 다를경우 따로 설정
 	
 	// 패키지2부터는 @Primary 제외

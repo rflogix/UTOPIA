@@ -29,7 +29,7 @@ public class LogParamConfig implements HandlerInterceptor {
 					break;
 				}
 			}
-			if (리소스여부 == false) {
+			if (리소스여부 == false) { // 리소스 경로는 파라미터 로그 남기지 않음
 				HashMap<String, Object> map파라미터 = GF.get파라미터(request);
 				if (map파라미터.isEmpty() == false) {
 					StringBuffer 파라미터_로그 = new StringBuffer();
