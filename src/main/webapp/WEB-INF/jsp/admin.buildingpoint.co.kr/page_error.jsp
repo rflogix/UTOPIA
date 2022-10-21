@@ -1,5 +1,5 @@
 <jsp:directive.page contentType="text/html;charset=UTF-8" />
-<jsp:directive.page import="buildingpoint.admin.common.*"/>
+<jsp:directive.page import="buildingpoint.common.*"/>
 <%
 /***********************************************************************************
 * Copyright (C)RFLOGIX since 2010.08.24 (rflogix@rflogix.com)

@@ -4,7 +4,7 @@
 	
 	<select id="selectUser" parameterType="HashMap" resultType="UserDTO">
 		SELECT *
-		FROM tb_user
+		FROM tc_user
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test='userCD != null and userCD != 0'>
 			AND userCD = #{userCD}
@@ -39,15 +39,15 @@
 			</if>
 			
 			<if test='deleteYN != null and deleteYN != 0'>
-			AND tb_user.deleteYN = #{deleteYN}
+			AND tc_user.deleteYN = #{deleteYN}
 			</if>
 		</trim>
 	</select>
 	
 	<select id="insertUser" parameterType="HashMap" resultType="Long">
-		SET @userCD = (SELECT IFNULL(MAX(userCD), 0) + 1 FROM tb_user);
+		SET @userCD = (SELECT IFNULL(MAX(userCD), 0) + 1 FROM tc_user);
 		
-		INSERT INTO tb_user (
+		INSERT INTO tc_user (
 			userCD
 			,userID
 			,userPW
@@ -72,7 +72,7 @@
 	</select>
 	
 	<update id="updateUser" parameterType="HashMap">
-		UPDATE tb_user
+		UPDATE tc_user
 		<set>
 			<if test='userID != null'>
 			userID = #{userID},
