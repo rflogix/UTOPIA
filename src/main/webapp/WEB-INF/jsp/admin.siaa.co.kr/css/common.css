@@ -58,13 +58,13 @@ select::-ms-expand {display:none;}
 
 .fa, .fas, .far, .fal, .fad, .fab {line-height:unset !important;}
 
-.flex-row {display:flex; flex-direction:row; align-items:center; justify-content:center;}
-.flex-row-start {display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
-.flex-row-end {display:flex; flex-direction:row; align-items:center; justify-content:flex-end;}
-.flex-row-between {display:flex; flex-direction:row; align-items:center; justify-content:space-between;}
+.flex {display:flex; flex-direction:row; align-items:center; justify-content:center;}
+.flex-left {display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.flex-right {display:flex; flex-direction:row; align-items:center; justify-content:flex-end;}
+.flex-between {display:flex; flex-direction:row; align-items:center; justify-content:space-between;}
 
 .flex-col {display:flex; flex-direction:column; align-items:center; justify-content:center;}
-.flex-col-start {display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start;}
+.flex-col-left {display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-start;}
 .flex-col-between {display:flex; flex-direction:column; align-items:flex-start; justify-content:space-between;}
 
 .button {width: auto; height: 30px; padding: 0 20px; font-size: 14px; letter-spacing: 1px; background-color: #38626b; color: white; border-radius: 3px; display:flex; flex-direction:row; align-items:center; justify-content:center; cursor:pointer; transition: background-color 0.3s, color 0.3s;}
@@ -133,9 +133,9 @@ select::-ms-expand {display:none;}
 .search_param label input	{width:auto; height:auto; position:relative; top:3px; padding:0; margin:0; border:0;}
 .search_param select		{width:calc(100% - 20px); padding:0 5px; border:1px solid #aaa;}
 
-.search_action				{width:calc(100% - 16px - 40px); padding:7px; margin:10px 20px 0 20px; border:1px solid #ccc; border-bottom:0; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
-.search_action .blank		{flex:1; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
-.search_action.hidden		{border:0; padding:0;}
+.search_control				{width:calc(100% - 16px - 40px); padding:7px; margin:10px 20px 0 20px; border:1px solid #ccc; border-bottom:0; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.search_control .blank		{flex:1; display:flex; flex-direction:row; align-items:center; justify-content:flex-start;}
+.search_control.hidden		{border:0; padding:0;}
 
 .search_result				{width:calc(100% - 40px); margin:0 20px 0 20px;}
 .search_result .GRID		{width:calc(100% - 2px); height:624px; border-bottom:1px solid #ccc; border-left:1px solid #ccc;; border-right:1px solid #ccc;}
@@ -273,6 +273,19 @@ input[type='file'] {display:none;}
 .ui-datepicker-next		{height:90% !important;}
 .ui_datepicker {width:135px !important; background-color:#efefef; text-align:center; cursor:pointer; position:relative;}
 .datepicker.fa-times {cursor:pointer; padding-left:5px;}
+
+#MINI_CAL {width:auto; position:absolute;}
+.mini_calendar {width:180px; border:2px #b8cd94 solid; font-size:8pt;}
+.mini_calendar select {padding-right:20px;}
+.mini_calendar table {width:180px; border:1px #b8cd94 solid; font-family:Tahoma; font-size:8pt;}
+.mini_calendar table .title {background-color:#EAEAEA;}
+.mini_calendar table .kr {font-size:8pt;}
+.mini_calendar table .en {font-size:6.5pt;}
+.mini_calendar table tr td{text-align:right; font-weight:bold; border-right:1px #dbdbdb solid; border-bottom:1px #dbdbdb solid; padding:3px; vertical-align:top; height:; }
+.mini_calendar .sun{color:#cd383b;}
+.mini_calendar .sat{color:#213aa4;}
+.mini_calendar .dayoff{font-weight:normal; color:#b3b3b3; background-color:#f4f4f4;}
+.mini_calendar .today{background-color:#D4F4FA}
 
 
 

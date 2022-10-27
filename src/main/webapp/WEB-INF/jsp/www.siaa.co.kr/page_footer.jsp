@@ -18,7 +18,7 @@
 		</div> -->
 	</div>
 	<div class="footer_bot">
-		<div class="bot_wrap flex-row-between">
+		<div class="bot_wrap flex-between">
 			<div class="left_wrap">
 				<div class="title">
 					한국증권정보협회

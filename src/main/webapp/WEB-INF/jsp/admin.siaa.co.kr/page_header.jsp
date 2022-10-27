@@ -76,6 +76,9 @@
 		</ul>
 		<ul class="leftmenu main_menu menu_cd_3">
 			<li class="level2 sub_menu menu_cd_3_1" onclick="selectMenu(3,1)">
+				메인화면
+			</li>
+			<li class="level2 sub_menu menu_cd_3_2" onclick="selectMenu(3,2)">
 				협회개요
 			</li>
 		</ul>

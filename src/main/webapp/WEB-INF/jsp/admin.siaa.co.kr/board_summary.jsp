@@ -22,89 +22,96 @@
 		<jsp:directive.include file="page_header.jsp"/>
 		
 		<div class="page_content">
-			<!-- 검색 타이틀 -->
-			<div class="search_title">
-				<i class="far fa-bookmark"></i><span class="menu_nm"></span>
-				
-				<!-- <div class="btn_detail button" onclick="toggleSearch();">
-					<i class="fas fa-angle-< %= SearchOpenYN==1?"up":"down" % >"></i><div>상세검색 < %= SearchOpenYN==1?"닫기":"열기" % ></div>
-				</div> -->
-				
-				<div class="btn_search button" onclick="clickSearch();">
-					<i class="fa fa-search"></i>조 회
+			<form class="search_wrap">
+				<!-- 검색 타이틀 -->
+				<div class="search_title">
+					<i class="far fa-bookmark"></i><span class="menu_nm"></span>
+					
+					<!-- <div class="btn_detail button" onclick="toggleSearch();">
+						<i class="fas fa-angle-< %= SearchOpenYN==1?"up":"down" % >"></i><div>상세검색 < %= SearchOpenYN==1?"닫기":"열기" % ></div>
+					</div> -->
+					
+					<div class="btn_search button" onclick="clickSearch();">
+						<i class="fa fa-search"></i>조 회
+					</div>
 				</div>
-			</div>
-			
-			<!-- 검색 조건 -->
-			<form class="search_param">
-				<input name="deleteYN" value="-1" type="hidden"/>
-				<table>
-					<colgroup>
-						<col width="120px"/>
-						<col width="300px"/>
-						
-						<col width="120px"/>
-						<col width="300px"/>
-						
-						<col width="120px"/>
-						<col width="auto"/>
-					</colgroup>
-					<tr>
-						<th>게시판구분</th>
-						<td>
-							<select name="boardType">
-								<% for (String 게시판 : GC.게시판종류) { %>
-								<option value="<%= 게시판 %>"><%= 게시판 %></option>
-								<% } %>
-							</select>
-						</td>
-						<th>제목</th>
-						<td>
-							<input name="titleText_like"/>
-						</td>
-						<th>내용</th>
-						<td>
-							<input name="contentText_like"/>
-						</td>
-					</tr>
-					<!--
-					<tr>
-						<th>작성자</th>
-						<td>
-							<input name="writeUserNM_like"/>
-						</td>
-						<th>작성일시</th>
-						<td>
-							<input name="writeDT_start" class="start" style="width:80px; text-align:center;" maxlength="10"/>
-							<img src="image/button/ico_calendar.png" onclick="Calendar($(this).parent().children('.start'))" style="width:auto; cursor:pointer;"/>
-							~
-							<input name="writeDT_end" class="end" style="width:80px; text-align:center;" maxlength="10"/>
-							<img src="image/button/ico_calendar.png" onclick="Calendar($(this).parent().children('.end'))" style="width:auto; cursor:pointer;"/>
-						</td>
-						<th>업데이트일시</th>
-						<td>
-							<input name="updateDT_start" class="start" style="width:80px; text-align:center;" maxlength="10"/>
-							<img src="image/button/ico_calendar.png" onclick="Calendar($(this).parent().children('.start'))" style="width:auto; cursor:pointer;"/>
-							~
-							<input name="updateDT_end" class="end" style="width:80px; text-align:center;" maxlength="10"/>
-							<img src="image/button/ico_calendar.png" onclick="Calendar($(this).parent().children('.end'))" style="width:auto; cursor:pointer;"/>
-						</td>
-					</tr>
-					-->
-				</table>
+				
+				<!-- 검색 조건 -->
+				<div class="search_param">
+					<table>
+						<colgroup>
+							<col width="120px"/>
+							<col width="300px"/>
+							
+							<col width="120px"/>
+							<col width="300px"/>
+							
+							<col width="120px"/>
+							<col width="auto"/>
+						</colgroup>
+						<tr>
+							<th>게시판구분</th>
+							<td>
+								<select name="boardType">
+									<% for (String 게시판 : GC.게시판종류) { %>
+									<option value="<%= 게시판 %>"><%= 게시판 %></option>
+									<% } %>
+								</select>
+							</td>
+							<th>제목</th>
+							<td>
+								<input name="titleText_like"/>
+							</td>
+							<th>내용</th>
+							<td>
+								<input name="contentText_like"/>
+							</td>
+						</tr>
+						<!--
+						<tr>
+							<th>작성자</th>
+							<td>
+								<input name="writeUserNM_like"/>
+							</td>
+							<th>작성일시</th>
+							<td>
+								<input name="writeDT_start" class="start" style="width:80px; text-align:center;" maxlength="10"/>
+								<img src="image/button/ico_calendar.png" onclick="Calendar($(this).parent().children('.start'))" style="width:auto; cursor:pointer;"/>
+								~
+								<input name="writeDT_end" class="end" style="width:80px; text-align:center;" maxlength="10"/>
+								<img src="image/button/ico_calendar.png" onclick="Calendar($(this).parent().children('.end'))" style="width:auto; cursor:pointer;"/>
+							</td>
+							<th>업데이트일시</th>
+							<td>
+								<input name="updateDT_start" class="start" style="width:80px; text-align:center;" maxlength="10"/>
+								<img src="image/button/ico_calendar.png" onclick="Calendar($(this).parent().children('.start'))" style="width:auto; cursor:pointer;"/>
+								~
+								<input name="updateDT_end" class="end" style="width:80px; text-align:center;" maxlength="10"/>
+								<img src="image/button/ico_calendar.png" onclick="Calendar($(this).parent().children('.end'))" style="width:auto; cursor:pointer;"/>
+							</td>
+						</tr>
+						-->
+					</table>
+				</div>
+				
+				<!-- 검색 컨트럴 -->
+				<div class="search_control">
+					<div class="button" onclick="openPopup_board();">
+						<i class="fas fa-share-square"></i>게시물작성
+					</div>
+					
+					<!-- 검색 추가 조건 -->
+					<input name="deleteYN" value="-1" type="hidden"/>
+					<input name="Search_SortCol" type="hidden"><!-- 정렬 컬럼 -->
+					<input name="Search_SortType" type="hidden"><!-- 정렬 순서 -->
+					<input name="Search_Page" type="hidden"><!-- 선택된 페이지 -->
+				</div>
+				
+				<!-- 검색 결과 리스트 -->
+				<div class="search_result">
+					<div class="GRID"></div>
+				</div>
 			</form>
-			
-			<!-- 작업 실행 -->
-			<div class="search_action">
-				<div class="button" onclick="openPopup_board();">
-					<i class="fas fa-share-square"></i>게시물작성
-				</div>
-			</div>
-			
-			<!-- 검색 결과 리스트 -->
-			<div class="search_result">
-				<div class="GRID"></div>
-			</div>
 		</div>
 		
 		<%--********************************************************************************
@@ -129,7 +136,7 @@
 						게시판 구분
 						<input name="boardCD" type="hidden"/>
 					</div>
-					<div class="content flex-row-start">
+					<div class="content flex-left">
 						<select name="boardType">
 							<% for (String 게시판 : GC.게시판종류) { %>
 							<option value="<%= 게시판 %>"><%= 게시판 %></option>
@@ -181,7 +188,7 @@
 						</script>
 					</div>
 				</form>
-				<div class="popup_bot flex-row">
+				<div class="popup_bot flex">
 					<a class="button delete" onclick="deleteBoard();">
 						<i class="far fa-trash-alt"></i>&nbsp;&nbsp;삭 제
 					</a>

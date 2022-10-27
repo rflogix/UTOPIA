@@ -94,8 +94,8 @@
 				</div>
 				<form class="popup_content">
 					<div class="user_company_wrap">
-						<div class="user_wrap flex-row-start">
-							<div class="caption flex-row">
+						<div class="user_wrap flex-left">
+							<div class="caption flex">
 								사<br/>용<br/>자<br/>정<br/>보
 							</div>
 							<div class="content_wrap">

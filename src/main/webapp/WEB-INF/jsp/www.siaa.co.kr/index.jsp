@@ -18,38 +18,57 @@
 		<content>
 			<div class="page_wrap menu_cd_0_0 select">
 				<!-- 배너 -->
-				<div class="banner_wrap">
-					<div class="box">
-						<div class="number">
-							01
-						</div>
-						<div class="title">
-							해외주식형 펀드,
-							<br/>2거래일간 873억원 순유
-						</div>
-						<div class="content">
-							해외 주식형 펀드에 800억원 넘는 자금이 들어왔다. 18일 금융투자협회에 따르 면 지난 16일 기준 상장지수펀드(ETF)를 제외한 해외 주식형 펀드는 481억 ...
-						</div>
-						<div class="more">
-							View More &gt;
-						</div>
-						<div class="page_wrap">
-							<div class="prev">
-								&lt;
+				<div class="main_banner swiper-container">
+					<div class="swiper-wrapper">
+						<% int main_banner_cnt = 3;
+						for (int i = 0; i < main_banner_cnt; i++) { %>
+						<div class="banner_wrap banner_<%= i %> swiper-slide">
+							<div class="box">
+								<div class="number">
+									0<%= i+1 %>
+								</div>
+								<div class="title">
+									해외주식형 펀드,
+									<br/>2거래일간 873억원 순유
+								</div>
+								<div class="content">
+									해외 주식형 펀드에 800억원 넘는 자금이 들어왔다. 18일 금융투자협회에 따르 면 지난 16일 기준 상장지수펀드(ETF)를 제외한 해외 주식형 펀드는 481억 ...
+								</div>
+								<div class="more">
+									View More &gt;
+								</div>
+								<div class="page_wrap">
+									<div class="prev" onclick="main_banner.slidePrev();">
+										&lt;
+									</div>
+									<div class="page">
+										<%= i + 1 %>
+									</div>
+									<div class="per">/</div>
+									<div class="total">
+										<%= main_banner_cnt %>
+									</div>
+									<div class="next" onclick="main_banner.slideNext();">
+										&gt;
+									</div>
+								</div>
 							</div>
-							<div class="page">
-								1
-							</div>
-							<div class="per">/</div>
-							<div class="total">
-								5
-							</div>
-							<div class="next">
-								&gt;
-							</div>
 						</div>
+						<% } %>
 					</div>
 				</div>
+				<script>
+				let main_banner;
+				$(document).ready(function() {	
+					main_banner = new Swiper(".page_wrap.menu_cd_0_0 .main_banner", {
+						loop: true,
+						autoplay: {
+							delay: 3000,
+							pauseOnMouseEnter: true,
+						},
+					});
+				});
+				</script>
 				
 				<!-- 게시판 -->
 				<div class="board_wrap">

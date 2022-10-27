@@ -2,15 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="siaa.board.BoardMapper">
 	
+	<!-- 조회 -->
 	<select id="selectBoard" parameterType="HashMap" resultType="BoardDTO">
 		SELECT tb_board.*
 			, write_user.UserNM as writeUserNM
 			
+		<include refid = "FROM_selectBoard"/>
+		<include refid = "WHERE_selectBoard"/>
+		<include refid = "ORDER_BY_selectBoard"/>
+		
+		<if test='(Search_StartRow != null and Search_StartRow != 0) and (Search_ShowCNT != null and Search_ShowCNT != 0)'>
+		LIMIT #{Search_StartRow}, #{Search_ShowCNT}
+		</if>
+	</select>
+	<select id="selectBoardCnt" parameterType="HashMap" resultType="int">
+		SELECT COUNT(*)
+		<include refid = "FROM_selectBoard"/>
+		<include refid = "WHERE_selectBoard"/>
+	</select>
+	<sql id = "FROM_selectBoard">
 		FROM tb_board
 			LEFT OUTER JOIN tb_user as write_user
 				ON write_user.userCD = tb_board.writeUserCD
-			
-		WHERE 1=1
+	</sql>
+	<sql id = "WHERE_selectBoard">
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<if test='boardCD != null and boardCD != 0'>
 			AND tb_board.boardCD = #{boardCD}
 			</if>
@@ -39,10 +55,27 @@
 			<if test='deleteYN != null and deleteYN != 0'>
 			AND tb_board.deleteYN = #{deleteYN}
 			</if>
-			
-		ORDER BY tb_board.boardOrder DESC, tb_board.writeDT DESC
-	</select>
+		</trim>
+	</sql>
+	<sql id = "ORDER_BY_selectBoard">
+		ORDER BY
+		<if test='Search_SortCol == null or Search_SortCol == ""'>
+			tb_board.boardOrder DESC, tb_board.writeDT DESC
+		</if>
+		<if test='Search_SortCol != null and Search_SortCol != ""'>
+			<choose>
+				<when test='Search_SortCol eq "writeDT"'>writeDT</when>
+				<otherwise>tb_board.insertDT</otherwise>
+			</choose>
+			<choose>
+				<when test='Search_SortType eq "desc"'>DESC</when>
+				<when test='Search_SortType eq "DESC"'>DESC</when>
+				<otherwise>ASC</otherwise>
+			</choose>
+		</if>
+	</sql>
 	
+	<!-- 추가 -->
 	<select id="insertBoard" parameterType="HashMap" resultType="Long">
 		SET @boardCD = (SELECT IFNULL(MAX(boardCD), 0) + 1 FROM tb_board);
 		SET @boardOrder = (SELECT IFNULL(MAX(boardOrder), 0) + 1 FROM tb_board WHERE boardType = #{boardType});

@@ -1,19 +1,3 @@
-document.write("<style type='text/css'>");
-document.write("#MINI_CAL {width:auto; position:absolute;}");
-document.write(".mini_calendar {width:180px; border:2px #b8cd94 solid; font-size:8pt;}");
-document.write(".mini_calendar select {padding-right:20px;}");
-document.write(".mini_calendar table {width:180px; border:1px #b8cd94 solid; font-family:Tahoma; font-size:8pt;}");
-document.write(".mini_calendar table .title {background-color:#EAEAEA;}");
-document.write(".mini_calendar table .kr {font-size:8pt;}");
-document.write(".mini_calendar table .en {font-size:6.5pt;}");
-document.write(".mini_calendar table tr td{text-align:right; font-weight:bold; border-right:1px #dbdbdb solid; border-bottom:1px #dbdbdb solid; padding:3px; vertical-align:top; height:; }");
-document.write(".mini_calendar .sun{color:#cd383b;}");
-document.write(".mini_calendar .sat{color:#213aa4;}");
-document.write(".mini_calendar .dayoff{font-weight:normal; color:#b3b3b3; background-color:#f4f4f4;}");
-document.write(".mini_calendar .today{background-color:#D4F4FA}");
-document.write("</style>");
-
-var MINI_CAL	 = "<div name='MINI_CAL' id='MINI_CAL' oncontextmenu='return false' ondragstart='return false' onselectstart='return false' style='position:absolute; display:none; background-color:#FFFFFF; z-index: 99'>&nbsp;</div>";
 var MC_CurrYear	= "";	   //현재 년도
 var MC_CurrMonth   = "";	   //현재 월
 var MC_CurrDate	= "";	   //현재 날짜
@@ -30,7 +14,17 @@ var MC_arrMonth_en = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct
 var MC_strYear	 = "";
 var MC_strMonth	= "";
 
-document.write(MINI_CAL);
+let _MINI_CALENDER_ID = "MINI_CAL";
+$(document).ready(function() {
+	$('body').append(
+		$('<div>').attr('name', _MINI_CALENDER_ID)
+			.attr('id', _MINI_CALENDER_ID)
+			.attr('oncontextmenu', 'return false')
+			.attr('ondragstart', 'return false')
+			.attr('onselectstart', 'return false')
+			.attr('style', 'position:absolute; display:none; background-color:#FFFFFF; z-index: 99;')
+	);
+});
 
 //obj   : 대상 객체
 //gb	: 구분자('-','/')
@@ -41,8 +35,8 @@ function Calendar(obj, gb, lan, e){
 	var nMonth	  = "";
 	var nDate	   = "";
 
-	if (document.getElementById("MINI_CAL").style.display==""){
-		document.getElementById("MINI_CAL").style.display="none";
+	if (document.getElementById(_MINI_CALENDER_ID).style.display==""){
+		document.getElementById(_MINI_CALENDER_ID).style.display="none";
 		return;
 	}
 
@@ -115,22 +109,22 @@ function Calendar(obj, gb, lan, e){
 		x = (document.layers) ? loc.pageX : event.clientX + document.documentElement.scrollLeft;
 		y = (document.layers) ? loc.pageY : event.clientY + document.documentElement.scrollTop;
 
-		document.getElementById("MINI_CAL").style.top = y+20 + "px";
-		document.getElementById("MINI_CAL").style.left= x-50 + "px";
+		document.getElementById(_MINI_CALENDER_ID).style.top = y+20 + "px";
+		document.getElementById(_MINI_CALENDER_ID).style.left= x-50 + "px";
 		
 	} else if (ua.indexOf("Safari") > -1) {
 		x = (document.layers) ? loc.pageX : event.clientX + document.body.scrollLeft;
 		y = (document.layers) ? loc.pageY : event.clientY + document.body.scrollTop;
 
-		document.getElementById("MINI_CAL").style.pixelTop = y+20;
-		document.getElementById("MINI_CAL").style.pixelLeft = x-50;
+		document.getElementById(_MINI_CALENDER_ID).style.pixelTop = y+20;
+		document.getElementById(_MINI_CALENDER_ID).style.pixelLeft = x-50;
 		
 	} else {
 		x = (document.layers) ? loc.pageX : event.clientX + document.documentElement.scrollLeft;
 		y = (document.layers) ? loc.pageY : event.clientY + document.documentElement.scrollTop;
 
-		document.getElementById("MINI_CAL").style.pixelTop = y+20;
-		document.getElementById("MINI_CAL").style.pixelLeft = x-50;
+		document.getElementById(_MINI_CALENDER_ID).style.pixelTop = y+20;
+		document.getElementById(_MINI_CALENDER_ID).style.pixelLeft = x-50;
 	}
 	
 	MC_ShowCal(nYear, nMonth, nDate);
@@ -253,8 +247,8 @@ function MC_ShowCal(nYear, nMonth, nDate){
 
 	Cal_html += "</div>";
 
-	document.getElementById("MINI_CAL").style.display = "";
-	document.getElementById("MINI_CAL").innerHTML = Cal_html;
+	document.getElementById(_MINI_CALENDER_ID).style.display = "";
+	document.getElementById(_MINI_CALENDER_ID).innerHTML = Cal_html;
 
 }
 function MC_doOver(obj){
@@ -359,10 +353,10 @@ function MC_doClick(p_date){
 		$(MC_target).val(p_date);
 	}
 	onClickCalendar(MC_target); // 캘린더 클릭했을때 호출 함수 - 각 페이지에서 재정의
-	document.getElementById("MINI_CAL").style.display = "none";
+	document.getElementById(_MINI_CALENDER_ID).style.display = "none";
 }
 function onClickCalendar() {}
 
 function hideMINI_CAL() {
-	document.getElementById("MINI_CAL").style.display = "none";
+	document.getElementById(_MINI_CALENDER_ID).style.display = "none";
 }

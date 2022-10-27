@@ -17,7 +17,7 @@
 	<body>
 		<div class="page_top">
 			<div class="logo">
-				<img src="image/logo_100.png" />
+				<img src="/image/logo_100.png" />
 				<span>&nbsp;</span>
 			</div>
 		</div>

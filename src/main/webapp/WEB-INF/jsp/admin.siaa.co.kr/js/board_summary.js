@@ -27,15 +27,11 @@ $(document).ready(function () {
 	// 포커스
 	$(".search_param input[name='titleText_like']").focus();
 	
-	// 컬럼 설정
+	// 그리드
+	initGrid(); // 그리드 초기화
 	//GRID_COL.push(GRID_CHECKBOX.getColumnDefinition()); // 체크박스
-	GRID_COL.push({id:"id", name:"NO", field:"id", width:40, sortable:true, sorter:sorterNumeric});
-	//if($("#PlusYN").val() == 1){
-	//	GRID_COL.push({id:"receiptPopOpen", name:"영수증접수", field:"BoardCD", width:100, sortable:true, sorter:sorterNumeric, formatter:formatterReceiptPopOpen});
-	//	GRID_COL.push({id:"ReceiptionYN", name:"접수유무", field:"ReceiptionYN", width:100, sortable:true, sorter:sorterNumeric, formatter:formatterReceiptionYN});
-	//}
 	GRID_COL.push(
-		//{id:"boardCD", name:"게시판코드", field:"boardCD", width:100, sortable:true},
+		{id:"id", name:"NO", field:"id", width:40, sortable:true, sorter:sorterNumeric},
 		{id:"boardType", name:"게시판구분", field:"boardType", width:150, sortable:true},
 		{id:"titleText", name:"제목", field:"titleText", width:400, sortable:true, cssClass:"align-left", formatter:formatterBoardPopup},
 		{id:"contentText", name:"내용", field:"contentText", width:400, sortable:true, cssClass:"align-left", formatter:formatterBoardPopup},
@@ -43,80 +39,16 @@ $(document).ready(function () {
 		{id:"writeDT", name:"작성일시", field:"writeDT", width:120, sortable:true, formatter:formatterDateTime},
 		{id:"updateDT", name:"업데이트일시", field:"updateDT", width:120, sortable:true, formatter:formatterDateTime},
 	);
+	GRID_SHOW_CNT = "100,500,1000"; // 그리드에 보여지는 개수
+	createGrid(); // 그리드 생성
 	
-	// 그리드에 보여지는 개수
-	GRID_SHOW_CNT = "1000";//"500,1000";
-	
-	// 그리드 생성
-	GRID = new Slick.Grid(".GRID", GRID_DATA, GRID_COL, GRID_OPTION);
-	GRID.setSelectionModel(new Slick.RowSelectionModel({selectActiveRow:false})); // false: 여러 ROW 선택가능 / true: 단독 ROW 선택
-	//GRID.setSelectionModel(new Slick.CellSelectionModel({selectActiveRow:false})); // 셀 드래그 선택 
-	GRID.registerPlugin(new Slick.CellExternalCopyManager({"readOnlyMode":true})); // Ctrl+C 가능, 그리드에는 못붙이게
-	GRID.registerPlugin(GRID_CHECKBOX); // 체크박스 플러그인
-	
-	// 그리드 이벤트 설정
-	GRID.onCellChange.subscribe(function(e, args) { // 셀 변경될때
-		GRID_DATA.updateItem(args.item.id, args.item);
-		updateGridFooter(args.grid, args.cell);
-	});
-	GRID.onColumnsReordered.subscribe(function(e, args) { // 컬럼 재배치 되었을때
-		updateGridFooterAll(args.grid); // footer 자동으로 지워지므로 다시 설정
-	});
-	GRID.onKeyDown.subscribe(function (e) {
-		if (e.which != 65 || !e.ctrlKey) { // Ctrl+A 모두선택
-			return false;
-		}
-		var rows = [];
-		for (var i = 0; i < GRID_DATA.getLength(); i++) {
-			rows.push(i);
-		}
-		GRID.setSelectedRows(rows);
-		e.preventDefault();
-	});
-	GRID.onSort.subscribe(function (e, args) { // 헤드컬럼 눌러서 소팅될때
-		GRID_SORT_COL = args.sortCol.field;
-		if (!args.sortCol.sorter) { // 기본 정렬은 문자형으로
-			args.sortCol.sorter = sorterString;
-		}
-		GRID_DATA.sort(args.sortCol.sorter, args.sortAsc);
-	});
-	
-	// 가로 스크롤 안되도록 컬럼 사이즈 자동조절
-	//GRID_DATA.beginUpdate(); for (i=0; i<30; i++) {GRID_DATA.addItem({"id":i});} GRID_DATA.endUpdate();
-	//GRID.autosizeColumns();-
-	//GRID_DATA.beginUpdate(); for (i=0; i<30; i++) {GRID_DATA.deleteItem(i);} GRID_DATA.endUpdate();
-	
+	// 조회
 	clickSearch();
 });
 
 // formatterBoardPopup
 function formatterBoardPopup(row, cell, value, columnDef, dataContext) {
 	return "<div class='link_popup' onclick=\"openPopup_board('"+GRID_DATA.getItem(row)["boardCD"]+"')\">"+value+"</div>";
-}
-
-// 그리드 Footer 업데이트
-function updateGridFooter(grid, columnIdx) {
-	var columnId = grid.getColumns()[columnIdx].id;
-	var total = 0;
-	if (columnId == "TotalPrice") {
-		for (var i=0; i<GRID_DATA.getLength(); i++) {
-			total += (parseInt((GRID_DATA.getItem(i).TotalPrice).replace(/,/g,""), 10) || 0);
-		}
-		$(grid.getFooterRowColumn(columnId)).html(formatMoney(total));
-	}
-}
-
-
-
-
-/***********************************************************************************
-* 조회
-***********************************************************************************/
-
-function setSearchParam() {
-	var strParam = $(".search_param").serialize()
-	
-	return strParam;
 }
 
 

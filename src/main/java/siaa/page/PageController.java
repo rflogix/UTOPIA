@@ -3,6 +3,7 @@ package siaa.page;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,10 +21,17 @@ public class PageController {
 	@Autowired
 	private PageService pageService;
 	
-	@RequestMapping("/page_summary/page_1_1")
-	public String 페이지관리_협회개요(HttpServletRequest request, Model model) throws Exception {
+	@RequestMapping("/page_summary/메인화면")
+	public String 페이지관리_메인화면(HttpServletRequest request, Model model) throws Exception {
 		model.addAttribute("main_menu_cd", 3); // 노가다 코드 임시로 추가 @@@@@@@@@@@
 		model.addAttribute("sub_menu_cd", 1); // 노가다 코드 임시로 추가 @@@@@@@@@@@
+		return GF.페이지이동(request, "/페이지관리/메인화면");
+	}
+	
+	@RequestMapping("/page_summary/협회개요")
+	public String 페이지관리_협회개요(HttpServletRequest request, Model model) throws Exception {
+		model.addAttribute("main_menu_cd", 3); // 노가다 코드 임시로 추가 @@@@@@@@@@@
+		model.addAttribute("sub_menu_cd", 2); // 노가다 코드 임시로 추가 @@@@@@@@@@@
 		return GF.페이지이동(request, "/페이지관리/협회개요");
 	}
 	
@@ -38,7 +46,12 @@ public class PageController {
 	}
 	
 	@RequestMapping("/page/update")
-	public @ResponseBody HashMap<String, Object> 업데이트(@RequestParam HashMap<String, Object> mapParam) throws Exception {
-		return pageService.업데이트(mapParam);
+	public @ResponseBody HashMap<String, Object> 업데이트(@RequestParam HashMap<String, Object> mapParam, HttpSession session) throws Exception {
+		return pageService.업데이트(mapParam, session);
+	}
+	
+	@RequestMapping("/page/delete")
+	public @ResponseBody HashMap<String, Object> 삭제(@RequestParam HashMap<String, Object> mapParam, HttpSession session) throws Exception {
+		return pageService.삭제(mapParam, session);
 	}
 }

@@ -15,11 +15,11 @@ public abstract class DomainDTO implements Serializable { // 직접 생성해서
 	private String id; // 그리드에서 쓰는 id
 	
 	private String insertDT;
-	private Long insertUserCD;
+	private long insertUserCD;
 	private String updateDT;
-	private Long updateUserCD;
+	private long updateUserCD;
 	private String deleteDT;
-	private Long deleteUserCD;
+	private long deleteUserCD;
 	private String deleteRemark;
-	private Integer deleteYN;
+	private int deleteYN;
 }

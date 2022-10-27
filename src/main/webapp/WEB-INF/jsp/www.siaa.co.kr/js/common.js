@@ -35,6 +35,9 @@ $(document).ready(function() {
 				let clsPage = p_data.list[i];
 				if (clsPage.contentType == "HTML") {
 					$(clsPage.selectorNM).html(clsPage.contentValue);
+					
+				} else if (clsPage.contentType == 'BG_IMG') {
+					$(clsPage.selectorNM).css('background-image', 'url('+clsPage.contentValue+')');
 				}
 			}
 		}

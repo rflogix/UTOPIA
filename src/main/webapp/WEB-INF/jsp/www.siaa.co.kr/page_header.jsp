@@ -87,16 +87,14 @@
 					</div>
 				</div>
 			</div>
-			
-			<!--
-			<div class="top_menu_wrap">
-				<button onclick="logout()">logout</button>
-			</div>-->
+			<div class="top_menu_btn flex">
+				<i class="fas fa-bars"></i>
+			</div>
 		</div>
 	</div>
 	<div class="header_bot">
 		<div class="bot_wrap">
-			<div class="bot_title flex-row">
+			<div class="bot_title flex">
 				협회소개
 			</div>
 			<div class="left_menu_wrap menu_cd_1">

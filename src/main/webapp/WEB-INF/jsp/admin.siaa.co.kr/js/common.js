@@ -194,7 +194,10 @@ function selectMenu(main_menu_cd, sub_menu_cd) {
 		location.href = "/board_summary";
 
 	} else if ((main_menu_cd == 3) && (sub_menu_cd == 1)) {
-		location.href = "/page_summary/page_1_1"; // 협회개요
+		location.href = "/page_summary/메인화면"; // 메인화면
+
+	} else if ((main_menu_cd == 3) && (sub_menu_cd == 2)) {
+		location.href = "/page_summary/협회개요"; // 협회개요
 		
 	} else {
 		location.href = "/";
@@ -219,72 +222,25 @@ function showMenu(main_menu_cd, sub_menu_cd) {
 * 조회
 ***********************************************************************************/
 
+function setSearchParam() {
+	return $("form.search_wrap").serialize();
+}
+
 var CLICK_SEARCH_YN = false;
 function clickSearch(p_page) {
 	if (CLICK_SEARCH_YN == false) {
 		CLICK_SEARCH_YN = true;
 		
-		if ($(".search_result .GRID_pager").length == 0) {
-			$(".search_result").append(
-				"<div class='GRID_pager'>"
-					+"<div class='total_cnt'></div>"
-					+"<div class='page_list'></div>"
-					+"<div class='show_cnt'></div>"
-					
-					+"<input name='Search_Page' type='hidden'/>"
-					+"<input name='Search_ShowCNT' type='hidden'/>"
-				+"</div>");
-			$(".search_result .GRID_pager").addClass("show");
+		openPopup("loading");
+		
+		// Search_Page 설정
+		$("input[name='Search_Page']").val(1);
+		if (p_page != undefined) {
+			$("input[name='Search_Page']").val(p_page);
 		}
 		
-		// Search_ShowCNT
-		if ($(".search_result .GRID_pager .show_cnt").html() == "") {
-			var strShowCNT_HTML = "";
-			GRID_SHOW_CNT = GRID_SHOW_CNT.replace(/(\s*)/g,"");
-			if (GRID_SHOW_CNT != "") {
-				strShowCNT_HTML = "<select onchange=\"selectSearchShowCNT(this);\">";
-				var arrShowCNT = GRID_SHOW_CNT.split(",");
-				for (var i=0; i<arrShowCNT.length; i++) {
-					strShowCNT_HTML += "<option value='"+arrShowCNT[i]+"'>"+arrShowCNT[i]+"개씩 보기</option>"
-				}
-				strShowCNT_HTML += "</select>";
-				if ($("input[name='Search_ShowCNT']").val() == "") {
-					$("input[name='Search_ShowCNT']").val(arrShowCNT[0]);
-				}
-			}
-			$(".search_result .GRID_pager .show_cnt").html(strShowCNT_HTML);
-		}
-		
-		// 검색중
-		if ($(".search_result .GRID_msg").length == 0) {
-			$(".search_result .slick-pane.slick-pane-top.slick-pane-left").append("<div class='GRID_msg'></div>");
-		}
-		$(".search_result .GRID_msg").html("검색중 입니다.").addClass("show");
-		
-		var strParam = setSearchParam(); // 각 페이지에서 정의해 주어야 함
-		
-		// Search_Page
-		if ($("input[name='Search_Page']").length > 0) {
-			if (p_page) {
-				$("input[name='Search_Page']").val(p_page);
-			} else {
-				//if ($(".search_result .page.button.selected").html() != 1) {
-					$("input[name='Search_Page']").val($(".search_result .page.button.selected").html());
-				//} else {
-				//	$("input[name='Search_Page']").val(1);
-				//}
-			}
-			strParam += "&Search_Page=" + $("input[name='Search_Page']").val();
-		}
-		
-		// Search_ShowCNT
-		if ($("input[name='Search_ShowCNT']").length > 0) {
-			strParam += "&Search_ShowCNT=" + $("input[name='Search_ShowCNT']").val();
-		}
-		$.post(GRID_URL, strParam, function(p_data, p_status) {
+		$.post(GRID_URL, setSearchParam(), function(p_data) { // 파라미터 함수는 각 페이지에서 재정의 가능
 			if (p_data.result == "Y") {
-				CLICK_SEARCH_YN = false;
-				
 				if (p_data.list.length == 0) {
 					GRID_DATA.beginUpdate();
 					GRID_DATA.setItems([]);
@@ -346,12 +302,21 @@ function clickSearch(p_page) {
 				
 				updateGridFooterAll(GRID); // Footer 재설정
 				
-			} else { // 오류라면
 				CLICK_SEARCH_YN = false;
+				closePopup("loading");
+				
+			} else { // 오류라면
 				alert("조회 과정중 오류가 발생하였습니다.");
+				
+				CLICK_SEARCH_YN = false;
+				closePopup("loading");
 			}
+			
 		},"JSON").fail(function(p_data, p_status){
 			alert(p_data.message);
+			
+			CLICK_SEARCH_YN = false;
+			closePopup("loading");
 		});
 		
 	} else {
@@ -368,12 +333,6 @@ function selectSearchPage(p_this) {
 		Page = $(p_this).html();
 	}
 	clickSearch(Page);
-}
-
-// ShowCNT 변경
-function selectSearchShowCNT(p_this) {
-	$("input[name='Search_ShowCNT']").val($(p_this).val());
-	clickSearch();
 }
 
 // 상세검색 토글
@@ -422,8 +381,9 @@ function selectSearchRow() {}
 * 그리드 관련
 ***********************************************************************************/
 
-var GRID, GRID_DATA, GRID_COL, GRID_OPTION, GRID_CHECKBOX, GRID_SORT_COL, GRID_SHOW_CNT="";
-$(document).ready(function () {
+let GRID, GRID_DATA, GRID_COL, GRID_OPTION, GRID_CHECKBOX, GRID_SORT_COL;
+let GRID_SHOW_CNT = "50,100";
+function initGrid() {
 	GRID_CHECKBOX = new Slick.CheckboxSelectColumn({cssClass:"slick-cell-checkbox"}); // 체크박스
 	GRID_COL = [];
 	GRID_OPTION = {
@@ -450,7 +410,66 @@ $(document).ready(function () {
 	GRID_DATA.onPagingInfoChanged.subscribe(function (e, pagingInfo) {
 		GRID.updatePagingStatusFromView(pagingInfo);
 	});
-});
+}
+function createGrid(selectorNm) {
+	if (selectorNm == undefined) {
+		selectorNm = ".GRID";
+	}
+	
+	// 그리드 생성
+	GRID = new Slick.Grid(selectorNm, GRID_DATA, GRID_COL, GRID_OPTION);
+	GRID.setSelectionModel(new Slick.RowSelectionModel({selectActiveRow:false})); // false: 여러 ROW 선택가능 / true: 단독 ROW 선택
+	//GRID.setSelectionModel(new Slick.CellSelectionModel({selectActiveRow:false})); // 셀 드래그 선택 
+	GRID.registerPlugin(new Slick.CellExternalCopyManager({"readOnlyMode":true})); // Ctrl+C 가능, 그리드에는 못붙이게
+	GRID.registerPlugin(GRID_CHECKBOX); // 체크박스 플러그인
+	
+	// 그리드 이벤트 설정
+	GRID.onCellChange.subscribe(function(e, args) { // 셀 변경될때
+		GRID_DATA.updateItem(args.item.id, args.item);
+		updateGridFooter(args.grid, args.cell);
+	});
+	GRID.onColumnsReordered.subscribe(function(e, args) { // 컬럼 재배치 되었을때
+		updateGridFooterAll(args.grid); // footer 자동으로 지워지므로 다시 설정
+	});
+	GRID.onKeyDown.subscribe(function (e) {
+		if (e.which != 65 || !e.ctrlKey) { // Ctrl+A 모두선택
+			return false;
+		}
+		var rows = [];
+		for (var i = 0; i < GRID_DATA.getLength(); i++) {
+			rows.push(i);
+		}
+		GRID.setSelectedRows(rows);
+		e.preventDefault();
+	});
+	GRID.onSort.subscribe(function (e, args) { // 헤드컬럼 눌러서 소팅될때
+		GRID_SORT_COL = args.sortCol.field;
+		if (!args.sortCol.sorter) { // 기본 정렬은 문자형으로
+			args.sortCol.sorter = sorterString;
+		}
+		GRID_DATA.sort(args.sortCol.sorter, args.sortAsc);
+	});
+	
+	// 가로 스크롤 안되도록 컬럼 사이즈 자동조절
+	//GRID_DATA.beginUpdate(); for (i=0; i<30; i++) {GRID_DATA.addItem({"id":i});} GRID_DATA.endUpdate();
+	//GRID.autosizeColumns();-
+	//GRID_DATA.beginUpdate(); for (i=0; i<30; i++) {GRID_DATA.deleteItem(i);} GRID_DATA.endUpdate();
+	
+	// Search_ShowCNT 셀렉트박스 설정
+	let elementShowCNT = $('<select>').attr('name', 'Search_ShowCNT');
+	$(GRID_SHOW_CNT.replace(' ', '').split(',')).each(function(index, showCnt) {
+		$(elementShowCNT).append($("<option>").attr("value", showCnt).text(showCnt));
+	});
+	
+	// 페이징 리스트 생성
+	$(".search_result").append(
+		$('<div>').attr('class', 'GRID_pager')
+			.append($('<div>').attr('class', 'total_cnt'))
+			.append($('<div>').attr('class', 'page_list'))
+			.append($('<div>').attr('class', 'show_cnt').append($(elementShowCNT)))
+	);
+	$(".search_result .GRID_pager").addClass("show");
+}
 function sorterString(a, b) {
 	var x = a[GRID_SORT_COL], y = b[GRID_SORT_COL];
 	return (x === y ? 0 : (x > y ? 1 : -1));

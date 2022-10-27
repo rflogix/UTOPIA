@@ -67,7 +67,7 @@
 			</div>
 		</form>
 		<!--
-		<div class="popup_bot flex-row">
+		<div class="popup_bot flex">
 			<a class="button delete" onclick="deleteBoard();">
 				<i class="far fa-trash-alt"></i>&nbsp;&nbsp;삭 제
 			</a>

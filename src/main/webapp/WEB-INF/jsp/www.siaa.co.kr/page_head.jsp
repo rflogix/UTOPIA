@@ -24,6 +24,10 @@ String 리소스버젼 = "?v=20220926.2";
 <!-- CKEDITOR -->
 <script src="/js/ckeditor/ckeditor.js" type="text/javascript"></script>
 
+<%-- swiper --%>
+<script src="/js/swiper-5.3.6/swiper.min.js<%= 리소스버젼 %>"></script>
+<link href="/js/swiper-5.3.6/swiper.min.css<%= 리소스버젼 %>"rel="stylesheet" type="text/css"/>
+	
 <!-- 공통 -->
 <script src="/js/common.js<%= 리소스버젼 %>" type="text/javascript"></script>
 <link href="/css/common.css<%= 리소스버젼 %>" rel="stylesheet" type="text/css"/>

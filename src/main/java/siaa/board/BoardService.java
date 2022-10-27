@@ -57,25 +57,21 @@ public class BoardService {
 		HashMap<String, Object> mapReturn = new HashMap<String, Object>();
 		
 		try {
-			mapReturn.putAll(mapParam); // 기본적으로 들어온 파라미터 그대로 돌려준다
+			// 검색조건으로 전체 검색수량 조회 후 페이징 파라미터 설정
+			mapReturn = GF.setSearchPagingParam(mapParam, boardMapper.selectBoardCnt(mapParam));
+			
+			// 페이징 파라미터 추가된 검색조건으로 다시 조회
+			List<BoardDTO> arrBoard = boardMapper.selectBoard(mapParam);
+			GF.setSearchResultCnt(mapReturn, arrBoard.size()); // 조회된 검색수량 설정
+			
+			// 그리드 및 기타 설정값 적용
+			int Search_StartRow = GF.getSearchRowStart(mapReturn); // 검색 시작 ROW 조회
+			for (BoardDTO board : arrBoard) {
+				board.setId(""+(Search_StartRow++)); // 그리드에서 쓰는 id 세팅
+			}
 			
 			mapReturn.put("result", "Y");
-			
-			List<BoardDTO> arrBoard = boardMapper.selectBoard(mapParam);
-			for (int i=0; i<arrBoard.size(); i++) {
-				arrBoard.get(i).setId(""+(i+1)); // 그리드에서 쓰는 id 세팅
-			}
 			mapReturn.put("list", arrBoard);
-			
-			String temp = GF.getString(mapParam.get("Search_Page"));
-			if (temp.equals("") || temp.equals("0")) {
-				mapParam.put("Search_Page", 1);
-			}
-			mapReturn.put("Search_Page", mapParam.get("Search_Page"));
-			mapReturn.put("Search_ShowCNT", mapParam.get("Search_ShowCNT"));
-			mapReturn.put("Search_ResultCNT", mapParam.get("Search_ShowCNT"));
-			mapReturn.put("Search_TotalCNT", mapParam.get("Search_ShowCNT"));
-			mapReturn.put("Search_TotalPage", mapParam.get("Search_Page"));
 			
 		} catch(Exception e) {
 			mapReturn.put("result", "E");

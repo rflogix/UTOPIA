@@ -14,6 +14,9 @@
 			<if test='selectorNM != null and selectorNM != ""'>
 			AND tb_page.selectorNM = #{selectorNM}
 			</if>
+			<if test='selectorNM_like != null and selectorNM_like != ""'>
+			AND tb_page.selectorNM LIKE CONCAT(CONCAT('%', #{selectorNM_like}), '%')
+			</if>
 			
 			<if test='contentType != null and contentType != ""'>
 			AND tb_page.contentType = #{contentType}
@@ -27,38 +30,78 @@
 			</if>
 	</select>
 	
+	<!-- 추가 -->
+	<insert id="insertPage" parameterType="PageDTO">
+		INSERT INTO tb_page (
+			pageURL,
+			selectorNM,
+			
+			contentType,
+			contentValue,
+			insertUserCD
+		) VALUES (
+			#{pageURL},
+			#{selectorNM},
+			
+			#{contentType},
+			#{contentValue},
+			#{insertUserCD}
+		)
+		<trim prefix="ON DUPLICATE KEY UPDATE" prefixOverrides=",">
+			<include refid = "SET_updatePage"/>
+		</trim>
+	</insert>
+	
+	<!-- 수정 -->
 	<update id="updatePage" parameterType="PageDTO">
 		UPDATE tb_page
 		<set>
-			<if test='contentType != null and contentType != ""'>
-			contentType = #{contentType},
-			</if>
-			<if test='contentValue != null and contentValue != ""'>
-			contentValue = #{contentValue},
-			</if>
-			
-			<!-- 업데이트 관련 -->
-			<if test='updateUserCD != null and updateUserCD != 0'>
-			updateUserCD = #{updateUserCD},
-			updateDT = now(),
-			</if>
+			<include refid = "SET_updatePage"/>
 			
 			<!-- 삭제 관련 -->
 			<if test='deleteYN != null and deleteYN == 1'>
-			deleteYN = #{deleteYN},
-			deleteDT = now(),
+			,deleteYN = #{deleteYN}
+			,deleteDT = now()
 				<if test='deleteUserCD != null and deleteUserCD != 0'>
-				deleteUserCD = #{deleteUserCD},
+				,deleteUserCD = #{deleteUserCD}
 				</if>
 			</if>
 			<if test='deleteYN != null and deleteYN == -1'>
-			deleteYN = #{deleteYN},
-			deleteDT = NULL,
-			deleteUserCD = NULL,
+			,deleteYN = #{deleteYN}
+			,deleteDT = NULL
+			,deleteUserCD = NULL
 			</if>
 		</set>
 		WHERE pageURL = #{pageURL}
 			AND selectorNM = #{selectorNM}
 		;
 	</update>
+	<sql id = "SET_updatePage">
+		<if test='contentType != null and contentType != ""'>
+			,contentType = #{contentType}
+			</if>
+			<if test='contentValue != null and contentValue != ""'>
+			,contentValue = #{contentValue}
+			</if>
+			
+			<if test='updateUserCD != null and updateUserCD != 0'>
+			,updateUserCD = #{updateUserCD}
+			,updateDT = now()
+		</if>
+	</sql>
+	
+	<!-- 삭제 -->
+	<delete id="deletePage" parameterType="HashMap">
+		<if test='(selectorNM != null and selectorNM != "") or (selectorNM_like != null and selectorNM_like != "")'>
+		DELETE FROM tb_page
+		WHERE pageURL = #{pageURL}
+			<if test='selectorNM != null and selectorNM != ""'>
+			AND selectorNM  = #{selectorNM}
+			</if>
+			<if test='selectorNM_like != null and selectorNM_like != ""'>
+			AND selectorNM LIKE CONCAT(#{selectorNM_like}, '%')
+			</if>
+		;
+		</if>
+	</delete>
 </mapper>
