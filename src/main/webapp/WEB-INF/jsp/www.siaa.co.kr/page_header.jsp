@@ -24,9 +24,9 @@
 					<div class="sub_menu menu_cd_1_2" onclick="selectMenu(1,2)">
 						인사말
 					</div>
-					<!-- <div class="sub_menu menu_cd_1_3" onclick="selectMenu(1,3)">
+					<div class="sub_menu menu_cd_1_3" onclick="selectMenu(1,3)">
 						조직도
-					</div> -->
+					</div>
 					<div class="sub_menu menu_cd_1_4" onclick="selectMenu(1,4)">
 						찾아오시는 길
 					</div>
@@ -102,7 +102,7 @@
 				<div class="sub_menu_wrap">
 					<div class="sub_menu menu_cd_1_1" onclick="selectMenu(1,1)">협회개요</div>
 					<div class="sub_menu menu_cd_1_2" onclick="selectMenu(1,2)">인사말</div>
-					<!-- <div class="sub_menu menu_cd_1_3" onclick="selectMenu(1,3)">조직도</div> -->
+					<div class="sub_menu menu_cd_1_3" onclick="selectMenu(1,3)">조직도</div>
 					<div class="sub_menu menu_cd_1_4" onclick="selectMenu(1,4)">찾아오시는 길</div>
 				</div>
 			</div>

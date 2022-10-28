@@ -1,23 +1,54 @@
 
 .page_wrap.menu_cd_1_3 .content {
 width: 1043px;
-height: 1287px;
-background: #FFFFFF 0% 0% no-repeat padding-box;
-box-shadow: 6px 6px 8px #00000029;
-border: 1px solid #ECECEC;
-opacity: 1;
-
+height:6000px;
 margin:110px 0 175px calc((100% - 1043px)/2 + 115px);
-
 }
 
 .page_wrap.menu_cd_1_3 .content > div {float:left;}
 
 
-.page_wrap.menu_cd_1_3 .content .text {font-size:20px; line-height:30px; letter-spacing:-1px; text-align:left; color:#767676;}
-.page_wrap.menu_cd_1_3 .content .text.top {width:calc(100% - 385px); height:auto; padding:35px 15px 0 350px;}
-.page_wrap.menu_cd_1_3 .content .text.top .picture {width:340px; height:100%; position:absolute; left:-1px; top:-1px; background-color:white; border-right: 1px solid #ECECEC; border-bottom: 1px solid #ECECEC;}
-.page_wrap.menu_cd_1_3 .content .text.top .picture img {width:287px;}
-.page_wrap.menu_cd_1_3 .content .text.top .picture .name {width:287px; height:45px; line-height:45px; margin-top:10px; font-size:30px; font-weight:bold; color:#191919; text-align:center;}
-.page_wrap.menu_cd_1_3 .content .text.bot {width:calc(100% - 30px); height:auto; padding:24px 15px 0 15px;}
-.page_wrap.menu_cd_1_3 .content .sign {width:100%; height:37px; margin:24px 20px 28px 0; line-height:30px; font-size:25px; letter-spacing:-1.25px; color:#767676; text-align:right;}
+.page_wrap.menu_cd_1_3 .content .org {width:100%; margin:30px auto; border-bottom:2px solid #9A9A9A;}
+
+.page_wrap.menu_cd_1_3 .content .org.chart {width:100%; height:auto;}
+.page_wrap.menu_cd_1_3 .content .org.chart img {width:992px;}
+
+.page_wrap.menu_cd_1_3 .content .org.chairman {width:calc(100% - 365px); height:auto; padding:340px 15px 60px 350px;}
+.page_wrap.menu_cd_1_3 .content .org.chairman .picture {width:336px; height:100%; position:absolute; left:-1px; top:-1px; background-color:white;}
+.page_wrap.menu_cd_1_3 .content .org.chairman .picture img {width:303px;}
+.page_wrap.menu_cd_1_3 .content .org.chairman .namecard {width:100%; height:114px; background-color:white;}
+.page_wrap.menu_cd_1_3 .content .org.chairman .namecard img {width:15px;}
+.page_wrap.menu_cd_1_3 .content .org.chairman .namecard .name {width:calc(100% - 15px); height:100%; position:absolute; left:20px; top:-1px; font-family:'Noto Sans KR'; font-size:40px; line-height:60px; letter-spacing:-1px; text-align:left; color:#191919;}
+
+.page_wrap.menu_cd_1_3 .content .org.vice {width:100%; height:auto; padding:0;}
+.page_wrap.menu_cd_1_3 .content .org.vice .org_title {width:30px; height:auto; position:absolute; left:-45px; top:-65px; }
+.page_wrap.menu_cd_1_3 .content .org.vice .org_title .title {font-family:'Noto Sans KR'; font-size:30px; letter-spacing:-1px; text-align:left; color:#191919;}
+.page_wrap.menu_cd_1_3 .content .org.vice .vice_wrap {width:50%; height:100%; float:left;}
+.page_wrap.menu_cd_1_3 .content .org.vice .vice_wrap .vice_profile {width:30%; height:auto; padding:358px 15px 80px 300px;}
+.page_wrap.menu_cd_1_3 .content .org.vice .vice_wrap .vice_profile .picture {width:316px; height:100%; position:absolute; left:-1px; top:-1px; background-color:white;}
+.page_wrap.menu_cd_1_3 .content .org.vice .vice_wrap .vice_profile .picture img {width:286px;}
+.page_wrap.menu_cd_1_3 .content .org.vice .vice_wrap .vice_profile .namecard {width:100%; height:70px; background-color:white;}
+.page_wrap.menu_cd_1_3 .content .org.vice .vice_wrap .vice_profile .namecard img {width:10px;}
+.page_wrap.menu_cd_1_3 .content .org.vice .vice_wrap .vice_profile .namecard .name {width:100%; height:100%; position:absolute; left:15px; top:-1px; font-family:'Noto Sans KR'; font-size:25px; line-height:35px; letter-spacing:-1px; text-align:left; color:#191919;}
+
+.page_wrap.menu_cd_1_3 .content .org.member {width:100%; height:auto; padding:0;}
+.page_wrap.menu_cd_1_3 .content .org.member .org_title {width:30px; height:auto; position:absolute; left:-45px; top:-65px; }
+.page_wrap.menu_cd_1_3 .content .org.member .org_title .title {font-family:'Noto Sans KR'; font-size:30px; letter-spacing:-1px; text-align:left; color:#191919;}
+.page_wrap.menu_cd_1_3 .content .org.member .member_wrap {width:50%; height:100%; float:left;}
+.page_wrap.menu_cd_1_3 .content .org.member .member_wrap .member_profile {width:30%; height:auto; padding:268px 15px 80px 240px;}
+.page_wrap.menu_cd_1_3 .content .org.member .member_wrap .member_profile .picture {width:240px; height:100%; position:absolute; left:-1px; top:-1px; background-color:white;}
+.page_wrap.menu_cd_1_3 .content .org.member .member_wrap .member_profile .picture img {width:228px;}
+.page_wrap.menu_cd_1_3 .content .org.member .member_wrap .member_profile .namecard {width:100%; height:58px; background-color:white;}
+.page_wrap.menu_cd_1_3 .content .org.member .member_wrap .member_profile .namecard img {width:10px;}
+.page_wrap.menu_cd_1_3 .content .org.member .member_wrap .member_profile .namecard .name {width:100%; height:100%; position:absolute; left:15px; top:-1px; font-family:'Noto Sans KR'; font-size:22px; line-height:35px; letter-spacing:-1px; text-align:left; color:#191919;}
+.page_wrap.menu_cd_1_3 .content .org.member .member_list {width:100%; height:auto; clear:both;}
+.page_wrap.menu_cd_1_3 .content .org.member .member_list .member {width:260px; height:100%; margin:0 0 60px 0; float:left;}
+.page_wrap.menu_cd_1_3 .content .org.member .member_list .member img {width:228px;}
+.page_wrap.menu_cd_1_3 .content .org.member .member_list .member .member_name {width:228px; height:53px; background-color:#fff; text-align:center; position:absolute; left:0; bottom:0; opacity:0.65; font-family:'Noto Sans KR'; font-size:22px; line-height:10px; letter-spacing:-1px; color:#191919;}
+
+.page_wrap.menu_cd_1_3 .content .org.report {width:100%; height:auto; border:0;}
+.page_wrap.menu_cd_1_3 .content .org.report .org_title {width:100%; height:100%; font-family:'Noto Sans KR'; font-size:30px; line-height:35px; letter-spacing:-1px; color:#191919;}
+.page_wrap.menu_cd_1_3 .content .org.report .org_title img {width:15px;}
+.page_wrap.menu_cd_1_3 .content .org.report .link {width:calc(100% - 30px); padding:10px 0 0 30px;}
+.page_wrap.menu_cd_1_3 .content .org.report .link a {font-family:'Noto Sans KR'; font-size:20px; line-height:35px; letter-spacing:-1px; color:#191919;}
+
