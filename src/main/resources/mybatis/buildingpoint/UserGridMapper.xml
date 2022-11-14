@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="buildingpoint.user.UserGridMapper">
+
+	<resultMap id="UserMenuAuthMap" type="UserMenuAuthVO">
+		<result property="userCD" column="UserCD"/>
+		<result property="userID" column="UserID"/>
+		<result property="userNM" column="UserNM"/>
+		<collection property="_children" column="userCD" ofType="MenuAuthDTO" select="selectUserMenuAuth"/>
+	</resultMap>
+
+	<select id="searchUserList" parameterType="HashMap" resultMap="UserMenuAuthMap">
+		SELECT *
+		FROM tc_user
+		WHERE 1=1
+		AND DeleteYN = -1
+		<if test="searchKeyword != null and searchKeyword != ''">
+			AND	UserNM LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
+		ORDER BY UserNM ASC, InsertDT DESC
+		LIMIT ${start}, ${perPage}
+	</select>
+
+	<resultMap id="MenuAuthMap" type="MenuAuthDTO">
+		<result property="menuCD" column="MenuCD"/>
+		<result property="showYN" column="ShowYN"/>
+		<result property="useYN" column="UseYN"/>
+	</resultMap>
+
+	<select id="selectUserMenuAuth" parameterType="HashMap" resultMap="MenuAuthMap">
+		SELECT *
+		FROM tc_menuauth tma
+		LEFT OUTER JOIN tc_menu tm
+		ON tma.MenuCD = tm.MenuCD
+		WHERE 1=1
+		AND UserCD = #{userCD}
+	</select>
+
+	<select id="selectMenu" parameterType="HashMap" resultType="MenuDTO">
+		SELECT *
+		FROM tc_menu
+		WHERE 1=1
+		AND MenuCD = #{menuCD}
+	</select>
+
+	<select id="selectUserLoginList" parameterType="HashMap" resultType="UserLoginDTO">
+		SELECT *
+		FROM tc_userlogin
+		WHERE 1=1
+		AND UserCD = #{userCD}
+	</select>
+
+	<select id="searchUserTotalCount" parameterType="HashMap" resultType="int">
+		SELECT COUNT(*)
+		  FROM tc_user
+		 WHERE 1=1
+		<if test="searchKeyword != null and searchKeyword != ''">
+			AND	UserNM LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
+	</select>
+
+	<insert id="createUserList" parameterType="HashMap">
+		INSERT INTO tc_user
+		(
+		  	userCD
+		)
+		VALUES
+		(
+			#{userCD}
+		)
+	</insert>
+
+	<update id="updateUserList" parameterType="HashMap">
+		UPDATE tc_user
+		   SET
+		       DeleteYN = #{deleteYN}
+		     , UserNM   = #{userNM}
+		 WHERE 1=1
+		   AND UserCD = #{userCD}
+	</update>
+</mapper>

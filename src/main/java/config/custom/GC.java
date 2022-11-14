@@ -2,7 +2,7 @@ package config.custom;
 
 public class GC {
 	// UriViewConfig.java 설정 관련
-	public static final String 기본도메인 = "www.buildingpoint.co.kr"; // localhost 일때 기본 도메인
+	public static final String 기본도메인 = "admin.buildingpoint.co.kr"; // localhost 일때 기본 도메인
 	public static final String 개발테스트용_INPUT도메인 = "rflogix.iptime.org"; // 개발 테스트시 들어오는 도메인 설정
 	public static final String 개발테스트용_OUTPUT도메인 = "admin.buildingpoint.co.kr"; // 개발 테스트시 나가는 도메인 설정
 	

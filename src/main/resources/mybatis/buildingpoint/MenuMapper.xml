@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="buildingpoint.menu.MenuMapper">
+
+	<resultMap id="MenuMap" type="MenuDTO">
+		<collection property="_children" column="{parentCD=MenuCD,menuLevel=menuLevel}" ofType="MenuDTO" select="selectMenuList"/>
+	</resultMap>
+
+	<select id="selectMenu" parameterType="HashMap" resultType="MenuDTO">
+		SELECT *
+		FROM tc_menu
+		WHERE 1=1
+		AND DeleteYN = -1
+		<if test="menuCD != null and menuCD != ''">
+		AND	menuCD = #{menuCD}
+		</if>
+	</select>
+
+	<select id="selectMenuList" parameterType="HashMap" resultMap="MenuMap">
+		SELECT *
+		FROM tc_menu
+		WHERE 1=1
+		AND DeleteYN = -1
+		<if test="searchKeyword != null and searchKeyword != ''">
+		AND	MenuNM LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
+		<if test="menuCD != null and menuCD != ''">
+		AND	menuCD = #{menuCD}
+		</if>
+		<choose>
+		<when test="menuLevel != null and menuLevel != ''">
+		AND MenuLevel != 1
+		AND ParentCD   = #{parentCD}
+		ORDER BY MenuOrder ASC
+		</when>
+		<otherwise>
+		AND MenuLevel = 1
+		ORDER BY MenuOrder ASC
+		LIMIT ${start}, ${perPage}
+		</otherwise>
+		</choose>
+	</select>
+
+	<select id="searchMenuTotalCount" parameterType="HashMap" resultType="int">
+		SELECT COUNT(*)
+		FROM tc_menu
+		WHERE 1=1
+		<if test="searchKeyword != null and searchKeyword != ''">
+		AND	MenuNM LIKE CONCAT('%', #{searchKeyword}, '%')
+		</if>
+		AND MenuLevel = 1
+	</select>
+
+	<insert id="createMenu" parameterType="HashMap">
+		INSERT INTO tc_menu	(
+			MenuCD,
+			MenuLevel,
+			ParentCD
+		)
+		VALUES (
+			#{menuCD},
+			#{menuLevel},
+			#{parentCD}
+		)
+	</insert>
+
+	<update id="updateMenu" parameterType="HashMap">
+		UPDATE tc_menu
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="menuNM != null and menuNM != ''">	MenuNM = #{menuNM} ,</if>
+			<if test="menuLevel != null and menuLevel != ''"> MenuLevel = #{menuLevel} ,</if>
+			<if test="deleteYN != null and deleteYN != ''"> DeleteYN  = #{deleteYN} ,</if>
+			<if test="parentCD != null and parentCD != ''"> ParentCD  = #{parentCD} ,</if>
+			<if test="sectionHtml1 != null and sectionHtml1 != ''"> sectionHtml1  = #{sectionHtml1} ,</if>
+			<if test="sectionHtml2 != null and sectionHtml2 != ''"> sectionHtml2  = #{sectionHtml2}	,</if>
+			<if test="sectionText1 != null and sectionText1 != ''"> sectionText1  = #{sectionText1}	,</if>
+			<if test="sectionText2 != null and sectionText2 != ''"> sectionText2  = #{sectionText2}	,</if>
+		</trim>
+		WHERE 1=1
+		AND MenuCD  = #{menuCD}
+	</update>
+
+	<select id="searchMenuTabulator" parameterType="HashMap" resultType="MenuDTO">
+		SELECT *
+		FROM tc_menu
+		WHERE 1=1
+		AND DeleteYN = -1
+		AND MenuLevel = 1
+		ORDER BY MenuOrder ASC
+		LIMIT ${start}, ${perPage}
+	</select>
+</mapper>

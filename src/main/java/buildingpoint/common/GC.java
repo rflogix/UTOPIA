@@ -75,4 +75,15 @@ public class GC extends config.custom.GC {
 	
 	public static final int		MAX_FILE_SIZE			= 1000 * 1024 * 1024 ; // 파일업로드 용량 제한.. 10Mb
 
+	/***********************************************************************************
+	 * 코드관련
+	 ***********************************************************************************/
+	// 회원코드
+	public static final int		CODE_TYPE_USER			= 10;		// 회원코드		- 상점코드+년월일+SEQ	ex) 10004 150323 00000001
+	public static final int		CODE_MAX_USER      		= 99999999;
+
+	// 회원코드
+	public static final int		CODE_TYPE_MENU			= 200;		// 회원코드		- 상점코드+년월일+SEQ	ex) 10004 150323 00000001
+	public static final int		CODE_MAX_MENU      		= 99999999;
+
 }
