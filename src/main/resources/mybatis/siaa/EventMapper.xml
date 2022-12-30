@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="siaa.event.EventMapper">
+	
+	<select id="selectEvent" parameterType="HashMap" resultType="EventDTO">
+		SELECT tb_event.*
+			
+		FROM tb_event
+			
+		WHERE 1=1
+			<if test='eventCD != null and eventCD != 0'>
+			AND tb_event.eventCD = #{eventCD}
+			</if>
+			
+			<if test='eventTitle != null and eventTitle != ""'>
+			AND tb_event.eventTitle = #{eventTitle}
+			</if>
+			<if test='eventTitle_like != null and eventTitle_like != ""'>
+			AND tb_event.eventTitle LIKE CONCAT(CONCAT('%', #{eventTitle_like}), '%')
+			</if>
+			
+			<if test='eventType != null and eventType != 0'>
+			AND tb_event.eventType = #{eventType}
+			</if>
+			
+			<if test='startDT != null and startDT != ""'>
+			AND tb_event.startDT = #{startDT}
+			</if>
+			<if test='endDT != null and endDT != ""'>
+			AND tb_event.endDT = #{endDT}
+			</if>
+			
+			<if test='deleteYN != null and deleteYN != 0'>
+			AND tb_event.deleteYN = #{deleteYN}
+			</if>
+	</select>
+	
+	<!-- 추가 -->
+	<insert id="insertEvent" parameterType="HashMap">
+		INSERT INTO tb_event (
+			eventCD,
+			eventTitle,
+			eventType,
+			startDT,
+			endDT,
+			insertUserCD
+		) VALUES (
+			#{eventCD},
+			#{eventTitle},
+			#{eventType},
+			#{startDT},
+			#{endDT},
+			#{insertUserCD}
+		)
+		<trim prefix="ON DUPLICATE KEY UPDATE" prefixOverrides=",">
+			<include refid = "SET_updateEvent"/>
+		</trim>
+	</insert>
+	
+	<!-- 수정 -->
+	<update id="updateEvent" parameterType="HashMap">
+		UPDATE tb_event
+		<set>
+			<include refid = "SET_updateEvent"/>
+			
+			<!-- 삭제 관련 -->
+			<if test='deleteYN != null and deleteYN == 1'>
+			,deleteYN = #{deleteYN}
+			,deleteDT = now()
+				<if test='deleteUserCD != null and deleteUserCD != 0'>
+				,deleteUserCD = #{deleteUserCD}
+				</if>
+			</if>
+			<if test='deleteYN != null and deleteYN == -1'>
+			,deleteYN = #{deleteYN}
+			,deleteDT = NULL
+			,deleteUserCD = NULL
+			</if>
+		</set>
+		WHERE eventCD = #{eventCD}
+		;
+	</update>
+	<sql id = "SET_updateEvent">
+		<if test='eventTitle != null and eventTitle != ""'>
+		,eventTitle = #{eventTitle}
+		</if>
+		<if test='eventType != null and eventType != 0'>
+		,eventType = #{eventType}
+		</if>
+		<if test='startDT != null and startDT != ""'>
+		,startDT = #{startDT}
+		</if>
+		<if test='endDT != null and endDT != ""'>
+		,endDT = #{endDT}
+		</if>
+		
+		<if test='updateUserCD != null and updateUserCD != 0'>
+		,updateUserCD = #{updateUserCD}
+		,updateDT = now()
+		</if>
+	</sql>
+	
+	<!-- 삭제 -->
+	<delete id="deleteEvent" parameterType="HashMap">
+		DELETE FROM tb_event
+		WHERE eventCD = #{eventCD}
+		;
+	</delete>
+</mapper>

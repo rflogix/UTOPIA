@@ -1,0 +1,29 @@
+
+.calendar_section {width:1902px; height:1050px; margin:0 auto; position:relative; background-color:#f8f8f8;}
+.calendar_main {width:1200px; height:1000px; margin:auto; padding-top:100px; position:relative; }
+#calendar {width: 1200px; height:870px;}
+/* .fc .fc-scroller-liquid-absolute {overflow:hidden !important;} */
+.fc-col-header-cell.fc-day {background-color:#f2eeef !important; height:44px; line-height:44px;}
+.fc .fc-scrollgrid-liquid tbody > tr {background-color:white;}
+
+
+div.fc-toolbar-chunk {width:300px;}
+div.fc-toolbar-chunk:first-child {width:450px; text-align:right;}
+div.fc-toolbar-chunk:last-child {width:450px; text-align:left;}
+.fc .fc-toolbar-title {width:300px; margin: 0 auto; text-align:center;}
+.fc-right .fc-prev-button, .fc-right .fc-next-button{background-color: #b1d583; background-image: none;}
+
+.cal_content {width:220px; position:relative; overflow:hidden; font-size:13px;}
+.cal_content .sp_name {width:220px; color:#2381db;}
+.cal_content .sp_name.up {padding-top:30px;}
+.cal_content .sp_item {width:220px; color:#2381db; clear:both;}
+.cal_content .sp_item .item_itemnm {width:162px; float:left; color:#060606; text-align:left;}
+.cal_content .sp_item .item_profit {width:58px; padding-right:5px; float:left; color:#dd0200; text-align:right;}
+.cal_content .sp_item .item_profit.minus {color:blue;}
+.cal_content .dayTotal {width:220px; padding:20px 5px 0 0; color:#060606; text-align:right; clear:both;}
+.cal_content .dayTotal span {color:#dd0200;}
+
+
+.sp_section {width:1110px; height:600px; line-height:600px; margin:0 auto; position:relative;}
+.sp_section .sp {width:555px; height:426px; margin:auto; float:left;}
+.sp_section .sp > img {cursor:pointer;}
